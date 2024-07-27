@@ -1,4 +1,4 @@
-import {Box, Typography, Button, Menu, MenuItem, Skeleton} from "@mui/material";
+import {Box, Typography, Button, Menu, MenuItem, Skeleton, Slide} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import {GitHub, Instagram, LinkedIn, MenuRounded} from "@mui/icons-material";
 import {useEffect, useState} from "react";
@@ -8,7 +8,7 @@ const App = () => {
     const [avatarLoaded, setAvatarLoaded] = useState(false)
     const open = Boolean(anchorEl)
 
-    const avatar = './images/programmer.png'
+    const avatar = './images/programmer.webp'
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget)
@@ -48,40 +48,50 @@ const App = () => {
                     <Grid xs={12} sm={12} md={5} lg={5} sx={{textAlign:"center", mt:5}}>
                         {!avatarLoaded && (
                             <Skeleton variant="rectangular" animation="wave"
-                                      sx={{ width: 350, height: 350, m:"auto", mb:2, borderRadius:3 }} />
+                                      sx={{ width: 250, height: 250, m:"auto", mb:2, borderRadius:3 }} />
                         )}
-                        {avatarLoaded && (
-                            <img
-                                src={avatar}
-                                alt="programmer"
-                                width={300}
-                                height={300}
-                            />
-                        )}
-
+                            <Slide direction="left" in={avatarLoaded} style={{transitionDelay: avatarLoaded ? "400ms": "0"}}>
+                                <img
+                                    src={avatar}
+                                    alt="programmer"
+                                    width={300}
+                                    height={300}
+                                />
+                            </Slide>
                     </Grid>
                     <Grid xs={12} sm={12} md={6} lg={6} sx={{ display: 'flex',flexDirection: 'column',
                         alignItems: 'center', justifyContent: 'center',textAlign: 'right' }}>
-                        <Typography color="text.primary" sx={{ textAlign: 'right', mt:1 }} variant="h6">
-                            __سلام من
-                        </Typography>
-                        <Typography color="text.primary" sx={{ textAlign: 'right',
-                            fontSize:{
-                                lg:60,
-                                md:45,
-                                sm:45,
-                                xs:40
-                            }
-                        }}>
-                            محمدحسین حیدریم
-                        </Typography>
-                        <Typography color="text.primary" sx={{ textAlign: 'right',mt:1}} >
-                            یک برنامه نویس فرانت اند.
-                        </Typography>
-
-                        <Button color="secondary" variant="contained" sx={{my:5}}>
-                            درباره من
-                        </Button>
+                        <Slide direction="down" in={avatarLoaded}
+                               style={{transitionDelay: avatarLoaded ? "300ms": "0"}}>
+                            <Typography color="text.primary" sx={{ textAlign: 'right', mt:1 }} variant="h6">
+                                - سلام من
+                            </Typography>
+                        </Slide>
+                        <Slide direction="down" in={avatarLoaded}
+                               style={{transitionDelay: avatarLoaded ? "400ms": "0"}}>
+                            <Typography color="text.primary" sx={{ textAlign: 'right',
+                                fontSize:{
+                                    lg:60,
+                                    md:45,
+                                    sm:45,
+                                    xs:40
+                                }
+                            }}>
+                                محمدحسین حیدریم
+                            </Typography>
+                        </Slide>
+                        <Slide direction="down" in={avatarLoaded}
+                               style={{transitionDelay: avatarLoaded ? "500ms": "0"}}>
+                            <Typography color="text.primary" sx={{ textAlign: 'right',mt:1}} >
+                                یک برنامه نویس فرانت اند.
+                            </Typography>
+                        </Slide>
+                        <Slide direction="up" in={avatarLoaded}
+                               style={{transitionDelay: avatarLoaded ? "500ms": "0"}}>
+                            <Button color="secondary" variant="contained" sx={{my:5}}>
+                                درباره من
+                            </Button>
+                        </Slide>
                     </Grid>
                     <Grid xs={12} sm={12} md={1} lg={1} sx={{ display: 'flex',
                         mb:{
@@ -97,9 +107,20 @@ const App = () => {
                             lg:'column'
                         },
                         alignItems: 'center', justifyContent: 'center',textAlign: 'right',gap:2}}>
-                        <Instagram color="secondary" fontSize="large" sx={{cursor:"pointer"}}/>
-                        <GitHub color="secondary" fontSize="large" sx={{cursor:"pointer"}}/>
-                        <LinkedIn color="secondary" fontSize="large" sx={{cursor:"pointer"}}/>
+                            <Instagram color="secondary"
+                                       sx={{cursor:"pointer",fontSize:40,
+                                           transition: "font-size 0.1s ease-in-out", ":hover":{
+                                               fontSize:50,
+                                           }}}
+                            />
+                            <GitHub color="secondary" fontSize="large" sx={{cursor:"pointer",fontSize:40,
+                                transition: "font-size 0.1s ease-in-out", ":hover":{
+                                    fontSize:50,
+                                }}}/>
+                            <LinkedIn color="secondary" fontSize="large" sx={{cursor:"pointer",fontSize:40,
+                                transition: "font-size 0.1s ease-in-out", ":hover":{
+                                    fontSize:50,
+                                }}}/>
                     </Grid>
                 </Grid>
                 <MenuRounded fontSize="large" sx={{position:"absolute", top:20,right:35, color:"white", cursor:"pointer"}}
@@ -121,10 +142,10 @@ const App = () => {
                     transformOrigin={{
                         vertical: 'top',
                         horizontal: 'left',
-                    }}
-                >
+                    }}>
                     <MenuItem onClick={() => handleMenuItemClick("home")}
-                              sx={{ backgroundColor: activePage === "home" ? "primary.light" : "inherit" }}>صفحه اصلی</MenuItem>
+                              sx={{ backgroundColor: activePage === "home" ? "primary.light" : "inherit",}}>
+                        صفحه اصلی</MenuItem>
                     <MenuItem onClick={() => handleMenuItemClick("about")}
                               sx={{ backgroundColor: activePage === "about" ? "primary.light" : "inherit" }}>درباره من</MenuItem>
                     <MenuItem onClick={() => handleMenuItemClick("skills")}

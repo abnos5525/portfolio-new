@@ -1,9 +1,12 @@
 {
+  "homepage": "https://abnos5525.github.io/portfolio-new",
   "name": "portfolio-new",
   "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "predeploy": "vite build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite --port 3000",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
