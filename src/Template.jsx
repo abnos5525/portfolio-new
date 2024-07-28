@@ -14,6 +14,7 @@ import rtlPlugin from "stylis-plugin-rtl";
         typography: {
             allVariants:{
               fontFamily: "vazir",
+                color:"#fff"
             },
         },
         palette:{
@@ -30,9 +31,6 @@ import rtlPlugin from "stylis-plugin-rtl";
             },
             success: {
                 main:"#1c7339",
-            },
-            text: {
-                primary:"#fff"
             },
         }
     })

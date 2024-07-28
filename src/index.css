@@ -1,3 +1,43 @@
 body{
     background-color: #1C1717;
 }
+
+@keyframes floating {
+    0% {
+        transform: translateY(-2px);
+    }
+    50% {
+        transform: translateY(3px);
+    }
+    100% {
+        transform: translateY(-2px);
+    }
+}
+
+.float-animation {
+    animation: floating 3s infinite ease-in-out;
+}
+
+
+.page-enter {
+    opacity: 0;
+    transform: translateY(20px);
+}
+.page-enter-active {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 300ms, transform 300ms;
+}
+.page-exit {
+    opacity: 1;
+    transform: translateY(0);
+}
+.page-exit-active {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 300ms, transform 300ms;
+}
+
+.grayscale{
+    filter: grayscale(60%);
+}
