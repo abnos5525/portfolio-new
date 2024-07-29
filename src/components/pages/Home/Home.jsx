@@ -5,7 +5,6 @@ import Avatar from "./Avatar.jsx";
 import Intro from "./Intro.jsx";
 import Socials from "./Socials.jsx";
 import MainMenu from "../../MainMenu.jsx";
-import Arrow_right from "../../background/Arrow_right.jsx";
 
 const Home = () => {
     const [avatarLoaded, setAvatarLoaded] = useState(false)
@@ -20,13 +19,14 @@ const Home = () => {
 
             <Box sx={{height:"auto",pb:5, borderRadius:4, backgroundColor: "primary.dark", position:"relative"}}>
 
-                <Arrow_right/>
-
                 <Slide direction="down" in={avatarLoaded}
                        style={{transitionDelay: avatarLoaded ? "600ms": "0"}}>
-                    <Box component="img" src="./images/imojis/light_bulb.png"
-                        sx={{position:"absolute",top:-50, left:20}}
-                    />
+                    <Box sx={{ position: "relative" }}>
+                        <Box component="img" src="./images/imojis/light_bulb.png"
+                             sx={{ position: "absolute", top: -40, left: 20 }}
+                        />
+                        <Box className="light-bulb-glow" />
+                    </Box>
                 </Slide>
 
                 <Grid container>
