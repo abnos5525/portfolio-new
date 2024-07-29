@@ -19,7 +19,7 @@ const Home = () => {
 
             <Box sx={{height:"auto",pb:5, borderRadius:4, backgroundColor: "primary.dark", position:"relative"}}>
 
-                <Slide direction="down" in={avatarLoaded}
+                <Slide direction="left" in={avatarLoaded}
                        style={{transitionDelay: avatarLoaded ? "600ms": "0"}}>
                     <Box sx={{ position: "relative" }}>
                         <Box component="img" src="./images/imojis/light_bulb.png"

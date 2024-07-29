@@ -24,19 +24,28 @@ const Socials = () => {
                 xs:10
             }
         }}>
-            <Instagram color="secondary"
+            <Instagram color="secondary" className="icon-light"
                        sx={{cursor:"pointer",fontSize:40,
-                           transition: "font-size 0.1s ease-in-out", ":hover":{
+                           transition: "font-size 0.1s ease-in-out",
+                           borderRadius:3,
+                           ":hover":{
                                fontSize:50,
+                               filter: "brightness(2)"
                            }}}
             />
-            <GitHub color="secondary" fontSize="large" sx={{cursor:"pointer",fontSize:40,
+            <GitHub color="secondary" fontSize="large" className="icon-light"
+                    sx={{cursor:"pointer",fontSize:40,
+                borderRadius:6,
                 transition: "font-size 0.1s ease-in-out", ":hover":{
                     fontSize:50,
+                    filter: "brightness(2)"
                 }}}/>
-            <LinkedIn color="secondary" fontSize="large" sx={{cursor:"pointer",fontSize:40,
+            <LinkedIn color="secondary" fontSize="large" className="icon-light"
+                      sx={{cursor:"pointer",fontSize:40,
+                borderRadius:2,
                 transition: "font-size 0.1s ease-in-out", ":hover":{
                     fontSize:50,
+                    filter: "brightness(2)"
                 }}}/>
         </Grid>
     )

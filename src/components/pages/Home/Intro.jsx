@@ -1,8 +1,9 @@
-import {Button, Slide, Typography} from "@mui/material";
-import {ManOutlined} from "@mui/icons-material";
+import {Box, Button, Slide, Typography} from "@mui/material";
+import {KeyboardDoubleArrowLeftOutlined, ManOutlined} from "@mui/icons-material";
 import Grid from "@mui/material/Unstable_Grid2";
-import {useContext} from "react";
+import {useContext, useEffect, useRef} from "react";
 import {Context} from "../../../ContextApp.jsx";
+import Typed from "typed.js";
 
 const Intro = ({avatarLoaded}) => {
 
@@ -12,14 +13,30 @@ const Intro = ({avatarLoaded}) => {
         setActivePage(page)
     }
 
-    return(
+    const TEXTS_fa = ["ریکت.","فرانت اند.","پایتون.","وب."]
+    const textRef = useRef(null)
 
+    useEffect(() => {
+        const typed = new Typed(textRef.current, {
+            strings: TEXTS_fa,
+            typeSpeed: 50,
+            showCursor:false,
+            loop: true
+        })
+
+        return () => {
+            typed.destroy()
+        }
+    }, [])
+
+    return(
         <Grid xs={12} sm={12} md={6} lg={6} sx={{ display: 'flex',flexDirection: 'column',
             alignItems: 'center', justifyContent: 'center',textAlign: 'right' }}>
             <Slide direction="down" in={avatarLoaded}
                    style={{transitionDelay: avatarLoaded ? "300ms": "0"}}>
                 <Typography sx={{ textAlign: 'right', mt:1 }} variant="h6">
-                    - سلام من
+                    <KeyboardDoubleArrowLeftOutlined className="arrow-animation" sx={{verticalAlign:"middle"}}/>
+                    سلام من
                 </Typography>
             </Slide>
             <Slide direction="down" in={avatarLoaded}
@@ -37,9 +54,14 @@ const Intro = ({avatarLoaded}) => {
             </Slide>
             <Slide direction="down" in={avatarLoaded}
                    style={{transitionDelay: avatarLoaded ? "500ms": "0"}}>
-                <Typography sx={{ textAlign: 'right',mt:1}} >
-                    یک برنامه نویس فرانت اند.
-                </Typography>
+                <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center',
+                        justifyContent: 'center',mt:1}}>
+                    <Typography sx={{ textAlign: 'right'}}>
+                        یک برنامه نویس
+                    </Typography>
+                    <Typography sx={{ textAlign: 'right',ml:1}} ref={textRef}>
+                    </Typography>
+                </Box>
             </Slide>
 
             <Slide direction="up" in={avatarLoaded}

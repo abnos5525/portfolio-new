@@ -60,3 +60,46 @@ body{
     pointer-events: none; /* برای جلوگیری از تعامل با این عنصر */
 }
 
+@keyframes LinearProgress-fadeIn {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+.LinearProgress-fadeIn {
+    animation: fadeIn 0.5s;
+}
+
+@keyframes light {
+    0% {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.1), 0 0 10px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    50% {
+        box-shadow: 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(255, 255, 255, 0.3), 0 0 40px rgba(255, 255, 255, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(255, 255, 255, 0.1), 0 0 10px rgba(255, 255, 255, 0.1), 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+}
+
+.icon-light {
+    animation: light 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: translateX(0);
+    }
+    50% {
+        transform: translateX(-3px);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.arrow-animation {
+    animation: pulse 2s infinite;
+}
+
+
+
