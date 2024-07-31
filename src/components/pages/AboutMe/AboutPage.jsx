@@ -60,18 +60,18 @@ const AboutPage = () => {
                                         borderRadius: 4,
                                         display: avatarLoaded ? 'block' : 'none',
                                         position:"absolute",
-                                        width: 330,
-                                        height:530,
-                                        top:-125,
-                                        left:-15
+                                        width: 290,
+                                        height:490,
+                                        top:-120,
+                                        left:-9
                                     }}
                                 />
                                 <Box
                                     component="img"
                                     className="grayscale"
                                     src={avatar}
-                                    width="100%"
-                                    height="100%"
+                                    width="90%"
+                                    height="90%"
                                     sx={{
                                         borderRadius: 5,
                                         display: avatarLoaded ? 'block' : 'none',
