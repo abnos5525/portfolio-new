@@ -30,8 +30,11 @@ import rtlPlugin from "stylis-plugin-rtl";
               dark: "#bb3d0c",
             },
             success: {
-                main:"#1c7339",
+                main:"#31cb68",
             },
+            error:{
+                main: "#cc3030"
+            }
         }
     })
 const Template = ({children}) => {

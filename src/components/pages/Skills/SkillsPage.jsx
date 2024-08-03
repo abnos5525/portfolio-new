@@ -19,6 +19,7 @@ const SkillsPage = () => {
         { name: "ReactJs", img: "./images/icons/reactjs.png", progress: 85 },
         { name: "Redux", img: "./images/icons/redux.png", progress: 70 },
         { name: "VueJs", img: "./images/icons/vuejs.png", progress: 70 },
+        { name: "NodeJs", img: "./images/icons/nodejs.png", progress: 50 },
         { name: "Bootstrap", img: "./images/icons/bootstrap.png", progress: 85 },
         { name: "TailwindCss", img: "./images/icons/tailwind.png", progress: 85 },
         { name: "Python", img: "./images/icons/python.png", progress: 75 },
@@ -53,16 +54,6 @@ const SkillsPage = () => {
             setActiveSkill(activeSkill === index ? null : index)
         }
     }
-
-    useEffect(() => {
-        const loadImage = (index, src) => {
-            const img = new Image()
-            img.src = src
-            img.onload = () => setLoadedImages(prev => ({ ...prev, [index]: true }))
-        }
-
-        skills.forEach((skill, index) => loadImage(index, skill.img))
-    }, [skills])
 
     const {setActivePage} = useContext(Context)
 
@@ -160,7 +151,7 @@ const SkillsPage = () => {
                 <MainMenu />
                 <Box sx={{textAlign:"center"}}>
                     <Button color="secondary" onClick={() => handleMenuItemClick("projects")}
-                            variant="contained" sx={{my:5,px:5, py:2}}>
+                            variant="contained" sx={{my:10,px:5, py:2}}>
                         <WorkOutline className="float-animation" />
                         پروژه های من
                     </Button>
