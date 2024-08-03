@@ -10,9 +10,13 @@ const ProjectsPage = () => {
     const settings = {
         dots: true,
         infinite: true,
-        speed: 500,
+        speed: 800,
+        autoplaySpeed: 3500,
+        cssEase: "linear",
+        autoplay:true,
         slidesToShow: 2,
         arrows:false,
+        focusOnSelect:false,
         slidesToScroll: 1,
         style:{margin:10},
         responsive: [
