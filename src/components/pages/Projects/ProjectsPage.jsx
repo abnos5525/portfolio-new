@@ -2,7 +2,7 @@ import {Box, Link, Skeleton, Slide, Typography} from "@mui/material";
 import {KeyboardDoubleArrowLeftOutlined} from "@mui/icons-material";
 import Slider from "react-slick";
 import {useEffect, useState} from "react";
-import MainMenu from "../../MainMenu.jsx";
+import DrawerActionButton from "../../sidebar/DrawerActionButton.jsx";
 
 const ProjectsPage = () => {
     const [loadedImages, setLoadedImages] = useState({});
@@ -133,7 +133,7 @@ const ProjectsPage = () => {
                     }
                 </Slider>
 
-                <MainMenu />
+                <DrawerActionButton/>
             </Box>
         </Box>
     )

@@ -2,8 +2,8 @@ import {Box, Button, LinearProgress, Skeleton, Slide, Typography, useMediaQuery}
 import {KeyboardDoubleArrowLeftOutlined, WorkOutline} from "@mui/icons-material";
 import {useContext, useEffect, useState} from "react";
 import Grid from "@mui/material/Unstable_Grid2";
-import MainMenu from "../../MainMenu.jsx";
 import {Context} from "../../../ContextApp.jsx";
+import DrawerActionButton from "../../sidebar/DrawerActionButton.jsx";
 
 const SkillsPage = () => {
 
@@ -148,7 +148,6 @@ const SkillsPage = () => {
                         ))}
                     </Grid>
                 </Grid>
-                <MainMenu />
                 <Box sx={{textAlign:"center"}}>
                     <Button color="secondary" onClick={() => handleMenuItemClick("projects")}
                             variant="contained" sx={{my:10,px:5, py:2}}>
@@ -156,6 +155,9 @@ const SkillsPage = () => {
                         پروژه های من
                     </Button>
                 </Box>
+
+                <DrawerActionButton/>
+
             </Box>
         </Box>
     )

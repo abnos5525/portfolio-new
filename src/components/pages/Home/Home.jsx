@@ -4,7 +4,7 @@ import {useState} from "react";
 import Avatar from "./Avatar.jsx";
 import Intro from "./Intro.jsx";
 import Socials from "./Socials.jsx";
-import MainMenu from "../../MainMenu.jsx";
+import DrawerActionButton from "../../sidebar/DrawerActionButton.jsx";
 
 const Home = () => {
     const [avatarLoaded, setAvatarLoaded] = useState(false)
@@ -37,7 +37,7 @@ const Home = () => {
                     <Socials/>
                 </Grid>
 
-                <MainMenu />
+                <DrawerActionButton/>
 
             </Box>
         </Box>

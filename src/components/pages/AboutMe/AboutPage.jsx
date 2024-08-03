@@ -1,9 +1,9 @@
 import {Box, Button, Skeleton, Slide, Typography} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import {useContext, useEffect, useState} from "react";
-import MainMenu from "../../MainMenu.jsx";
 import {CodeOutlined, KeyboardDoubleArrowLeftOutlined} from "@mui/icons-material";
 import {Context} from "../../../ContextApp.jsx";
+import DrawerActionButton from "../../sidebar/DrawerActionButton.jsx";
 
 const AboutPage = () => {
     const [avatarLoaded, setAvatarLoaded] = useState(false)
@@ -117,7 +117,9 @@ const AboutPage = () => {
                         </Slide>
                     </Grid>
                 </Grid>
-                <MainMenu />
+
+                <DrawerActionButton/>
+
             </Box>
         </Box>
     )
