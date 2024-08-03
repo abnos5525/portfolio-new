@@ -42,7 +42,7 @@ const ProjectsPage = () => {
                 },
             },
             {
-                breakpoint: 0, // اندازه صفحه بسیار کوچک
+                breakpoint: 200, // اندازه صفحه بسیار کوچک
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
