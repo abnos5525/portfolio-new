@@ -62,8 +62,8 @@ const AboutPage = () => {
                                         position:"absolute",
                                         width: 290,
                                         height:490,
-                                        top:-120,
-                                        left:-9
+                                        top:-110,
+                                        left:0
                                     }}
                                 />
                                 <Box
@@ -75,6 +75,8 @@ const AboutPage = () => {
                                     sx={{
                                         borderRadius: 5,
                                         display: avatarLoaded ? 'block' : 'none',
+                                        ml:1,
+                                        mt:1
                                     }}
                                 />
                             </Box>
