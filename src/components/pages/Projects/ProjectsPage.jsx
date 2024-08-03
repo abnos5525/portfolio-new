@@ -10,8 +10,8 @@ const ProjectsPage = () => {
     const settings = {
         dots: true,
         infinite: true,
-        speed: 800,
-        autoplaySpeed: 3500,
+        speed: 2500,
+        autoplaySpeed: 6000,
         cssEase: "linear",
         autoplay:true,
         slidesToShow: 2,
@@ -42,7 +42,7 @@ const ProjectsPage = () => {
                 },
             },
             {
-                breakpoint: 200, // اندازه صفحه بسیار کوچک
+                breakpoint: 400, // اندازه صفحه بسیار کوچک
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
@@ -73,7 +73,7 @@ const ProjectsPage = () => {
 
     return(
         <Box sx={{m:{
-                xs:2,
+                xs:1,
                 sm:2,
                 md:5,
                 lg:5
@@ -104,7 +104,7 @@ const ProjectsPage = () => {
                                                     lg:550,
                                                     md:550,
                                                     sm:450,
-                                                    xs:360
+                                                    xs:300
                                                 },
                                                 textAlign:"center",
                                                 m:"auto"
