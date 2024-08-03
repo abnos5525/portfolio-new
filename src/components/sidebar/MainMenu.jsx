@@ -15,7 +15,7 @@ const MainMenu = () => {
 
     return(
             <Grid container gap={1}>
-                <Grid md={12}>
+                <Grid xs={12} md={12}>
                     <MenuItem onClick={() => handleMenuItemClick("home")}
                               sx={{ backgroundColor: activePage === "home" ? "primary.light" : "inherit",
                                   height:60}}>
@@ -26,7 +26,7 @@ const MainMenu = () => {
                         </Typography>
                     </MenuItem>
                 </Grid>
-                <Grid md={12}>
+                <Grid xs={12} md={12}>
                 <MenuItem onClick={() => handleMenuItemClick("about")}
                           sx={{ backgroundColor: activePage === "about" ? "primary.light" : "inherit", height:60 }}>
                     <Typography sx={{m:"auto"}}>
@@ -35,7 +35,7 @@ const MainMenu = () => {
                     </Typography>
                 </MenuItem>
                 </Grid>
-                <Grid md={12}>
+                <Grid xs={12} md={12}>
                 <MenuItem onClick={() => handleMenuItemClick("skills")}
                           sx={{ backgroundColor: activePage === "skills" ? "primary.light" : "inherit", height:60 }}>
                     <Typography sx={{m:"auto"}}>
@@ -44,7 +44,7 @@ const MainMenu = () => {
                     </Typography>
                 </MenuItem>
                 </Grid>
-                <Grid md={12}>
+                <Grid xs={12} md={12}>
                 <MenuItem onClick={() => handleMenuItemClick("projects")}
                           sx={{ backgroundColor: activePage === "projects" ? "primary.light" : "inherit", height:60 }}>
                     <Typography sx={{m:"auto"}}>
