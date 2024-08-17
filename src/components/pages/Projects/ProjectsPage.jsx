@@ -72,14 +72,7 @@ const ProjectsPage = () => {
     }, [projects])
 
     return(
-        <Box sx={{m:{
-                xs:1,
-                sm:2,
-                md:5,
-                lg:5
-            },p:1, height:"auto", borderRadius:3, background: 'linear-gradient(to left, #E06432 , #261a1a)'}}>
-
-            <Box sx={{height:"auto",pb:5, borderRadius:4, backgroundColor: "primary.dark", position:"relative"}}>
+        <>
                 <Slide direction="down" in={loadedImages[0]}
                        style={{transitionDelay: "200ms"}}>
                     <Typography variant="h5" textAlign="left" sx={{p:2}}>
@@ -134,8 +127,7 @@ const ProjectsPage = () => {
                 </Slider>
 
                 <DrawerActionButton/>
-            </Box>
-        </Box>
+        </>
     )
 }
 

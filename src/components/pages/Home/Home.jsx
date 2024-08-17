@@ -10,15 +10,7 @@ const Home = () => {
     const [avatarLoaded, setAvatarLoaded] = useState(false)
 
     return (
-        <Box style={{marginTop:30}} sx={{m:{
-                xs:2,
-                sm:2,
-                md:5,
-                lg:5
-            },p:1, height:"auto",borderRadius:3, background: 'linear-gradient(to left, #E06432 , #261a1a)'}}>
-
-            <Box sx={{height:"auto",pb:5, borderRadius:4, backgroundColor: "primary.dark", position:"relative"}}>
-
+        <>
                 <Slide direction="left" in={avatarLoaded}
                        style={{transitionDelay: avatarLoaded ? "600ms": "0"}}>
                     <Box sx={{ position: "relative" }}>
@@ -51,8 +43,7 @@ const Home = () => {
 
                 <DrawerActionButton/>
 
-            </Box>
-        </Box>
+            </>
     )
 }
 

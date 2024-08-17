@@ -27,14 +27,7 @@ const AboutPage = () => {
     }
 
     return(
-        <Box sx={{m:{
-                xs:2,
-                sm:2,
-                md:5,
-                lg:5
-            },p:1, height:"auto", borderRadius:3, background: 'linear-gradient(to left, #E06432 , #261a1a)'}}>
-
-            <Box sx={{height:"auto",pb:5, borderRadius:4, backgroundColor: "primary.dark", position:"relative"}}>
+        <>
                 <Slide direction="down" in={avatarLoaded}
                        style={{transitionDelay: avatarLoaded ? "200ms": "0"}}>
                     <Typography variant="h5" textAlign="left" sx={{p:2,mb:2}}>
@@ -122,8 +115,8 @@ const AboutPage = () => {
                         </Box>
                     </Grid>
                     <Grid xs={12} sm={12} md={7} lg={7} sx={{order: { md: 1 }}}>
-                        {[...Array(5)].map((_, index) => (
-                            <Box key={index} sx={{ mb: 2 }}>
+                        {[...Array(8)].map((_, index) => (
+                            <Box key={index} sx={{ my: 2 }}>
                                 <Skeleton
                                     animation="wave"
                                     sx={{
@@ -172,8 +165,7 @@ const AboutPage = () => {
 
                 <DrawerActionButton/>
 
-            </Box>
-        </Box>
+            </>
     )
 }
 

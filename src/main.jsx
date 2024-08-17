@@ -9,10 +9,10 @@ import "slick-carousel/slick/slick-theme.css";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-      <Template>
-          <ContextApp>
-            <RoutePages/>
-          </ContextApp>
-      </Template>
+      <ContextApp>
+          <Template>
+                <RoutePages/>
+          </Template>
+      </ContextApp>
   </StrictMode>
 )
