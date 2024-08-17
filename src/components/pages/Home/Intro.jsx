@@ -46,7 +46,7 @@ const Intro = ({avatarLoaded}) => {
                         lg:60,
                         md:45,
                         sm:45,
-                        xs:40
+                        xs:27
                     }
                 }}>
                     محمدحسین حیدریم

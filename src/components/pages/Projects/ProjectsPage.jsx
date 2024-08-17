@@ -82,7 +82,7 @@ const ProjectsPage = () => {
             <Box sx={{height:"auto",pb:5, borderRadius:4, backgroundColor: "primary.dark", position:"relative"}}>
                 <Slide direction="down" in={loadedImages[0]}
                        style={{transitionDelay: "200ms"}}>
-                    <Typography variant="h4" textAlign="left" sx={{p:2}}>
+                    <Typography variant="h5" textAlign="left" sx={{p:2}}>
                         <KeyboardDoubleArrowLeftOutlined className="arrow-animation" fontSize="20" sx={{verticalAlign:"middle"}}/>
                         پروژه های من
                     </Typography>
@@ -104,7 +104,7 @@ const ProjectsPage = () => {
                                                     lg:550,
                                                     md:550,
                                                     sm:450,
-                                                    xs:300
+                                                    xs:220
                                                 },
                                                 textAlign:"center",
                                                 m:"auto"

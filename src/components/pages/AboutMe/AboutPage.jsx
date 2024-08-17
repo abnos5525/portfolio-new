@@ -37,22 +37,31 @@ const AboutPage = () => {
             <Box sx={{height:"auto",pb:5, borderRadius:4, backgroundColor: "primary.dark", position:"relative"}}>
                 <Slide direction="down" in={avatarLoaded}
                        style={{transitionDelay: avatarLoaded ? "200ms": "0"}}>
-                    <Typography variant="h4" textAlign="left" sx={{p:2}}>
-                        <KeyboardDoubleArrowLeftOutlined className="arrow-animation" fontSize="20" sx={{verticalAlign:"middle"}}/>
+                    <Typography variant="h5" textAlign="left" sx={{p:2,mb:2}}>
+                        <KeyboardDoubleArrowLeftOutlined className="arrow-animation" fontSize="20" sx={{verticalAlign:"middle"}}
+                        />
                         درباره من
                     </Typography>
                 </Slide>
                 <Grid container>
                     <Grid xs={12} sm={12} md={5} lg={5} sx={{textAlign:"center", order: { md: 2 }}}>
-                        <Box sx={{ display: 'grid', justifyItems: 'center', position:"relative" }}>
+                        <Box sx={{ display: 'grid', justifyItems: 'center', position:"relative",
+                            height: {
+                                lg:260,
+                                md:260,
+                                sm:260,
+                                xs:180
+                            }
+                        }}>
                             {!avatarLoaded && (
                                 <Skeleton
                                     variant="rectangular"
                                     animation="wave"
-                                    sx={{ width: 250, height: 250, m: "auto", mb: 2, borderRadius: 6 }}
+                                    sx={{ width: {lg:250,md:250,sm:250,xs:200},
+                                        height: {lg:250,md:250,sm:250,xs:200}, m: "auto", mb: 2, borderRadius: 6 }}
                                 />
                             )}
-                            <Box sx={{ width: 300, height: 300, position: 'relative', minHeight: '300px' }}>
+                            <Box sx={{position: 'relative', minHeight: '300px' }}>
                                 <Skeleton
                                     animation="wave"
                                     sx={{
@@ -60,23 +69,53 @@ const AboutPage = () => {
                                         borderRadius: 4,
                                         display: avatarLoaded ? 'block' : 'none',
                                         position:"absolute",
-                                        width: 290,
-                                        height:490,
-                                        top:-110,
-                                        left:0
+                                        width: {
+                                            lg:290,
+                                            md:290,
+                                            sm:290,
+                                            xs:200
+                                        },
+                                        height:{
+                                            lg:490,
+                                            md:490,
+                                            sm:490,
+                                            xs:360
+                                        },
+                                        top:{
+                                            lg:-115,
+                                            md:-115,
+                                            sm:-115,
+                                            xs:-90
+                                        },
+                                        left:{
+                                            lg:-8,
+                                            md:-8,
+                                            sm:-8,
+                                            xs:-4
+                                        }
                                     }}
                                 />
                                 <Box
                                     component="img"
                                     className="grayscale"
                                     src={avatar}
-                                    width="90%"
-                                    height="90%"
                                     sx={{
                                         borderRadius: 5,
+                                        textAlign:"center",
                                         display: avatarLoaded ? 'block' : 'none',
-                                        ml:1,
-                                        mt:1
+                                        mx:"auto",
+                                        width:{
+                                            lg:270,
+                                            md:270,
+                                            sm:270,
+                                            xs:190,
+                                        },
+                                        height:{
+                                            lg:270,
+                                            md:270,
+                                            sm:270,
+                                            xs:190,
+                                        }
                                     }}
                                 />
                             </Box>
@@ -99,7 +138,18 @@ const AboutPage = () => {
                             </Box>
                         ))}
                         <Typography variant="subtitle1" sx={{lineHeight:2, p:2, display: avatarLoaded ? 'block' : 'none'}} >
-                            سلام! من محمدحسین حیدری هستم، برنامه‌نویس فرانت‌اند. طراحی و توسعه رابط‌های کاربری زیبا و کارآمد برای وب‌سایت‌ها و برنامه‌های وب، عشق و علاقه منه. با استفاده از تکنولوژی‌های مدرن و بهترین شیوه‌های برنامه‌نویسی، سعی می‌کنم تا تجربه کاربری را به بهترین شکل ممکن به کاربران ارائه بدم. هر پروژه برای من فرصتیه تا خلاقیت و مهارت‌های خود را به چالش بکشم و نتایج بی‌نظیری به دست بیارم. با علاقه‌مندی به یادگیری مداوم و به‌روز نگه داشتن دانش خود، همواره در تلاش هستم تا بهترین نسخه از خودم باشم و تاثیر مثبتی در دنیای دیجیتال بذارم.
+                            <p>
+                                سلام! من محمدحسین حیدری هستم، برنامه‌نویس فرانت‌اند. طراحی و توسعه رابط‌های کاربری زیبا و کارآمد برای وب‌سایت‌ها و برنامه‌های وب، عشق و علاقه منه.
+                            </p>
+                            <p>
+                                با استفاده از تکنولوژی‌های مدرن و بهترین شیوه‌های برنامه‌نویسی، سعی می‌کنم تا تجربه کاربری را به بهترین شکل ممکن به کاربران ارائه بدم.
+                            </p>
+                            <p>
+                                هر پروژه برای من فرصتیه تا خلاقیت و مهارت‌های خود را به چالش بکشم و نتایج بی‌نظیری به دست بیارم.
+                            </p>
+                            <p>
+                                با علاقه‌مندی به یادگیری مداوم و به‌روز نگه داشتن دانش خود، همواره در تلاش هستم تا بهترین نسخه از خودم باشم و تاثیر مثبتی در دنیای دیجیتال بذارم.
+                            </p>
                         </Typography>
 
                         <Slide direction="up" in={avatarLoaded}

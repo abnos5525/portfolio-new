@@ -20,12 +20,23 @@ const Avatar = ({avatarLoaded,setAvatarLoaded}) => {
         <Grid xs={12} sm={12} md={5} lg={5} sx={{textAlign:"center", mt:5}}>
             {!avatarLoaded && (
                 <Skeleton variant="rectangular" animation="wave"
-                          sx={{ width: 250, height: 250, m:"auto", mb:2, borderRadius:3 }} />
+                          sx={{ width: {lg:250,md:250,sm:250,xs:200},
+                              height: {lg:250,md:250,sm:250,xs:200}, m:"auto", mb:2, borderRadius:3 }} />
             )}
             <Box component="img"
                 src={avatar}
-                width={300}
-                height={300}
+                width={{
+                    lg:300,
+                    md:300,
+                    sm:300,
+                    xs:200
+                }}
+                height={{
+                    lg:300,
+                    md:300,
+                    sm:300,
+                    xs:200
+                }}
             />
         </Grid>
     )

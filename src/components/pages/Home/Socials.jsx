@@ -22,7 +22,7 @@ const Socials = () => {
                 lg:4,
                 md:4,
                 sm:10,
-                xs:10
+                xs:5
             }
         }}>
             <Link target="_blank" href="https://www.instagram.com/hosseinn_heidary">

@@ -23,9 +23,21 @@ const Home = () => {
                        style={{transitionDelay: avatarLoaded ? "600ms": "0"}}>
                     <Box sx={{ position: "relative" }}>
                         <Box component="img" src="./images/imojis/light_bulb.png"
-                             sx={{ position: "absolute", top: -40, left: 20 }}
+                             sx={{ position: "absolute", top: -40, left: {
+                                    lg:20,
+                                    md:20,
+                                    sm:20,
+                                    xs:-20
+                                 } }}
                         />
-                        <Box className="light-bulb-glow" />
+                        <Box className="light-bulb-glow" sx={{
+                            left:{
+                                lg:47,
+                                md:47,
+                                sm:47,
+                                xs:8
+                            }
+                        }} />
                     </Box>
                 </Slide>
 
