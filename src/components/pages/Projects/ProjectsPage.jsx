@@ -1,23 +1,26 @@
 import {Box, Link, Skeleton, Slide, Typography} from "@mui/material";
-import {KeyboardDoubleArrowLeftOutlined} from "@mui/icons-material";
+import {KeyboardDoubleArrowLeftOutlined, KeyboardDoubleArrowRightOutlined} from "@mui/icons-material";
 import Slider from "react-slick";
 import {useEffect, useState} from "react";
 import DrawerActionButton from "../../sidebar/DrawerActionButton.jsx";
+import {useTranslation} from "react-i18next";
 
 const ProjectsPage = () => {
     const [loadedImages, setLoadedImages] = useState({});
 
+    const {t, i18n} = useTranslation()
+
     const settings = {
         dots: true,
         infinite: true,
-        speed: 2500,
+        speed: 500,
         autoplaySpeed: 6000,
         cssEase: "linear",
         autoplay:true,
         slidesToShow: 2,
         arrows:false,
         focusOnSelect:false,
-        slidesToScroll: 1,
+        slidesToScroll: 2,
         style:{margin:10},
         responsive: [
             {
@@ -75,9 +78,19 @@ const ProjectsPage = () => {
         <>
                 <Slide direction="down" in={loadedImages[0]}
                        style={{transitionDelay: "200ms"}}>
-                    <Typography variant="h5" textAlign="left" sx={{p:2}}>
-                        <KeyboardDoubleArrowLeftOutlined className="arrow-animation" fontSize="20" sx={{verticalAlign:"middle"}}/>
-                        پروژه های من
+                    <Typography variant="h5" textAlign="left" sx={{p:2,
+                        textAlign:i18n.language === "en" ? "right" : "left"}}>
+                        {
+                            i18n.language === "en" ?
+                                <KeyboardDoubleArrowRightOutlined className="arrow-animation" fontSize="20"
+                                                                  sx={{verticalAlign:"middle"}}/>
+                                :
+                                <KeyboardDoubleArrowLeftOutlined className="arrow-animation" fontSize="20"
+                                                                 sx={{verticalAlign:"middle"}}/>
+                        }
+                        {
+                            t("sidebar.projects")
+                        }
                     </Typography>
                 </Slide>
 
@@ -107,12 +120,16 @@ const ProjectsPage = () => {
                                             project.online ?
                                                 <Typography variant="h4"
                                                             sx={{color:"success.main", my:2}}>
-                                                    آنلاین
+                                                    {
+                                                        t("projects.online")
+                                                    }
                                                 </Typography>
                                                 :
                                                 <Typography variant="h4"
                                                             sx={{color:"error.main", my:2}}>
-                                                    آفلاین
+                                                    {
+                                                        t("projects.offline")
+                                                    }
                                                 </Typography>
                                         }
                                     </Box>

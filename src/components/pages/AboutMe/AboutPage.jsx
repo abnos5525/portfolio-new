@@ -1,12 +1,20 @@
 import {Box, Button, Skeleton, Slide, Typography} from "@mui/material";
 import Grid from "@mui/material/Unstable_Grid2";
 import {useContext, useEffect, useState} from "react";
-import {CodeOutlined, KeyboardDoubleArrowLeftOutlined} from "@mui/icons-material";
+import {
+    CodeOutlined,
+    KeyboardDoubleArrowLeftOutlined,
+    KeyboardDoubleArrowRight,
+    KeyboardDoubleArrowRightOutlined
+} from "@mui/icons-material";
 import {Context} from "../../../ContextApp.jsx";
 import DrawerActionButton from "../../sidebar/DrawerActionButton.jsx";
+import {useTranslation} from "react-i18next";
 
 const AboutPage = () => {
     const [avatarLoaded, setAvatarLoaded] = useState(false)
+
+    const {t, i18n} = useTranslation()
 
     const avatar = "./images/me.jpg"
 
@@ -30,10 +38,20 @@ const AboutPage = () => {
         <>
                 <Slide direction="down" in={avatarLoaded}
                        style={{transitionDelay: avatarLoaded ? "200ms": "0"}}>
-                    <Typography variant="h5" textAlign="left" sx={{p:2,mb:2}}>
-                        <KeyboardDoubleArrowLeftOutlined className="arrow-animation" fontSize="20" sx={{verticalAlign:"middle"}}
-                        />
-                        درباره من
+                    <Typography variant="h5" textAlign="left" sx={{p:2,mb:2,
+                        textAlign:i18n.language === "en" ? "right" : "left"}}>
+
+                        {
+                            i18n.language === "en" ?
+                                <KeyboardDoubleArrowRightOutlined className="arrow-animation" fontSize="20"
+                                                                 sx={{verticalAlign:"middle"}}/>
+                                :
+                                <KeyboardDoubleArrowLeftOutlined className="arrow-animation" fontSize="20"
+                                                                 sx={{verticalAlign:"middle"}}/>
+                        }
+                        {
+                            t("sidebar.aboutMe")
+                        }
                     </Typography>
                 </Slide>
                 <Grid container>
@@ -131,29 +149,20 @@ const AboutPage = () => {
                             </Box>
                         ))}
                         <Typography variant="subtitle1" sx={{lineHeight:2, p:2, display: avatarLoaded ? 'block' : 'none'}} >
-                            <p>
-                                سلام! من محمدحسین حیدری هستم، برنامه‌نویس فرانت‌اند. طراحی و توسعه رابط‌های کاربری زیبا و کارآمد برای وب‌سایت‌ها و برنامه‌های وب، عشق و علاقه منه.
-
-                                با استفاده از تکنولوژی‌های مدرن و بهترین شیوه‌های برنامه‌نویسی، سعی می‌کنم تا تجربه کاربری را به بهترین شکل ممکن به کاربران ارائه بدم.
-
-                                هر پروژه برای من فرصتیه تا خلاقیت و مهارت‌های خود را به چالش بکشم و نتایج بی‌نظیری به دست بیارم.
-
-                                با علاقه‌مندی به یادگیری مداوم و به‌روز نگه داشتن دانش خود، همواره در تلاش هستم تا بهترین نسخه از خودم باشم و تاثیر مثبتی در دنیای دیجیتال بذارم.
-                            </p>
+                                {
+                                    t("aboutMe.description")
+                                }
                         </Typography>
 
                         <Slide direction="up" in={avatarLoaded}
                                style={{transitionDelay: avatarLoaded ? "200ms": "0"}}>
-                            <Box sx={{textAlign:{
-                                    lg:"right",
-                                    md:"center",
-                                    sm:"center",
-                                    xs:"center"
-                                }}}>
+                            <Box sx={{textAlign:"center"}}>
                                 <Button color="secondary" onClick={() => handleMenuItemClick("skills")}
                                         variant="contained" sx={{my:5,px:5, py:2}}>
                                     <CodeOutlined className="float-animation" />
-                                    مهارت های من
+                                    {
+                                        t("sidebar.skills")
+                                    }
                                 </Button>
                             </Box>
                         </Slide>

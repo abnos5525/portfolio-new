@@ -6,10 +6,13 @@ import ProjectsPage from "./components/pages/Projects/ProjectsPage.jsx";
 import {useContext} from "react";
 import {Context} from "./ContextApp.jsx";
 import {Box} from "@mui/material";
+import {useTranslation} from "react-i18next";
 
 const RoutePages = () => {
 
     const {activePage, theme} = useContext(Context)
+
+    const {i18n} = useTranslation()
 
     const renderPage = () => {
         switch (activePage) {
@@ -37,7 +40,7 @@ const RoutePages = () => {
                         sm:2,
                         md:5,
                         lg:5
-                    },p:1, height:"auto",borderRadius:3,
+                    },p:1, height:"auto",borderRadius:3, direction: i18n.language === "fa" ? "ltr" : "rtl",
                     background: `linear-gradient(to left, ${theme === "theme1" ? '#E06432' :'#deab3a'}  ,
                                                   ${theme === "theme1" ? '#261a1a' : '#522258'} )`}}>
 

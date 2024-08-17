@@ -1,15 +1,18 @@
 import {Box, Button, LinearProgress, Skeleton, Slide, Typography, useMediaQuery} from "@mui/material";
-import {KeyboardDoubleArrowLeftOutlined, WorkOutline} from "@mui/icons-material";
+import {KeyboardDoubleArrowLeftOutlined, KeyboardDoubleArrowRightOutlined, WorkOutline} from "@mui/icons-material";
 import {useContext, useEffect, useState} from "react";
 import Grid from "@mui/material/Unstable_Grid2";
 import {Context} from "../../../ContextApp.jsx";
 import DrawerActionButton from "../../sidebar/DrawerActionButton.jsx";
+import {useTranslation} from "react-i18next";
 
 const SkillsPage = () => {
 
     const [activeSkill, setActiveSkill] = useState(null);
     const [loadedImages, setLoadedImages] = useState({});
     const isSmallScreen = useMediaQuery(theme => theme.breakpoints.down('sm'));
+
+    const {t, i18n} = useTranslation()
 
     const skills = [
         {name: "HTML", img: "./images/icons/html.png", progress: 95},
@@ -65,10 +68,19 @@ const SkillsPage = () => {
         <>
             <Slide direction="down" in={loadedImages[0]}
                    style={{transitionDelay: "200ms"}}>
-                <Typography variant="h5" textAlign="left" sx={{p: 2}}>
-                    <KeyboardDoubleArrowLeftOutlined className="arrow-animation" fontSize="20"
-                                                     sx={{verticalAlign: "middle"}}/>
-                    مهارت های من
+                <Typography variant="h5" textAlign="left" sx={{p: 2,
+                    textAlign:i18n.language === "en" ? "right" : "left"}}>
+                    {
+                        i18n.language === "en" ?
+                            <KeyboardDoubleArrowRightOutlined className="arrow-animation" fontSize="20"
+                                                              sx={{verticalAlign:"middle"}}/>
+                            :
+                            <KeyboardDoubleArrowLeftOutlined className="arrow-animation" fontSize="20"
+                                                             sx={{verticalAlign:"middle"}}/>
+                    }
+                    {
+                        t("sidebar.skills")
+                    }
                 </Typography>
             </Slide>
 
@@ -147,7 +159,9 @@ const SkillsPage = () => {
                 <Button color="secondary" onClick={() => handleMenuItemClick("projects")}
                         variant="contained" sx={{my: 10, px: 5, py: 2}}>
                     <WorkOutline className="float-animation"/>
-                    پروژه های من
+                    {
+                        t("sidebar.projects")
+                    }
                 </Button>
             </Box>
 

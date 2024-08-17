@@ -1,5 +1,5 @@
 import {Box, Button, Slide, Typography} from "@mui/material";
-import {KeyboardDoubleArrowLeftOutlined, ManOutlined} from "@mui/icons-material";
+import {KeyboardDoubleArrowLeftOutlined, KeyboardDoubleArrowRightOutlined, ManOutlined} from "@mui/icons-material";
 import Grid from "@mui/material/Unstable_Grid2";
 import {useContext, useEffect, useRef} from "react";
 import {Context} from "../../../ContextApp.jsx";
@@ -10,18 +10,19 @@ const Intro = ({avatarLoaded}) => {
 
     const {setActivePage} = useContext(Context)
 
-    const {t} = useTranslation()
+    const {t, i18n} = useTranslation()
 
     const handleMenuItemClick = (page) => {
         setActivePage(page)
     }
 
     const TEXTS_fa = ["ریکت.","فرانت اند.","پایتون.","وب."]
+    const TEXTS_en = ["reactjs.","frontend.","python.","web."]
     const textRef = useRef(null)
 
     useEffect(() => {
         const typed = new Typed(textRef.current, {
-            strings: TEXTS_fa,
+            strings: i18n.language === "en" ? TEXTS_en : TEXTS_fa,
             typeSpeed: 50,
             showCursor:false,
             loop: true
@@ -30,7 +31,7 @@ const Intro = ({avatarLoaded}) => {
         return () => {
             typed.destroy()
         }
-    }, [])
+    }, [i18n.language])
 
     return(
         <Grid xs={12} sm={12} md={6} lg={6} sx={{ display: 'flex',flexDirection: 'column',
@@ -38,7 +39,14 @@ const Intro = ({avatarLoaded}) => {
             <Slide direction="down" in={avatarLoaded}
                    style={{transitionDelay: avatarLoaded ? "300ms": "0"}}>
                 <Typography sx={{ textAlign: 'right', mt:1 }} variant="h6">
-                    <KeyboardDoubleArrowLeftOutlined className="arrow-animation" sx={{verticalAlign:"middle"}}/>
+                    {
+                        i18n.language === "en" ?
+                            <KeyboardDoubleArrowRightOutlined className="arrow-animation" fontSize="20"
+                                                              sx={{verticalAlign:"middle"}}/>
+                            :
+                            <KeyboardDoubleArrowLeftOutlined className="arrow-animation" fontSize="20"
+                                                             sx={{verticalAlign:"middle"}}/>
+                    }
 
                     {
                         t("home.hello")
@@ -56,18 +64,24 @@ const Intro = ({avatarLoaded}) => {
                         xs:27
                     }
                 }}>
-                    محمدحسین حیدریم
+                    {
+                        t("home.name")
+                    }
                 </Typography>
             </Slide>
             <Slide direction="down" in={avatarLoaded}
                    style={{transitionDelay: avatarLoaded ? "500ms": "0"}}>
                 <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center',
                         justifyContent: 'center',mt:1}}>
-                    <Typography sx={{ textAlign: 'right'}}>
-                        یک برنامه نویس
+                    <Typography sx={{ textAlign: 'right', ml: i18n.language === "en" ? 1 : 0}}>
+                        {
+                            t("home.programmer")
+                        }
                     </Typography>
-                    <Typography sx={{ textAlign: 'right',ml:1}} ref={textRef}>
+
+                    <Typography sx={{ textAlign: 'right', ml: i18n.language === "en" ? 0 : 1 }} ref={textRef}>
                     </Typography>
+
                 </Box>
             </Slide>
 
@@ -76,7 +90,9 @@ const Intro = ({avatarLoaded}) => {
                 <Button color="secondary" onClick={() => handleMenuItemClick("about")}
                         variant="contained" sx={{my:5,px:5, py:2}}>
                     <ManOutlined className="float-animation" />
-                    درباره من
+                    {
+                        t("sidebar.aboutMe")
+                    }
                 </Button>
             </Slide>
         </Grid>

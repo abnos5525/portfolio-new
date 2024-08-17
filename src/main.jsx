@@ -21,19 +21,19 @@ i18next
             fa: {
                 translation: global_fa
             },
-            lng: 'fa', // Set default language here
-            fallbackLng: 'fa', // Fallback language
-        }
+        },
+        lng: 'fa', // Set default language here
+        fallbackLng: 'fa', // Fallback language
     })
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
       <ContextApp>
-          <I18nextProvider i18n={i18next}>
               <Template>
+                  <I18nextProvider i18n={i18next}>
                     <RoutePages/>
+                  </I18nextProvider>
               </Template>
-          </I18nextProvider>
       </ContextApp>
   </StrictMode>
 )
