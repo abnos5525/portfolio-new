@@ -1,0 +1,20 @@
+{
+  "home": {
+    "hello": "Hi I'm",
+    "name": "Hossein Heidary",
+    "programmer": "Developer of "
+  },
+  "aboutMe": {
+    "description":"Hello! I'm Hossein Heidary, a front-end programmer. Designing and developing beautiful and efficient user interfaces for websites and web applications is my passion. Using modern technologies and the best programming practices, I try to provide users with the best possible user experience. Every project is an opportunity for me to challenge my creativity and skills and achieve unique results. Passionate about continuous learning and updating my knowledge, I am always striving to be the best version of myself and make a positive impact in the digital world."
+  },
+  "projects": {
+    "online": "Online",
+    "offline": "Offline"
+  },
+  "sidebar": {
+    "home": "Home",
+    "aboutMe": "About Me",
+    "skills": "Skills",
+    "projects": "Projects"
+  }
+}

@@ -4,10 +4,13 @@ import Grid from "@mui/material/Unstable_Grid2";
 import {useContext, useEffect, useRef} from "react";
 import {Context} from "../../../ContextApp.jsx";
 import Typed from "typed.js";
+import {useTranslation} from "react-i18next";
 
 const Intro = ({avatarLoaded}) => {
 
     const {setActivePage} = useContext(Context)
+
+    const {t} = useTranslation()
 
     const handleMenuItemClick = (page) => {
         setActivePage(page)
@@ -36,7 +39,11 @@ const Intro = ({avatarLoaded}) => {
                    style={{transitionDelay: avatarLoaded ? "300ms": "0"}}>
                 <Typography sx={{ textAlign: 'right', mt:1 }} variant="h6">
                     <KeyboardDoubleArrowLeftOutlined className="arrow-animation" sx={{verticalAlign:"middle"}}/>
-                    سلام من
+
+                    {
+                        t("home.hello")
+                    }
+
                 </Typography>
             </Slide>
             <Slide direction="down" in={avatarLoaded}

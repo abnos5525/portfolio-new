@@ -6,6 +6,7 @@ const ContextApp = ({children}) => {
     const [drawerOpen, setDrawerOpen] = useState(false)
     const [activePage, setActivePage] = useState("home")
     const [theme, setTheme] = useState("theme2")
+    const [lang, setLang] = useState("fa")
 
     return (
         <Context.Provider value={{
@@ -16,7 +17,10 @@ const ContextApp = ({children}) => {
             setActivePage,
 
             theme,
-            setTheme
+            setTheme,
+
+            lang,
+            setLang
         }}>
             {children}
         </Context.Provider>
