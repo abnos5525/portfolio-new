@@ -3,10 +3,10 @@ import {
     DarkModeOutlined,
     HomeOutlined, LanguageOutlined,
     LightModeOutlined,
-    ManOutlined,
+    ManOutlined, PersonOutline,
     WorkOutline
 } from "@mui/icons-material";
-import {Divider, Fab, MenuItem, Typography} from "@mui/material";
+import {Divider, Fab, Link, MenuItem, Typography} from "@mui/material";
 import {useContext} from "react";
 import {Context} from "../../ContextApp.jsx";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -50,7 +50,7 @@ const MainMenu = () => {
                           }}>
 
                     <Typography sx={{m: "auto"}}>
-                        <HomeOutlined sx={{verticalAlign: "middle"}}/>
+                        <HomeOutlined sx={{verticalAlign: "middle", float: i18n.language === "en" ? "right" : "left"}}/>
                         {
                             t("sidebar.home")
                         }
@@ -61,7 +61,7 @@ const MainMenu = () => {
                 <MenuItem onClick={() => handleMenuItemClick("about")}
                           sx={{backgroundColor: activePage === "about" ? "primary.light" : "inherit", height: 60}}>
                     <Typography sx={{m: "auto"}}>
-                        <ManOutlined sx={{verticalAlign: "middle"}}/>
+                        <ManOutlined sx={{verticalAlign: "middle", float: i18n.language === "en" ? "right" : "left"}}/>
                         {
                             t("sidebar.aboutMe")
                         }
@@ -72,7 +72,7 @@ const MainMenu = () => {
                 <MenuItem onClick={() => handleMenuItemClick("skills")}
                           sx={{backgroundColor: activePage === "skills" ? "primary.light" : "inherit", height: 60}}>
                     <Typography sx={{m: "auto"}}>
-                        <CodeOutlined sx={{verticalAlign: "middle"}}/>
+                        <CodeOutlined sx={{verticalAlign: "middle", float: i18n.language === "en" ? "right" : "left"}}/>
                         {
                             t("sidebar.skills")
                         }
@@ -83,12 +83,26 @@ const MainMenu = () => {
                 <MenuItem onClick={() => handleMenuItemClick("projects")}
                           sx={{backgroundColor: activePage === "projects" ? "primary.light" : "inherit", height: 60}}>
                     <Typography sx={{m: "auto"}}>
-                        <WorkOutline sx={{verticalAlign: "middle"}}/>
+                        <WorkOutline sx={{verticalAlign: "middle", float: i18n.language === "en" ? "right" : "left"}}/>
                         {
                             t("sidebar.projects")
                         }
                     </Typography>
                 </MenuItem>
+
+                <Divider variant="middle"/>
+
+                <MenuItem>
+                    <Link href="/file/resume.pdf" download sx={{m:"auto", textDecoration:"none"}}>
+                        <Typography sx={{textAlign:"center"}}>
+                            <PersonOutline sx={{verticalAlign: "middle", float: i18n.language === "en" ? "right" : "left"}}/>
+                            {
+                                t("sidebar.resume")
+                            }
+                        </Typography>
+                    </Link>
+                </MenuItem>
+
                 <Divider variant="middle"/>
 
                 <Fab size="large" variant="extended" sx={{m:2, bgcolor:"secondary.main", ":hover":{bgcolor:"secondary.light"} }} onClick={changeTheme}>

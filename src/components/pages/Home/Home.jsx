@@ -6,6 +6,7 @@ import Intro from "./Intro.jsx";
 import Socials from "./Socials.jsx";
 import DrawerActionButton from "../../sidebar/DrawerActionButton.jsx";
 import { useTranslation } from "react-i18next";
+import {Helmet} from "react-helmet-async";
 
 const Home = () => {
     const [avatarLoaded, setAvatarLoaded] = useState(false);
@@ -14,6 +15,9 @@ const Home = () => {
 
     return (
         <>
+            <Helmet>
+                <title>Portfolio-New | Home</title>
+            </Helmet>
             <Slide direction={i18n.language === "en" ? "right" : "left"} in={avatarLoaded}
                    style={{ transitionDelay: avatarLoaded ? "600ms" : "0" }}>
                 <Box sx={{ position: "relative" }}>

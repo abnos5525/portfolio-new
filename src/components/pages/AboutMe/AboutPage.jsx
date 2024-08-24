@@ -10,6 +10,7 @@ import {useTranslation} from "react-i18next";
 import Title from "./Title.jsx";
 import Avatar from "./Avatar.jsx";
 import Description from "./Description.jsx";
+import {Helmet} from "react-helmet-async";
 
 const AboutPage = () => {
     const [avatarLoaded, setAvatarLoaded] = useState(false)
@@ -24,6 +25,10 @@ const AboutPage = () => {
 
     return(
         <>
+            <Helmet>
+                <title>Portfolio-New | AboutMe</title>
+            </Helmet>
+
                 <Title avatarLoaded={avatarLoaded}/>
 
                 <Grid container>
