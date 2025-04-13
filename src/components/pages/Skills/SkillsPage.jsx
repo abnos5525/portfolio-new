@@ -20,15 +20,15 @@ const SkillsPage = () => {
         {name: "HTML", img: "./images/icons/html.png", progress: 95},
         {name: "CSS", img: "./images/icons/css.png", progress: 85},
         {name: "JavaScript", img: "./images/icons/javascript.png", progress: 75},
-        {name: "TypeScript", img: "./images/icons/typescript.png", progress: 60},
+        {name: "TypeScript", img: "./images/icons/typescript.png", progress: 70},
         {name: "ReactJs", img: "./images/icons/reactjs.png", progress: 85},
         {name: "Redux", img: "./images/icons/redux.png", progress: 60},
         {name: "VueJs", img: "./images/icons/vuejs.png", progress: 60},
-        {name: "NodeJs", img: "./images/icons/nodejs.png", progress: 50},
+        {name: "NodeJs", img: "./images/icons/nodejs.png", progress: 65},
         {name: "Bootstrap", img: "./images/icons/bootstrap.png", progress: 85},
         {name: "TailwindCss", img: "./images/icons/tailwind.png", progress: 85},
         {name: "Python", img: "./images/icons/python.png", progress: 70},
-        {name: "Git", img: "./images/icons/git.png", progress: 65},
+        {name: "Git", img: "./images/icons/git.png", progress: 70},
     ]
 
     const loadImage = useCallback((index, src) => {

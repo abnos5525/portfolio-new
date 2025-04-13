@@ -12,6 +12,8 @@ import {Context} from "../../ContextApp.jsx";
 import Grid from "@mui/material/Unstable_Grid2";
 import {useTranslation} from "react-i18next";
 
+import resume from "../../../public/file/resume.pdf"
+
 const MainMenu = () => {
 
     const {activePage, setActivePage, setDrawerOpen, theme,setTheme} = useContext(Context)
@@ -93,7 +95,7 @@ const MainMenu = () => {
                 <Divider variant="middle"/>
 
                 <MenuItem>
-                    <Link href="/file/resume.pdf" download sx={{m:"auto", textDecoration:"none"}}>
+                    <Link href={resume} download sx={{m:"auto", textDecoration:"none"}}>
                         <Typography sx={{textAlign:"center"}}>
                             <PersonOutline sx={{verticalAlign: "middle", float: i18n.language === "en" ? "right" : "left"}}/>
                             {
