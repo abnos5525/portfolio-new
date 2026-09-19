@@ -5,12 +5,7 @@ export const navigation: NavItem[] = [
   {
     id: "experience",
     href: "/#experience",
-    label: { fa: "سوابق", en: "Experience" },
+    label: { fa: "سوابق کاری", en: "Experience" },
   },
-  { id: "skills", href: "/#skills", label: { fa: "مهارت‌ها", en: "Skills" } },
-  {
-    id: "projects",
-    href: "/#projects",
-    label: { fa: "پروژه‌ها", en: "Projects" },
-  },
+  { id: "skills", href: "/#skills", label: { fa: "تخصص‌ها", en: "Skills" } },
 ]

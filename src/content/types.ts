@@ -48,6 +48,11 @@ export type Project = {
   year?: number
 }
 
+export type ExperienceProject = {
+  name: LocalizedString
+  stack: string[]
+}
+
 export type Experience = {
   id: string
   company: LocalizedString
@@ -55,8 +60,7 @@ export type Experience = {
   start: LocalizedString
   end: LocalizedString
   current?: boolean
-  highlights: LocalizedString[]
-  stack: string[]
+  projects: ExperienceProject[]
 }
 
 export type Education = {

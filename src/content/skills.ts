@@ -1,7 +1,31 @@
 import type { Skill } from "./types"
 
+/** Full skill set from resume — keep complete, do not trim for display. */
 export const skills: Skill[] = [
-  // Frontend — core
+  {
+    id: "html",
+    name: "HTML5",
+    icon: "/images/icons/html.png",
+    category: "frontend",
+    level: "core",
+    projectIds: ["iziran", "segal"],
+  },
+  {
+    id: "css",
+    name: "CSS3",
+    icon: "/images/icons/css.png",
+    category: "frontend",
+    level: "core",
+    projectIds: ["iziran", "segal"],
+  },
+  {
+    id: "javascript",
+    name: "JavaScript (ES6+)",
+    icon: "/images/icons/javascript.png",
+    category: "frontend",
+    level: "core",
+    projectIds: ["iziran", "ariko", "segal"],
+  },
   {
     id: "typescript",
     name: "TypeScript",
@@ -11,22 +35,22 @@ export const skills: Skill[] = [
     projectIds: ["iziran", "ariko"],
   },
   {
-    id: "javascript",
-    name: "JavaScript",
-    icon: "/images/icons/javascript.png",
-    category: "frontend",
+    id: "rest",
+    name: "RESTful API",
+    category: "backend",
     level: "core",
-    projectIds: [
-      "coffee-app",
-      "portfolio-app",
-      "top-movies",
-      "segal-rayane",
-      "iziran",
-    ],
+    projectIds: ["iziran", "ariko", "arnitex"],
+  },
+  {
+    id: "grpc",
+    name: "gRPC",
+    category: "backend",
+    level: "proficient",
+    projectIds: ["arnitex"],
   },
   {
     id: "react",
-    name: "React",
+    name: "React.js",
     icon: "/images/icons/reactjs.png",
     category: "frontend",
     level: "core",
@@ -63,31 +87,9 @@ export const skills: Skill[] = [
     projectIds: [],
   },
   {
-    id: "html",
-    name: "HTML5",
-    icon: "/images/icons/html.png",
-    category: "frontend",
-    level: "core",
-    projectIds: ["coffee-app", "portfolio-app", "top-movies"],
-  },
-  {
-    id: "css",
-    name: "CSS3",
-    icon: "/images/icons/css.png",
-    category: "frontend",
-    level: "core",
-    projectIds: ["coffee-app", "portfolio-app", "top-movies"],
-  },
-  {
-    id: "angular",
-    name: "Angular",
-    category: "frontend",
-    level: "proficient",
-    projectIds: ["ariko"],
-  },
-  {
-    id: "mui",
-    name: "Material UI",
+    id: "bootstrap",
+    name: "Bootstrap",
+    icon: "/images/icons/bootstrap.png",
     category: "frontend",
     level: "proficient",
     projectIds: [],
@@ -100,15 +102,26 @@ export const skills: Skill[] = [
     projectIds: [],
   },
   {
-    id: "bootstrap",
-    name: "Bootstrap",
-    icon: "/images/icons/bootstrap.png",
+    id: "mui",
+    name: "Material UI",
     category: "frontend",
     level: "proficient",
     projectIds: [],
   },
-
-  // Backend — core
+  {
+    id: "fuse",
+    name: "Fuse Skeleton",
+    category: "frontend",
+    level: "proficient",
+    projectIds: ["iziran"],
+  },
+  {
+    id: "angular",
+    name: "Angular",
+    category: "frontend",
+    level: "proficient",
+    projectIds: ["ariko"],
+  },
   {
     id: "nestjs",
     name: "NestJS",
@@ -125,36 +138,6 @@ export const skills: Skill[] = [
     projectIds: ["iziran"],
   },
   {
-    id: "spring-boot",
-    name: "Spring Boot",
-    category: "backend",
-    level: "core",
-    projectIds: ["iziran", "ariko"],
-  },
-  {
-    id: "java",
-    name: "Java",
-    category: "backend",
-    level: "core",
-    projectIds: ["iziran", "ariko", "segal"],
-  },
-  {
-    id: "rest",
-    name: "RESTful API",
-    category: "backend",
-    level: "core",
-    projectIds: ["iziran", "ariko"],
-  },
-  {
-    id: "keycloak",
-    name: "Keycloak / JWT",
-    category: "backend",
-    level: "core",
-    projectIds: ["iziran"],
-  },
-
-  // Data
-  {
     id: "postgresql",
     name: "PostgreSQL",
     category: "data",
@@ -162,21 +145,12 @@ export const skills: Skill[] = [
     projectIds: ["iziran"],
   },
   {
-    id: "redis",
-    name: "Redis",
-    category: "data",
-    level: "proficient",
-    projectIds: [],
+    id: "keycloak",
+    name: "Keycloak & JWT",
+    category: "backend",
+    level: "core",
+    projectIds: ["iziran"],
   },
-  {
-    id: "sqlserver",
-    name: "SQL Server",
-    category: "data",
-    level: "proficient",
-    projectIds: [],
-  },
-
-  // DevOps / infra
   {
     id: "docker",
     name: "Docker",
@@ -192,6 +166,48 @@ export const skills: Skill[] = [
     projectIds: ["iziran"],
   },
   {
+    id: "java",
+    name: "Java",
+    category: "backend",
+    level: "core",
+    projectIds: ["iziran", "ariko", "segal"],
+  },
+  {
+    id: "spring-boot",
+    name: "Spring Boot",
+    category: "backend",
+    level: "core",
+    projectIds: ["iziran", "ariko"],
+  },
+  {
+    id: "jpa",
+    name: "JPA",
+    category: "data",
+    level: "proficient",
+    projectIds: ["iziran", "ariko"],
+  },
+  {
+    id: "maven",
+    name: "Maven",
+    category: "backend",
+    level: "proficient",
+    projectIds: ["ariko"],
+  },
+  {
+    id: "gradle",
+    name: "Gradle",
+    category: "backend",
+    level: "proficient",
+    projectIds: ["ariko"],
+  },
+  {
+    id: "redis",
+    name: "Redis",
+    category: "data",
+    level: "proficient",
+    projectIds: [],
+  },
+  {
     id: "rabbitmq",
     name: "RabbitMQ",
     category: "devops",
@@ -199,9 +215,9 @@ export const skills: Skill[] = [
     projectIds: [],
   },
   {
-    id: "linux",
-    name: "Linux",
-    category: "devops",
+    id: "sqlserver",
+    name: "SQL Server",
+    category: "data",
     level: "proficient",
     projectIds: [],
   },
@@ -211,7 +227,14 @@ export const skills: Skill[] = [
     icon: "/images/icons/git.png",
     category: "other",
     level: "core",
-    projectIds: ["iziran", "ariko", "segal-rayane"],
+    projectIds: ["iziran", "ariko", "segal"],
+  },
+  {
+    id: "linux",
+    name: "Linux OS",
+    category: "devops",
+    level: "proficient",
+    projectIds: [],
   },
   {
     id: "python",
@@ -236,6 +259,6 @@ export const skillLevelLabel = {
   familiar: { fa: "آشنا", en: "Familiar" },
 } as const
 
-export function getCoreSkills(limit = 10) {
-  return skills.filter((skill) => skill.level === "core").slice(0, limit)
+export function getAllSkills() {
+  return skills
 }

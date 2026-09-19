@@ -1,16 +1,10 @@
 {
   "Home": {
-    "viewProjects": "View projects",
+    "viewExperience": "Work experience",
     "downloadResume": "Download resume",
-    "featured": "Selected work",
-    "skills": "Expertise",
+    "skills": "Skills",
     "about": "About",
-    "experience": "Experience",
-    "socialNav": "Social",
-    "status": {
-      "live": "Live",
-      "repo": "GitHub"
-    }
+    "experience": "Work experience"
   },
   "Nav": {
     "primary": "Primary",
