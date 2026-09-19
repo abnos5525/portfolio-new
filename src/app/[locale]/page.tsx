@@ -1,30 +1,32 @@
-import Link from "next/link"
 import { ArrowLeftIcon } from "lucide-react"
+import { getTranslations, setRequestLocale } from "next-intl/server"
 
+import { LocaleSwitcher } from "@/components/layout/locale-switcher"
 import { Badge } from "@/components/ui/badge"
 import { buttonVariants } from "@/components/ui/button"
 import {
+  getCoreSkills,
   getFeaturedProjects,
   site,
-  skills,
   socials,
   t,
   type Locale,
 } from "@/content"
+import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 
-const locale: Locale = "fa"
+type Props = {
+  params: Promise<{ locale: string }>
+}
 
-const statusLabel = {
-  live: { fa: "آنلاین", en: "Live" },
-  repo: { fa: "گیت‌هاب", en: "GitHub" },
-} as const
+export default async function Home({ params }: Props) {
+  const { locale: raw } = await params
+  const locale = raw as Locale
+  setRequestLocale(locale)
 
-export default function Home() {
+  const translate = await getTranslations("Home")
   const featured = getFeaturedProjects().slice(0, 4)
-  const highlightSkills = skills
-    .filter((skill) => skill.level === "core")
-    .slice(0, 8)
+  const highlightSkills = getCoreSkills(10)
 
   return (
     <main className="relative flex min-h-dvh items-center justify-center overflow-hidden px-6 py-20">
@@ -32,6 +34,10 @@ export default function Home() {
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,var(--surface-glow),transparent_55%)]"
       />
+
+      <div className="absolute top-6 end-6 z-20">
+        <LocaleSwitcher />
+      </div>
 
       <div className="relative z-10 mx-auto w-full max-w-3xl">
         <p className="text-primary text-sm font-medium tracking-wide">
@@ -51,7 +57,7 @@ export default function Home() {
             href="/#projects"
             className={cn(buttonVariants({ size: "lg" }))}
           >
-            مشاهده پروژه‌ها
+            {translate("viewProjects")}
             <ArrowLeftIcon className="size-4 rtl:rotate-180" />
           </Link>
           <a
@@ -59,7 +65,7 @@ export default function Home() {
             download
             className={cn(buttonVariants({ size: "lg", variant: "outline" }))}
           >
-            دانلود رزومه
+            {translate("downloadResume")}
           </a>
         </div>
 
@@ -69,7 +75,7 @@ export default function Home() {
               id="featured-heading"
               className="text-sm font-medium tracking-wide uppercase"
             >
-              پروژه‌های منتخب
+              {translate("featured")}
             </h2>
             <ul className="mt-4 space-y-3">
               {featured.map((project) => {
@@ -86,7 +92,7 @@ export default function Home() {
                         {t(project.title, locale)}
                       </span>
                       <Badge variant="outline">
-                        {statusLabel[project.status][locale]}
+                        {translate(`status.${project.status}`)}
                       </Badge>
                     </a>
                   </li>
@@ -100,7 +106,7 @@ export default function Home() {
               id="skills-heading"
               className="text-sm font-medium tracking-wide uppercase"
             >
-              تخصص‌ها
+              {translate("skills")}
             </h2>
             <div className="mt-4 flex flex-wrap gap-2">
               {highlightSkills.map((skill) => (
@@ -113,7 +119,7 @@ export default function Home() {
         </div>
 
         <nav
-          aria-label="شبکه‌های اجتماعی"
+          aria-label={translate("socialNav")}
           className="mt-12 flex flex-wrap items-center gap-4"
         >
           {socials.map((social) => (

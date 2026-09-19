@@ -1,0 +1,18 @@
+{
+  "Home": {
+    "viewProjects": "View projects",
+    "downloadResume": "Download resume",
+    "featured": "Selected work",
+    "skills": "Expertise",
+    "socialNav": "Social",
+    "status": {
+      "live": "Live",
+      "repo": "GitHub"
+    }
+  },
+  "LocaleSwitch": {
+    "label": "Language",
+    "fa": "فارسی",
+    "en": "English"
+  }
+}

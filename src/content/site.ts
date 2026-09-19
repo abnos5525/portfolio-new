@@ -2,26 +2,27 @@ import type { SiteContent } from "./types"
 
 export const site: SiteContent = {
   name: {
-    fa: "محمدحسین حیدری",
+    fa: "حسین حیدری",
     en: "Hossein Heidary",
   },
   role: {
-    fa: "مهندس فرانت‌اند",
-    en: "Frontend Engineer",
+    fa: "مهندس فول‌استک ارشد وب",
+    en: "Senior Full-Stack Web Engineer",
   },
   headline: {
-    fa: "ساخت رابط‌های مدرن با React، TypeScript و سیستم‌های UI دقیق",
-    en: "Building modern interfaces with React, TypeScript, and precise UI systems",
+    fa: "ساخت محصول از UI تا API — React، Next.js، NestJS و Spring Boot",
+    en: "Shipping product end-to-end — React, Next.js, NestJS, and Spring Boot",
   },
   about: {
-    fa: "سلام! من محمدحسین حیدری هستم، برنامه‌نویس فرانت‌اند. طراحی و توسعه رابط‌های کاربری زیبا و کارآمد برای وب‌سایت‌ها و برنامه‌های وب، علاقه اصلی منه. با تکنولوژی‌های مدرن و بهترین شیوه‌های برنامه‌نویسی، سعی می‌کنم تجربه کاربری قوی بسازم. هر پروژه فرصتیه برای چالش خلاقیت و مهارت، و همیشه در حال یادگیری و به‌روز ماندن هستم.",
-    en: "Hello! I'm Hossein Heidary, a front-end engineer. Designing and developing beautiful, efficient interfaces for websites and web apps is my focus. I use modern technologies and solid engineering practices to deliver strong user experiences. Every project is a chance to sharpen craft, and I keep learning continuously.",
+    fa: "کد زدن برای من بیشتر از یک مهارته؛ مسیر یادگیری JavaScript و Java را خودآموز جلو بردم و امروز به‌عنوان مهندس فول‌استک، پروژه را از رابط کاربری تا بک‌اند و زیرساخت با دقت و مسئولیت جلو می‌برم. در فرانت با React، Next.js، TypeScript و Tailwind کار می‌کنم و در بک‌اند با NestJS، Node.js، Spring Boot، PostgreSQL، Keycloak، Docker و Kafka. هر خط کد ترکیبی از تجربه، نظم و حل مسئله است.",
+    en: "Coding is more than a skill for me. I taught myself JavaScript and Java, and today I work as a full-stack engineer across UI, APIs, and infrastructure. On the frontend I build with React, Next.js, TypeScript, and Tailwind; on the backend with NestJS, Node.js, Spring Boot, PostgreSQL, Keycloak, Docker, and Kafka. Every line of code is a mix of craft, structure, and problem-solving.",
   },
   location: {
-    fa: "ایران",
-    en: "Iran",
+    fa: "تهران، ایران",
+    en: "Tehran, Iran",
   },
+  jobinjaUrl: "https://jobinja.ir/user/hosseinnh81",
   resumePath: "/file/resume.pdf",
   availability: "open",
-  nowLearning: ["Next.js App Router", "Motion", "GSAP ScrollTrigger"],
+  nowLearning: ["Next.js App Router", "Motion", "System design"],
 }

@@ -1,0 +1,56 @@
+import type { Metadata } from "next"
+import { hasLocale, NextIntlClientProvider } from "next-intl"
+import { getMessages, setRequestLocale } from "next-intl/server"
+import { notFound } from "next/navigation"
+
+import { DirectionProvider } from "@/components/ui/direction"
+import { site, t, type Locale } from "@/content"
+import { routing } from "@/i18n/routing"
+
+import "../globals.css"
+
+type Props = {
+  children: React.ReactNode
+  params: Promise<{ locale: string }>
+}
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }))
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>
+}): Promise<Metadata> {
+  const { locale: raw } = await params
+  const locale = (hasLocale(routing.locales, raw) ? raw : "fa") as Locale
+
+  return {
+    title: `${t(site.name, locale)} | ${t(site.role, locale)}`,
+    description: t(site.headline, locale),
+  }
+}
+
+export default async function LocaleLayout({ children, params }: Props) {
+  const { locale } = await params
+
+  if (!hasLocale(routing.locales, locale)) {
+    notFound()
+  }
+
+  setRequestLocale(locale)
+
+  const messages = await getMessages()
+  const direction = locale === "fa" ? "rtl" : "ltr"
+
+  return (
+    <html lang={locale} dir={direction} data-accent="trust" className="dark">
+      <body className="min-h-dvh font-sans antialiased">
+        <NextIntlClientProvider messages={messages}>
+          <DirectionProvider direction={direction}>{children}</DirectionProvider>
+        </NextIntlClientProvider>
+      </body>
+    </html>
+  )
+}

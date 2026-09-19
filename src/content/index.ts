@@ -6,10 +6,14 @@ export function t(value: LocalizedString, locale: Locale = "fa") {
 
 export { site } from "./site"
 export { projects, getFeaturedProjects, getProjectById } from "./projects"
-export { skills, skillLevelLabel } from "./skills"
+export { skills, skillLevelLabel, getCoreSkills } from "./skills"
+export { experience } from "./experience"
+export { education } from "./education"
 export { socials } from "./socials"
 export { navigation } from "./navigation"
 export type {
+  Education,
+  Experience,
   Locale,
   LocalizedString,
   NavItem,
@@ -17,6 +21,7 @@ export type {
   ProjectStatus,
   SiteContent,
   Skill,
+  SkillCategory,
   SkillLevel,
   SocialLink,
 } from "./types"

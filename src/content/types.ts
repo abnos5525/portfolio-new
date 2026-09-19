@@ -16,12 +16,20 @@ export type NavItem = {
 
 export type SkillLevel = "core" | "proficient" | "familiar"
 
+export type SkillCategory =
+  | "frontend"
+  | "backend"
+  | "devops"
+  | "data"
+  | "other"
+
 export type Skill = {
   id: string
   name: string
-  icon: string
+  icon?: string
+  category: SkillCategory
   level: SkillLevel
-  /** Project ids that prove this skill — no fake percentages */
+  /** Project / role ids that prove this skill — no fake percentages */
   projectIds: string[]
 }
 
@@ -40,6 +48,26 @@ export type Project = {
   year?: number
 }
 
+export type Experience = {
+  id: string
+  company: LocalizedString
+  role: LocalizedString
+  start: LocalizedString
+  end: LocalizedString
+  current?: boolean
+  highlights: LocalizedString[]
+  stack: string[]
+}
+
+export type Education = {
+  id: string
+  school: LocalizedString
+  degree: LocalizedString
+  start: LocalizedString
+  end: LocalizedString
+  current?: boolean
+}
+
 export type SiteContent = {
   name: LocalizedString
   role: LocalizedString
@@ -47,6 +75,7 @@ export type SiteContent = {
   about: LocalizedString
   location: LocalizedString
   email?: string
+  jobinjaUrl?: string
   resumePath: string
   availability: "open" | "busy" | "selective"
   nowLearning: string[]

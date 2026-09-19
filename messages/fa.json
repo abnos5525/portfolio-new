@@ -1,0 +1,18 @@
+{
+  "Home": {
+    "viewProjects": "مشاهده پروژه‌ها",
+    "downloadResume": "دانلود رزومه",
+    "featured": "پروژه‌های منتخب",
+    "skills": "تخصص‌ها",
+    "socialNav": "شبکه‌های اجتماعی",
+    "status": {
+      "live": "آنلاین",
+      "repo": "گیت‌هاب"
+    }
+  },
+  "LocaleSwitch": {
+    "label": "زبان",
+    "fa": "فارسی",
+    "en": "English"
+  }
+}
