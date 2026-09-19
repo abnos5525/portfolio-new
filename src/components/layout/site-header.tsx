@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl"
 import { useState } from "react"
 
 import { LocaleSwitcher } from "@/components/layout/locale-switcher"
+import { ThemeControls } from "@/components/layout/theme-controls"
 import { buttonVariants } from "@/components/ui/button"
 import {
   Sheet,
@@ -63,7 +64,8 @@ export function SiteHeader() {
             {translate("resume")}
           </a>
 
-          <div className="hidden sm:block">
+          <div className="hidden items-center gap-2 sm:flex">
+            <ThemeControls />
             <LocaleSwitcher />
           </div>
 
@@ -106,7 +108,8 @@ export function SiteHeader() {
                 >
                   {translate("resume")}
                 </a>
-                <div className="mt-4">
+                <div className="mt-4 space-y-3">
+                  <ThemeControls />
                   <LocaleSwitcher />
                 </div>
               </div>

@@ -21,7 +21,6 @@ export const site: SiteContent = {
     fa: "تهران، ایران",
     en: "Tehran, Iran",
   },
-  jobinjaUrl: "https://jobinja.ir/user/hosseinnh81",
   resumePath: "/file/resume.pdf",
   availability: "open",
   nowLearning: ["Next.js App Router", "Motion", "System design"],

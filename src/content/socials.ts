@@ -12,11 +12,6 @@ export const socials: SocialLink[] = [
     href: "https://www.linkedin.com/in/hossein-heidary-00a928235/",
   },
   {
-    id: "jobinja",
-    label: { fa: "جابینجا", en: "Jobinja" },
-    href: "https://jobinja.ir/user/hosseinnh81",
-  },
-  {
     id: "instagram",
     label: { fa: "اینستاگرام", en: "Instagram" },
     href: "https://www.instagram.com/hosseinn_heidary",

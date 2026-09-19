@@ -75,7 +75,6 @@ export type SiteContent = {
   about: LocalizedString
   location: LocalizedString
   email?: string
-  jobinjaUrl?: string
   resumePath: string
   availability: "open" | "busy" | "selective"
   nowLearning: string[]

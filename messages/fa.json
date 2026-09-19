@@ -20,6 +20,13 @@
   "Footer": {
     "social": "شبکه‌های اجتماعی"
   },
+  "Theme": {
+    "toggle": "تغییر حالت روشن یا تیره",
+    "accent": "رنگ تم",
+    "trust": "آرامش",
+    "energy": "انرژی",
+    "focus": "تمرکز"
+  },
   "LocaleSwitch": {
     "label": "زبان",
     "fa": "فارسی",

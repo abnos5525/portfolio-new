@@ -3,8 +3,9 @@ import { hasLocale, NextIntlClientProvider } from "next-intl"
 import { getMessages, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 
-import { DirectionProvider } from "@/components/ui/direction"
 import { SiteShell } from "@/components/layout/site-shell"
+import { ThemeProvider } from "@/components/layout/theme-provider"
+import { DirectionProvider } from "@/components/ui/direction"
 import { site, t, type Locale } from "@/content"
 import { routing } from "@/i18n/routing"
 
@@ -46,13 +47,21 @@ export default async function LocaleLayout({ children, params }: Props) {
   const direction = locale === "fa" ? "rtl" : "ltr"
 
   return (
-    <html lang={locale} dir={direction} data-accent="trust" className="dark">
+    <html
+      lang={locale}
+      dir={direction}
+      data-accent="trust"
+      className="dark"
+      suppressHydrationWarning
+    >
       <body className="min-h-dvh font-sans antialiased">
-        <NextIntlClientProvider messages={messages}>
-          <DirectionProvider direction={direction}>
-            <SiteShell>{children}</SiteShell>
-          </DirectionProvider>
-        </NextIntlClientProvider>
+        <ThemeProvider>
+          <NextIntlClientProvider messages={messages}>
+            <DirectionProvider direction={direction}>
+              <SiteShell>{children}</SiteShell>
+            </DirectionProvider>
+          </NextIntlClientProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

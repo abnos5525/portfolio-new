@@ -20,6 +20,13 @@
   "Footer": {
     "social": "Social"
   },
+  "Theme": {
+    "toggle": "Toggle light or dark mode",
+    "accent": "Accent color",
+    "trust": "Trust",
+    "energy": "Energy",
+    "focus": "Focus"
+  },
   "LocaleSwitch": {
     "label": "Language",
     "fa": "فارسی",
