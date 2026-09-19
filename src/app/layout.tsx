@@ -1,5 +1,15 @@
 import type { Metadata } from "next";
+import { Vazirmatn } from "next/font/google";
+
+import { DirectionProvider } from "@/components/ui/direction";
+import { cn } from "@/lib/utils";
+
 import "./globals.css";
+
+const vazirmatn = Vazirmatn({
+  subsets: ["arabic", "latin"],
+  variable: "--font-sans",
+});
 
 export const metadata: Metadata = {
   title: "Hossein Heidary | Frontend Engineer",
@@ -9,8 +19,15 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html lang="fa" dir="rtl">
-      <body className="min-h-dvh antialiased">{children}</body>
+    <html
+      lang="fa"
+      dir="rtl"
+      data-accent="trust"
+      className={cn("dark font-sans", vazirmatn.variable)}
+    >
+      <body className="min-h-dvh antialiased">
+        <DirectionProvider direction="rtl">{children}</DirectionProvider>
+      </body>
     </html>
   );
 }

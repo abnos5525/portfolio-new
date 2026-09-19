@@ -8,11 +8,13 @@ Modern hiring-focused frontend portfolio.
 - React 19
 - TypeScript (strict)
 - Tailwind CSS v4
+- pnpm
 
 ## Develop
 
 ```bash
-npm run dev
+pnpm install
+pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000).
