@@ -4,6 +4,7 @@ import { getMessages, setRequestLocale } from "next-intl/server"
 import { notFound } from "next/navigation"
 
 import { DirectionProvider } from "@/components/ui/direction"
+import { SiteShell } from "@/components/layout/site-shell"
 import { site, t, type Locale } from "@/content"
 import { routing } from "@/i18n/routing"
 
@@ -48,7 +49,9 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html lang={locale} dir={direction} data-accent="trust" className="dark">
       <body className="min-h-dvh font-sans antialiased">
         <NextIntlClientProvider messages={messages}>
-          <DirectionProvider direction={direction}>{children}</DirectionProvider>
+          <DirectionProvider direction={direction}>
+            <SiteShell>{children}</SiteShell>
+          </DirectionProvider>
         </NextIntlClientProvider>
       </body>
     </html>

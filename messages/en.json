@@ -4,11 +4,21 @@
     "downloadResume": "Download resume",
     "featured": "Selected work",
     "skills": "Expertise",
+    "about": "About",
+    "experience": "Experience",
     "socialNav": "Social",
     "status": {
       "live": "Live",
       "repo": "GitHub"
     }
+  },
+  "Nav": {
+    "primary": "Primary",
+    "menu": "Open menu",
+    "resume": "Resume"
+  },
+  "Footer": {
+    "social": "Social"
   },
   "LocaleSwitch": {
     "label": "Language",

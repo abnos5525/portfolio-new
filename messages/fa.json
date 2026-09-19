@@ -4,11 +4,21 @@
     "downloadResume": "دانلود رزومه",
     "featured": "پروژه‌های منتخب",
     "skills": "تخصص‌ها",
+    "about": "درباره",
+    "experience": "سوابق",
     "socialNav": "شبکه‌های اجتماعی",
     "status": {
       "live": "آنلاین",
       "repo": "گیت‌هاب"
     }
+  },
+  "Nav": {
+    "primary": "منوی اصلی",
+    "menu": "باز کردن منو",
+    "resume": "رزومه"
+  },
+  "Footer": {
+    "social": "شبکه‌های اجتماعی"
   },
   "LocaleSwitch": {
     "label": "زبان",
