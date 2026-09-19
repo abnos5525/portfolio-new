@@ -1,33 +1,21 @@
-import type { Metadata } from "next";
-import { Vazirmatn } from "next/font/google";
+import type { Metadata } from "next"
 
-import { DirectionProvider } from "@/components/ui/direction";
-import { cn } from "@/lib/utils";
+import { DirectionProvider } from "@/components/ui/direction"
+import { site, t } from "@/content"
 
-import "./globals.css";
-
-const vazirmatn = Vazirmatn({
-  subsets: ["arabic", "latin"],
-  variable: "--font-sans",
-});
+import "./globals.css"
 
 export const metadata: Metadata = {
-  title: "Hossein Heidary | Frontend Engineer",
-  description:
-    "Portfolio of Hossein Heidary — frontend engineer focused on React, TypeScript, and polished product UI.",
-};
+  title: `${t(site.name, "en")} | ${t(site.role, "en")}`,
+  description: t(site.headline, "en"),
+}
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html
-      lang="fa"
-      dir="rtl"
-      data-accent="trust"
-      className={cn("dark font-sans", vazirmatn.variable)}
-    >
-      <body className="min-h-dvh antialiased">
+    <html lang="fa" dir="rtl" data-accent="trust" className="dark">
+      <body className="min-h-dvh font-sans antialiased">
         <DirectionProvider direction="rtl">{children}</DirectionProvider>
       </body>
     </html>
-  );
+  )
 }
