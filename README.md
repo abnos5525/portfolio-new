@@ -1,8 +1,23 @@
-# React + Vite
+# Portfolio — Hossein Heidary
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Modern hiring-focused frontend portfolio.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Next.js 16 (App Router)
+- React 19
+- TypeScript (strict)
+- Tailwind CSS v4
+
+## Develop
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+## Notes
+
+- Legacy Vite/MUI app is archived in `_legacy/` for reference during migration.
+- Cursor guidance lives in `.cursor/skills/frontend-portfolio/` and `.cursor/rules/`.
