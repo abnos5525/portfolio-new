@@ -1,18 +1,19 @@
 {
   "Home": {
-    "viewExperience": "Work experience",
+    "viewExperience": "Career path",
     "downloadResume": "Download resume",
     "skills": "Skills",
     "about": "About",
-    "experience": "Work experience",
+    "experience": "Career path",
     "available": "Open to work",
     "skipToContent": "Skip to content",
-    "runtime": "RUNTIME",
-    "signal": "SIGNAL",
-    "aboutTag": "CORE",
-    "experienceTag": "TRACE",
-    "skillsTag": "NODES",
-    "buildOk": "build · ok · web"
+    "experienceSupport": "Each role holds, then the next covers it — scroll to read the full path.",
+    "skillsSupport": "Skills grouped by where they show up in a product.",
+    "catFrontend": "Interface",
+    "catBackend": "Backend & API",
+    "catData": "Data",
+    "catDevops": "Platform",
+    "catOther": "Other"
   },
   "Nav": {
     "primary": "Primary",

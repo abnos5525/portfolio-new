@@ -26,8 +26,8 @@
 .dark,
 .dark[data-accent="trust"],
 html.dark[data-accent="trust"] {
-  --background: oklch(0.15 0.025 250);
-  --foreground: oklch(0.96 0.01 250);
+  --background: oklch(0.11 0.02 268);
+  --foreground: oklch(0.97 0.012 95);
   --card: oklch(0.19 0.03 250);
   --card-foreground: oklch(0.96 0.01 250);
   --popover: oklch(0.19 0.03 250);

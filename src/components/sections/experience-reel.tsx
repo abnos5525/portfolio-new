@@ -13,11 +13,12 @@ gsap.registerPlugin(ScrollTrigger)
 type Props = {
   locale: Locale
   title: string
-  tag: string
+  support: string
   items: Experience[]
 }
 
-export function ExperienceReel({ locale, title, tag, items }: Props) {
+/** Award-style stacked pin: each role holds, then the next covers it. */
+export function ExperienceReel({ locale, title, support, items }: Props) {
   const rootRef = useRef<HTMLElement>(null)
 
   useEffect(() => {
@@ -25,27 +26,40 @@ export function ExperienceReel({ locale, title, tag, items }: Props) {
     if (!root) return
 
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (reduce) return
+    const desktop = window.matchMedia("(min-width: 768px)").matches
+    if (reduce || !desktop) return
+
+    const cards = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-exp-card]")
+    )
+    if (cards.length < 2) return
 
     const ctx = gsap.context(() => {
-      const cards = root.querySelectorAll<HTMLElement>("[data-exp-card]")
-      cards.forEach((card) => {
-        gsap.fromTo(
-          card,
-          { opacity: 0, y: 48, rotateX: 8 },
-          {
-            opacity: 1,
-            y: 0,
-            rotateX: 0,
-            duration: 0.75,
-            ease: "power3.out",
-            scrollTrigger: {
-              trigger: card,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
-          }
-        )
+      cards.forEach((card, index) => {
+        const next = cards[index + 1]
+        if (!next) return
+
+        ScrollTrigger.create({
+          trigger: card,
+          start: "top 18%",
+          endTrigger: next,
+          end: "top 18%",
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+        })
+
+        gsap.to(card, {
+          scale: 0.94,
+          filter: "brightness(0.72)",
+          ease: "none",
+          scrollTrigger: {
+            trigger: next,
+            start: "top 90%",
+            end: "top 18%",
+            scrub: true,
+          },
+        })
       })
     }, root)
 
@@ -56,71 +70,56 @@ export function ExperienceReel({ locale, title, tag, items }: Props) {
     <section
       id="experience"
       ref={rootRef}
-      className="scroll-mt-28 mt-24 [perspective:1200px] sm:mt-28"
+      className="scroll-mt-28 mx-auto mt-24 w-full max-w-6xl px-4 sm:mt-32 sm:px-6"
     >
-      <div className="mb-10 flex items-end justify-between gap-4">
-        <h2 className="text-muted-foreground text-xs font-medium tracking-[0.18em] uppercase">
-          {title}
-        </h2>
-        <span
-          aria-hidden
-          className="text-primary/40 font-mono text-[0.65rem] tracking-[0.2em]"
-        >
-          {tag}
-        </span>
-      </div>
+      <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-5xl">
+        {title}
+      </h2>
+      <p className="text-muted-foreground mt-4 max-w-2xl text-base leading-7 text-pretty">
+        {support}
+      </p>
 
-      <ul className="flex flex-col gap-14 sm:gap-16">
-        {items.map((role, roleIndex) => (
-          <li
+      <div className="mt-12 flex flex-col gap-8 pb-8 md:gap-10">
+        {items.map((role, index) => (
+          <article
             key={role.id}
             data-exp-card
-            className="border-border/40 relative border-s ps-6 sm:ps-8"
-            style={{ transformStyle: "preserve-3d" }}
+            className="border-border/50 bg-card/80 origin-top rounded-3xl border p-6 shadow-[0_24px_80px_-40px_oklch(0_0_0_/_45%)] backdrop-blur-md sm:p-8"
           >
-            <span
-              aria-hidden
-              className="bg-primary absolute top-2 -start-[5px] size-2.5 rounded-full shadow-[0_0_12px_var(--primary)]"
-            />
-            <span
-              aria-hidden
-              className="text-primary/25 absolute -top-1 end-0 font-mono text-4xl font-semibold tracking-tighter select-none sm:text-5xl"
-            >
-              {String(roleIndex + 1).padStart(2, "0")}
-            </span>
-
-            <header className="relative z-10 flex flex-col gap-3">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-                <h3 className="font-heading text-xl font-semibold tracking-tight text-balance sm:text-2xl sm:leading-snug">
-                  {t(role.role, locale)}
-                </h3>
-                <p className="text-muted-foreground shrink-0 font-mono text-xs tabular-nums sm:pt-2 sm:text-sm">
-                  {t(role.start, locale)}
-                  <span className="mx-1.5 opacity-50">—</span>
-                  {t(role.end, locale)}
-                </p>
-              </div>
-              <p className="text-primary text-sm font-medium tracking-wide sm:text-base">
-                {t(role.company, locale)}
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <span className="text-primary font-mono text-xs tracking-[0.22em]">
+                {String(index + 1).padStart(2, "0")}
+                <span className="text-muted-foreground">
+                  {" "}
+                  / {String(items.length).padStart(2, "0")}
+                </span>
+              </span>
+              <p className="text-muted-foreground font-mono text-xs tabular-nums sm:text-sm">
+                {t(role.start, locale)}
+                <span className="mx-1.5 opacity-50">—</span>
+                {t(role.end, locale)}
               </p>
-            </header>
+            </div>
 
-            <ul className="relative z-10 mt-8 flex flex-col gap-7">
+            <h3 className="font-heading text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+              {t(role.role, locale)}
+            </h3>
+            <p className="text-primary mt-3 text-base font-medium sm:text-lg">
+              {t(role.company, locale)}
+            </p>
+
+            <ul className="mt-8 flex flex-col gap-6">
               {role.projects.map((project) => (
                 <li
                   key={`${role.id}-${project.name.en}`}
                   className="flex flex-col gap-3"
                 >
-                  <p className="text-foreground/90 text-[0.95rem] font-medium sm:text-base">
+                  <p className="text-foreground/90 text-sm font-medium sm:text-base">
                     {t(project.name, locale)}
                   </p>
                   <div className="flex flex-wrap gap-2">
                     {project.stack.map((tech) => (
-                      <Badge
-                        key={tech}
-                        variant="outline"
-                        className="font-mono text-[0.7rem]"
-                      >
+                      <Badge key={tech} variant="outline" className="text-[0.7rem]">
                         {tech}
                       </Badge>
                     ))}
@@ -128,9 +127,9 @@ export function ExperienceReel({ locale, title, tag, items }: Props) {
                 </li>
               ))}
             </ul>
-          </li>
+          </article>
         ))}
-      </ul>
+      </div>
     </section>
   )
 }

@@ -14,8 +14,8 @@ export const site: SiteContent = {
     en: "I ship web products from first screen to API",
   },
   about: {
-    fa: "مهندس فول‌استک وب هستم و محصول را از رابط کاربری تا API و استقرار جلو می‌برم. مسیر JavaScript و Java را خودآموز شروع کردم و امروز روی سیستم‌هایی کار می‌کنم که باید سریع، امن و قابل توسعه بمانند.",
-    en: "I'm a full-stack web engineer — from UI to API and deploy. I taught myself JavaScript and Java, and I build systems that need to stay fast, secure, and easy to grow.",
+    fa: "مهندس فول‌استک وب هستم؛ مالکیت مسیر محصول را از رابط کاربری تا API و استقرار می‌پذیرم. JavaScript و Java را خودآموز شروع کردم و امروز روی سیستم‌هایی کار می‌کنم که باید سریع، امن و قابل توسعه بمانند.",
+    en: "I'm a full-stack web engineer who owns the product path from interface to API and deploy. I taught myself JavaScript and Java, and I build systems that must stay fast, secure, and easy to grow.",
   },
   location: {
     fa: "تهران، ایران",

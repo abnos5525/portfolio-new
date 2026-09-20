@@ -22,9 +22,6 @@ export async function HeroSection({ locale }: Props) {
         available: translate("available"),
         viewExperience: translate("viewExperience"),
         downloadResume: translate("downloadResume"),
-        runtime: translate("runtime"),
-        signal: translate("signal"),
-        buildOk: translate("buildOk"),
       }}
     />
   )

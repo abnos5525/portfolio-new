@@ -1,11 +1,11 @@
 import type { NavItem } from "./types"
 
 export const navigation: NavItem[] = [
-  { id: "about", href: "/#about", label: { fa: "درباره", en: "About" } },
+  { id: "about", href: "/#about", label: { fa: "درباره من", en: "About" } },
   {
     id: "experience",
     href: "/#experience",
-    label: { fa: "سوابق کاری", en: "Experience" },
+    label: { fa: "مسیر حرفه‌ای", en: "Career" },
   },
   { id: "skills", href: "/#skills", label: { fa: "تخصص‌ها", en: "Skills" } },
 ]

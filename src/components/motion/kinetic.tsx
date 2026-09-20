@@ -3,8 +3,6 @@
 import { motion, useReducedMotion } from "motion/react"
 import { useEffect, useState, type ReactNode } from "react"
 
-import { cn } from "@/lib/utils"
-
 type Props = {
   children: ReactNode
   className?: string
@@ -32,55 +30,39 @@ export function FadeRise({
       className={className}
       initial={{ opacity: 0, y }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] }}
     >
       {children}
     </motion.div>
   )
 }
 
-type KineticProps = {
+type NameProps = {
   text: string
   className?: string
-  as?: "h1" | "p" | "span"
-  delay?: number
 }
 
-export function KineticText({
-  text,
-  className,
-  as: Tag = "h1",
-  delay = 0,
-}: KineticProps) {
+/** Reveal the whole name as one connected string — never split Persian glyphs. */
+export function MonumentName({ text, className }: NameProps) {
   const reduce = useReducedMotion()
   const [ready, setReady] = useState(false)
-  const chars = Array.from(text)
 
   useEffect(() => setReady(true), [])
 
   if (!ready || reduce) {
-    return <Tag className={className}>{text}</Tag>
+    return <h1 className={className}>{text}</h1>
   }
 
   return (
-    <Tag className={cn("overflow-hidden", className)} aria-label={text}>
-      <span aria-hidden className="inline-flex flex-wrap justify-start">
-        {chars.map((char, index) => (
-          <motion.span
-            key={`${char}-${index}`}
-            className="inline-block whitespace-pre"
-            initial={{ y: "110%", rotate: 6, opacity: 0 }}
-            animate={{ y: "0%", rotate: 0, opacity: 1 }}
-            transition={{
-              duration: 0.55,
-              delay: delay + index * 0.028,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            {char}
-          </motion.span>
-        ))}
-      </span>
-    </Tag>
+    <h1 className={className}>
+      <motion.span
+        className="block"
+        initial={{ clipPath: "inset(0 0 100% 0)", y: 28 }}
+        animate={{ clipPath: "inset(0 0 0% 0)", y: 0 }}
+        transition={{ duration: 0.9, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+      >
+        {text}
+      </motion.span>
+    </h1>
   )
 }

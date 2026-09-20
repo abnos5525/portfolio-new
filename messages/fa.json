@@ -1,18 +1,19 @@
 {
   "Home": {
-    "viewExperience": "سوابق کاری",
+    "viewExperience": "مسیر حرفه‌ای",
     "downloadResume": "دانلود رزومه",
     "skills": "تخصص‌ها",
-    "about": "درباره",
-    "experience": "سوابق کاری",
+    "about": "درباره من",
+    "experience": "مسیر حرفه‌ای",
     "available": "آماده همکاری",
     "skipToContent": "رفتن به محتوا",
-    "runtime": "RUNTIME",
-    "signal": "SIGNAL",
-    "aboutTag": "CORE",
-    "experienceTag": "TRACE",
-    "skillsTag": "NODES",
-    "buildOk": "build · ok · web"
+    "experienceSupport": "هر نقش روی نقش قبلی می‌نشیند؛ اسکرول کن تا مسیر کامل دیده شود.",
+    "skillsSupport": "مهارت‌ها بر اساس جایی که در محصول استفاده می‌شوند گروه‌بندی شده‌اند.",
+    "catFrontend": "رابط کاربری",
+    "catBackend": "بک‌اند و API",
+    "catData": "داده",
+    "catDevops": "پلتفرم",
+    "catOther": "سایر"
   },
   "Nav": {
     "primary": "منوی اصلی",

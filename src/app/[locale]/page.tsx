@@ -18,7 +18,7 @@ export default async function Home({ params }: Props) {
   const allSkills = getAllSkills()
 
   return (
-    <main id="main" className="mx-auto w-full max-w-6xl flex-1 px-4 sm:px-6">
+    <main id="main" className="w-full flex-1">
       <a
         href="#about"
         className="bg-background text-foreground focus:ring-ring sr-only focus:not-sr-only focus:absolute focus:start-4 focus:top-20 focus:z-50 focus:rounded-md focus:px-3 focus:py-2 focus:ring-2"
@@ -26,36 +26,37 @@ export default async function Home({ params }: Props) {
         {translate("skipToContent")}
       </a>
 
-      <HeroSection locale={locale} />
+      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+        <HeroSection locale={locale} />
 
-      <section id="about" className="scroll-mt-28 relative mt-6 max-w-3xl sm:mt-10">
-        <div className="mb-5 flex items-end justify-between gap-4">
-          <h2 className="text-muted-foreground text-xs font-medium tracking-[0.18em] uppercase">
+        <section id="about" className="scroll-mt-28 mt-6 max-w-3xl sm:mt-10">
+          <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-5xl">
             {translate("about")}
           </h2>
-          <span
-            aria-hidden
-            className="text-primary/40 font-mono text-[0.65rem] tracking-[0.2em]"
-          >
-            {translate("aboutTag")}
-          </span>
-        </div>
-        <p className="border-primary/25 text-foreground/90 border-s-2 ps-5 text-base leading-8 text-pretty sm:text-lg sm:leading-9">
-          {t(site.about, locale)}
-        </p>
-      </section>
+          <p className="text-foreground/90 mt-6 text-base leading-8 text-pretty sm:text-lg sm:leading-9">
+            {t(site.about, locale)}
+          </p>
+        </section>
+      </div>
 
       <ExperienceReel
         locale={locale}
         title={translate("experience")}
-        tag={translate("experienceTag")}
+        support={translate("experienceSupport")}
         items={experience}
       />
 
       <SkillsConstellation
         title={translate("skills")}
-        tag={translate("skillsTag")}
+        support={translate("skillsSupport")}
         skills={allSkills}
+        categoryLabels={{
+          frontend: translate("catFrontend"),
+          backend: translate("catBackend"),
+          data: translate("catData"),
+          devops: translate("catDevops"),
+          other: translate("catOther"),
+        }}
       />
     </main>
   )

@@ -1,79 +1,65 @@
-"use client"
-
-import { motion, useReducedMotion } from "motion/react"
-
 import { Badge } from "@/components/ui/badge"
-import type { Skill } from "@/content"
-import { cn } from "@/lib/utils"
+import type { Skill, SkillCategory } from "@/content"
+
+const CATEGORY_ORDER: SkillCategory[] = [
+  "frontend",
+  "backend",
+  "data",
+  "devops",
+  "other",
+]
 
 type Props = {
   title: string
-  tag: string
+  support: string
   skills: Skill[]
+  categoryLabels: Record<SkillCategory, string>
 }
 
-/** Scatter constellation of skills — soft float + hover lift. */
-export function SkillsConstellation({ title, tag, skills }: Props) {
-  const reduce = useReducedMotion()
+export function SkillsConstellation({
+  title,
+  support,
+  skills,
+  categoryLabels,
+}: Props) {
+  const grouped = CATEGORY_ORDER.map((category) => ({
+    category,
+    items: skills.filter((skill) => skill.category === category),
+  })).filter((group) => group.items.length > 0)
 
   return (
     <section
       id="skills"
-      className="scroll-mt-28 relative mt-24 mb-24 overflow-hidden sm:mt-28 sm:mb-28"
+      className="scroll-mt-28 mx-auto mt-24 mb-28 w-full max-w-6xl px-4 sm:mt-32 sm:mb-32 sm:px-6"
     >
-      <div className="mb-10 flex items-end justify-between gap-4">
-        <h2 className="text-muted-foreground text-xs font-medium tracking-[0.18em] uppercase">
-          {title}
-        </h2>
-        <span
-          aria-hidden
-          className="text-primary/40 font-mono text-[0.65rem] tracking-[0.2em]"
-        >
-          {tag}
-        </span>
-      </div>
+      <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-5xl">
+        {title}
+      </h2>
+      <p className="text-muted-foreground mt-4 max-w-2xl text-base leading-7 text-pretty">
+        {support}
+      </p>
 
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-16 -z-10 h-64 opacity-40"
-        style={{
-          background:
-            "radial-gradient(ellipse at center, var(--surface-glow), transparent 65%)",
-        }}
-      />
-
-      <ul className="relative flex flex-wrap content-start gap-2.5 sm:gap-3">
-        {skills.map((skill, index) => (
-          <motion.li
-            key={skill.id}
-            initial={reduce ? false : { opacity: 0, scale: 0.88 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-40px" }}
-            transition={{
-              delay: Math.min(index * 0.02, 0.4),
-              duration: 0.35,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            whileHover={reduce ? undefined : { scale: 1.08, y: -4 }}
-            className={cn(
-              "origin-center",
-              !reduce && (index % 2 === 0 ? "motion-safe:animate-float-a" : "motion-safe:animate-float-b")
-            )}
-            style={
-              reduce
-                ? undefined
-                : { animationDelay: `${(index % 7) * 0.15}s` }
-            }
+      <div className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {grouped.map((group) => (
+          <div
+            key={group.category}
+            className="border-border/40 border-t pt-5"
           >
-            <Badge
-              variant="secondary"
-              className="border-border/50 hover:border-primary/50 hover:text-primary cursor-default px-3 py-1.5 font-mono text-[0.75rem] transition-colors"
-            >
-              {skill.name}
-            </Badge>
-          </motion.li>
+            <h3 className="text-primary mb-4 text-xs font-medium tracking-[0.18em] uppercase">
+              {categoryLabels[group.category]}
+            </h3>
+            <ul className="flex flex-wrap gap-2">
+              {group.items.map((skill) => (
+                <li key={skill.id}>
+                  <Badge variant="secondary" className="px-3 py-1.5 text-[0.75rem]">
+                    {skill.name}
+                  </Badge>
+                </li>
+              ))}
+            </ul>
+          </div>
         ))}
-      </ul>
+      </div>
     </section>
   )
 }
