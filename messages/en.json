@@ -4,7 +4,15 @@
     "downloadResume": "Download resume",
     "skills": "Skills",
     "about": "About",
-    "experience": "Work experience"
+    "experience": "Work experience",
+    "available": "Open to work",
+    "skipToContent": "Skip to content",
+    "runtime": "RUNTIME",
+    "signal": "SIGNAL",
+    "aboutTag": "CORE",
+    "experienceTag": "TRACE",
+    "skillsTag": "NODES",
+    "buildOk": "build · ok · web"
   },
   "Nav": {
     "primary": "Primary",

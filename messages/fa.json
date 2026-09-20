@@ -4,7 +4,15 @@
     "downloadResume": "دانلود رزومه",
     "skills": "تخصص‌ها",
     "about": "درباره",
-    "experience": "سوابق کاری"
+    "experience": "سوابق کاری",
+    "available": "آماده همکاری",
+    "skipToContent": "رفتن به محتوا",
+    "runtime": "RUNTIME",
+    "signal": "SIGNAL",
+    "aboutTag": "CORE",
+    "experienceTag": "TRACE",
+    "skillsTag": "NODES",
+    "buildOk": "build · ok · web"
   },
   "Nav": {
     "primary": "منوی اصلی",
