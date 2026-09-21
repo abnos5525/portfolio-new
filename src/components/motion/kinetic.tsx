@@ -56,10 +56,10 @@ export function MonumentName({ text, className }: NameProps) {
   return (
     <h1 className={className}>
       <motion.span
-        className="block"
-        initial={{ clipPath: "inset(0 0 100% 0)", y: 28 }}
+        className="block overflow-visible pb-[0.12em]"
+        initial={{ clipPath: "inset(0 0 100% 0)", y: 20 }}
         animate={{ clipPath: "inset(0 0 0% 0)", y: 0 }}
-        transition={{ duration: 0.9, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.8, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
       >
         {text}
       </motion.span>

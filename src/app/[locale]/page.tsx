@@ -2,6 +2,11 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import { ExperienceReel } from "@/components/sections/experience-reel"
 import { HeroSection } from "@/components/sections/hero"
+import {
+  EducationSection,
+  HireBand,
+  ProofStrip,
+} from "@/components/sections/hire-signals"
 import { SkillsConstellation } from "@/components/sections/skills-constellation"
 import { experience, getAllSkills, site, t, type Locale } from "@/content"
 
@@ -29,20 +34,29 @@ export default async function Home({ params }: Props) {
       <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
         <HeroSection locale={locale} />
 
-        <section id="about" className="scroll-mt-28 mt-6 max-w-3xl sm:mt-10">
-          <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-5xl">
+        <section id="about" className="scroll-mt-24 mt-4 max-w-3xl sm:mt-10 md:scroll-mt-28">
+          <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-5xl">
             {translate("about")}
           </h2>
-          <p className="text-foreground/90 mt-6 text-base leading-8 text-pretty sm:text-lg sm:leading-9">
+          <p className="text-foreground/90 mt-4 text-base leading-7 text-pretty sm:mt-6 sm:text-lg sm:leading-9">
             {t(site.about, locale)}
           </p>
         </section>
       </div>
 
+      <ProofStrip
+        proofs={[
+          { label: translate("proofLang"), value: translate("proofLangValue") },
+          { label: translate("proofStack"), value: translate("proofStackValue") },
+          { label: translate("proofEdu"), value: translate("proofEduValue") },
+          { label: translate("proofWork"), value: translate("proofWorkValue") },
+        ]}
+      />
+
       <ExperienceReel
         locale={locale}
         title={translate("experience")}
-        support={translate("experienceSupport")}
+        currentLabel={translate("current")}
         items={experience}
       />
 
@@ -57,6 +71,15 @@ export default async function Home({ params }: Props) {
           devops: translate("catDevops"),
           other: translate("catOther"),
         }}
+      />
+
+      <EducationSection locale={locale} title={translate("education")} />
+
+      <HireBand
+        title={translate("hireTitle")}
+        body={translate("hireBody")}
+        linkedinLabel={translate("hireLinkedin")}
+        resumeLabel={translate("downloadResume")}
       />
     </main>
   )

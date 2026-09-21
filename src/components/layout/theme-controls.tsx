@@ -10,7 +10,7 @@ import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const accentSwatch: Record<Accent, string> = {
-  trust: "bg-[oklch(0.68_0.12_205)]",
+  trust: "bg-[oklch(0.82_0.2_145)]",
   energy: "bg-[oklch(0.68_0.14_48)]",
   focus: "bg-[oklch(0.75_0.16_95)]",
 }

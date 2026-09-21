@@ -1,11 +1,11 @@
-/* Signal Forge — distinctive hiring palette (steel ink + cyan signal) */
+/* Monument Spec accents — steel/cyan, copper, amber */
 
 :root,
 [data-accent="trust"] {
-  --accent-brand: oklch(0.74 0.12 205);
-  --accent-brand-foreground: oklch(0.16 0.03 250);
-  --surface-glow: oklch(0.42 0.08 205 / 28%);
-  --grid-line: oklch(0.7 0.04 250 / 8%);
+  --accent-brand: oklch(0.82 0.2 145);
+  --accent-brand-foreground: oklch(0.16 0.05 145);
+  --surface-glow: oklch(0.45 0.14 145 / 32%);
+  --grid-line: oklch(0.7 0.08 145 / 10%);
 }
 
 [data-accent="energy"] {
@@ -26,31 +26,31 @@
 .dark,
 .dark[data-accent="trust"],
 html.dark[data-accent="trust"] {
-  --background: oklch(0.11 0.02 268);
-  --foreground: oklch(0.97 0.012 95);
-  --card: oklch(0.19 0.03 250);
-  --card-foreground: oklch(0.96 0.01 250);
-  --popover: oklch(0.19 0.03 250);
-  --popover-foreground: oklch(0.96 0.01 250);
-  --primary: oklch(0.74 0.12 205);
-  --primary-foreground: oklch(0.16 0.03 250);
-  --secondary: oklch(0.24 0.03 250);
-  --secondary-foreground: oklch(0.94 0.01 250);
-  --muted: oklch(0.24 0.025 250);
-  --muted-foreground: oklch(0.72 0.02 250);
-  --accent: oklch(0.26 0.04 205);
-  --accent-foreground: oklch(0.94 0.01 250);
-  --border: oklch(0.96 0.01 250 / 11%);
-  --input: oklch(0.96 0.01 250 / 13%);
-  --ring: oklch(0.74 0.12 205);
-  --sidebar: oklch(0.17 0.028 250);
-  --sidebar-foreground: oklch(0.96 0.01 250);
-  --sidebar-primary: oklch(0.74 0.12 205);
-  --sidebar-primary-foreground: oklch(0.16 0.03 250);
-  --sidebar-accent: oklch(0.24 0.03 250);
-  --sidebar-accent-foreground: oklch(0.94 0.01 250);
-  --sidebar-border: oklch(0.96 0.01 250 / 11%);
-  --sidebar-ring: oklch(0.74 0.12 205);
+  --background: oklch(0.13 0.03 155);
+  --foreground: oklch(0.93 0.08 145);
+  --card: oklch(0.17 0.035 155);
+  --card-foreground: oklch(0.93 0.08 145);
+  --popover: oklch(0.17 0.035 155);
+  --popover-foreground: oklch(0.93 0.08 145);
+  --primary: oklch(0.82 0.2 145);
+  --primary-foreground: oklch(0.16 0.05 145);
+  --secondary: oklch(0.22 0.04 155);
+  --secondary-foreground: oklch(0.9 0.06 145);
+  --muted: oklch(0.22 0.035 155);
+  --muted-foreground: oklch(0.72 0.07 145);
+  --accent: oklch(0.24 0.05 145);
+  --accent-foreground: oklch(0.9 0.06 145);
+  --border: oklch(0.82 0.16 145 / 18%);
+  --input: oklch(0.82 0.16 145 / 16%);
+  --ring: oklch(0.82 0.2 145);
+  --sidebar: oklch(0.15 0.032 155);
+  --sidebar-foreground: oklch(0.93 0.08 145);
+  --sidebar-primary: oklch(0.82 0.2 145);
+  --sidebar-primary-foreground: oklch(0.16 0.05 145);
+  --sidebar-accent: oklch(0.22 0.04 155);
+  --sidebar-accent-foreground: oklch(0.9 0.06 145);
+  --sidebar-border: oklch(0.82 0.16 145 / 18%);
+  --sidebar-ring: oklch(0.82 0.2 145);
 }
 
 .dark[data-accent="energy"],

@@ -10,7 +10,8 @@ gsap.registerPlugin(ScrollTrigger)
 export function SmoothScroll() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (reduce) return
+    const desktop = window.matchMedia("(min-width: 768px)").matches
+    if (reduce || !desktop) return
 
     const lenis = new Lenis({
       duration: 1.05,

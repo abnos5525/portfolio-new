@@ -1,125 +1,200 @@
 "use client"
 
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-import { useEffect, useRef } from "react"
+import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
+import { useCallback, useId, useState } from "react"
 
 import { Badge } from "@/components/ui/badge"
+import { buttonVariants } from "@/components/ui/button"
 import type { Experience, Locale } from "@/content"
 import { t } from "@/content"
-
-gsap.registerPlugin(ScrollTrigger)
+import { cn } from "@/lib/utils"
 
 type Props = {
   locale: Locale
   title: string
-  support: string
+  currentLabel: string
   items: Experience[]
 }
 
-/** Award-style stacked pin: each role holds, then the next covers it. */
-export function ExperienceReel({ locale, title, support, items }: Props) {
-  const rootRef = useRef<HTMLElement>(null)
+export function ExperienceReel({
+  locale,
+  title,
+  currentLabel,
+  items,
+}: Props) {
+  const labelId = useId()
+  const startIndex = Math.max(
+    0,
+    items.findIndex((item) => item.current)
+  )
+  const [index, setIndex] = useState(startIndex === -1 ? 0 : startIndex)
+  const active = items[index]
+  const rtl = locale === "fa"
 
-  useEffect(() => {
-    const root = rootRef.current
-    if (!root) return
+  const go = useCallback(
+    (next: number) => {
+      if (!items.length) return
+      setIndex((next + items.length) % items.length)
+    },
+    [items.length]
+  )
 
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    const desktop = window.matchMedia("(min-width: 768px)").matches
-    if (reduce || !desktop) return
+  if (!active) return null
 
-    const cards = Array.from(
-      root.querySelectorAll<HTMLElement>("[data-exp-card]")
-    )
-    if (cards.length < 2) return
-
-    const ctx = gsap.context(() => {
-      cards.forEach((card, index) => {
-        const next = cards[index + 1]
-        if (!next) return
-
-        ScrollTrigger.create({
-          trigger: card,
-          start: "top 18%",
-          endTrigger: next,
-          end: "top 18%",
-          pin: true,
-          pinSpacing: false,
-          anticipatePin: 1,
-        })
-
-        gsap.to(card, {
-          scale: 0.94,
-          filter: "brightness(0.72)",
-          ease: "none",
-          scrollTrigger: {
-            trigger: next,
-            start: "top 90%",
-            end: "top 18%",
-            scrub: true,
-          },
-        })
-      })
-    }, root)
-
-    return () => ctx.revert()
-  }, [])
+  const dir = rtl ? 1 : -1
 
   return (
     <section
       id="experience"
-      ref={rootRef}
-      className="scroll-mt-28 mx-auto mt-24 w-full max-w-6xl px-4 sm:mt-32 sm:px-6"
+      className="scroll-mt-24 mx-auto mt-16 w-full max-w-6xl px-4 sm:mt-24 sm:px-6 md:scroll-mt-28"
     >
-      <h2 className="font-heading text-3xl font-semibold tracking-tight sm:text-5xl">
+      <h2
+        id={labelId}
+        className="font-heading text-2xl font-semibold tracking-tight sm:text-5xl"
+      >
         {title}
       </h2>
-      <p className="text-muted-foreground mt-4 max-w-2xl text-base leading-7 text-pretty">
-        {support}
-      </p>
 
-      <div className="mt-12 flex flex-col gap-8 pb-8 md:gap-10">
-        {items.map((role, index) => (
+      <div className="mt-8 grid gap-6 lg:grid-cols-12 lg:gap-10">
+        <div className="lg:col-span-5">
+          <div className="rounded-3xl border border-primary/20 bg-card/65 p-4 sm:p-5">
+            <ol
+              role="tablist"
+              aria-labelledby={labelId}
+              className="relative space-y-3 before:bg-primary/18 before:absolute before:inset-y-3 before:start-[0.62rem] before:w-px before:content-['']"
+            >
+              {items.map((item, i) => {
+                const selected = i === index
+                const tabId = `experience-tab-${item.id}`
+                const panelId = `experience-panel-${item.id}`
+
+                return (
+                  <li key={item.id} className="relative ps-7">
+                    <span
+                      aria-hidden
+                      className={cn(
+                        "absolute start-0 top-1/2 size-3 -translate-y-1/2 rounded-full border",
+                        selected
+                          ? "border-primary bg-primary shadow-[0_0_0_4px_color-mix(in_oklab,var(--primary)_26%,transparent)]"
+                          : "border-primary/35 bg-background"
+                      )}
+                    />
+                    <button
+                      id={tabId}
+                      type="button"
+                      role="tab"
+                      aria-selected={selected}
+                      aria-controls={panelId}
+                      onClick={() => setIndex(i)}
+                      className={cn(
+                        "w-full rounded-2xl border px-3 py-3 text-start transition-colors",
+                        selected
+                          ? "border-primary/65 bg-primary/10"
+                          : "border-primary/15 hover:border-primary/40"
+                      )}
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <p className="text-muted-foreground font-mono text-[0.66rem] tabular-nums">
+                          {String(i + 1).padStart(2, "0")}
+                        </p>
+                        <p className="text-muted-foreground font-mono text-[0.66rem] tabular-nums">
+                          {t(item.start, locale)}
+                        </p>
+                      </div>
+                      <p className="mt-1.5 text-sm font-semibold">
+                        {t(item.company, locale)}
+                      </p>
+                      <p className="text-muted-foreground mt-1 text-xs">
+                        {t(item.role, locale)}
+                      </p>
+                    </button>
+                  </li>
+                )
+              })}
+            </ol>
+
+            <div className="mt-4 hidden items-center justify-between gap-3 border-t border-primary/15 pt-4 lg:flex">
+              <p className="text-muted-foreground font-mono text-[0.7rem] tabular-nums">
+                {String(index + 1).padStart(2, "0")} /{" "}
+                {String(items.length).padStart(2, "0")}
+              </p>
+              <div className="flex gap-2">
+                <button
+                  type="button"
+                  aria-label="prev"
+                  onClick={() => go(index - dir)}
+                  className={cn(
+                    buttonVariants({ variant: "outline", size: "icon" }),
+                    "size-10 touch-manipulation"
+                  )}
+                >
+                  <ChevronRightIcon className="size-4 rtl:rotate-180" />
+                </button>
+                <button
+                  type="button"
+                  aria-label="next"
+                  onClick={() => go(index + dir)}
+                  className={cn(
+                    buttonVariants({ variant: "outline", size: "icon" }),
+                    "size-10 touch-manipulation"
+                  )}
+                >
+                  <ChevronLeftIcon className="size-4 rtl:rotate-180" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="lg:col-span-7">
           <article
-            key={role.id}
-            data-exp-card
-            className="border-border/50 bg-card/80 origin-top rounded-3xl border p-6 shadow-[0_24px_80px_-40px_oklch(0_0_0_/_45%)] backdrop-blur-md sm:p-8"
+            id={`experience-panel-${active.id}`}
+            role="tabpanel"
+            aria-labelledby={`experience-tab-${active.id}`}
+            className="relative overflow-hidden rounded-3xl border border-primary/22 bg-card/80 p-5 shadow-[0_22px_90px_-55px_var(--primary)] sm:p-8"
           >
-            <div className="mb-6 flex items-center justify-between gap-4">
-              <span className="text-primary font-mono text-xs tracking-[0.22em]">
-                {String(index + 1).padStart(2, "0")}
-                <span className="text-muted-foreground">
-                  {" "}
-                  / {String(items.length).padStart(2, "0")}
-                </span>
-              </span>
-              <p className="text-muted-foreground font-mono text-xs tabular-nums sm:text-sm">
-                {t(role.start, locale)}
+            <div
+              aria-hidden
+              className="from-primary/40 absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r via-transparent to-transparent"
+            />
+
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              {active.current ? (
+                <Badge className="px-2.5 py-0 text-[0.65rem]">{currentLabel}</Badge>
+              ) : (
+                <span />
+              )}
+              <p className="text-muted-foreground bg-background/80 rounded-full border px-3 py-1 font-mono text-xs tabular-nums">
+                {t(active.start, locale)}
                 <span className="mx-1.5 opacity-50">—</span>
-                {t(role.end, locale)}
+                {t(active.end, locale)}
               </p>
             </div>
 
-            <h3 className="font-heading text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
-              {t(role.role, locale)}
+            <h3 className="font-heading mt-5 text-2xl font-semibold tracking-tight text-balance sm:text-4xl">
+              {t(active.role, locale)}
             </h3>
-            <p className="text-primary mt-3 text-base font-medium sm:text-lg">
-              {t(role.company, locale)}
+            <p className="text-primary mt-2 text-base font-medium sm:text-xl">
+              {t(active.company, locale)}
             </p>
 
-            <ul className="mt-8 flex flex-col gap-6">
-              {role.projects.map((project) => (
+            <ul className="mt-7 space-y-3 sm:mt-8">
+              {active.projects.map((project, projectIndex) => (
                 <li
-                  key={`${role.id}-${project.name.en}`}
-                  className="flex flex-col gap-3"
+                  key={`${active.id}-${project.name.en}`}
+                  className="rounded-2xl border border-primary/15 bg-background/55 p-4"
                 >
-                  <p className="text-foreground/90 text-sm font-medium sm:text-base">
-                    {t(project.name, locale)}
-                  </p>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="text-sm font-semibold sm:text-[0.95rem]">
+                      {t(project.name, locale)}
+                    </p>
+                    <p className="text-muted-foreground font-mono text-[0.66rem] tabular-nums">
+                      {String(projectIndex + 1).padStart(2, "0")}
+                    </p>
+                  </div>
+                  <div className="mt-3 flex flex-wrap gap-1.5">
                     {project.stack.map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-[0.7rem]">
+                      <Badge key={tech} variant="outline" className="text-[0.68rem]">
                         {tech}
                       </Badge>
                     ))}
@@ -128,7 +203,32 @@ export function ExperienceReel({ locale, title, support, items }: Props) {
               ))}
             </ul>
           </article>
-        ))}
+
+          <div className="mt-4 flex justify-end gap-2 lg:hidden">
+            <button
+              type="button"
+              aria-label="prev"
+              onClick={() => go(index - dir)}
+              className={cn(
+                buttonVariants({ variant: "outline", size: "icon" }),
+                "size-11 touch-manipulation"
+              )}
+            >
+              <ChevronRightIcon className="size-4 rtl:rotate-180" />
+            </button>
+            <button
+              type="button"
+              aria-label="next"
+              onClick={() => go(index + dir)}
+              className={cn(
+                buttonVariants({ variant: "outline", size: "icon" }),
+                "size-11 touch-manipulation"
+              )}
+            >
+              <ChevronLeftIcon className="size-4 rtl:rotate-180" />
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   )

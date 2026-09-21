@@ -29,13 +29,13 @@ export function MagneticLink({
   const springX = useSpring(x, { stiffness: 260, damping: 18 })
   const springY = useSpring(y, { stiffness: 260, damping: 18 })
 
-  if (reduce) {
-    return (
-      <a href={href} download={download} className={className}>
-        {children}
-      </a>
-    )
-  }
+  const plain = (
+    <a href={href} download={download} className={className}>
+      {children}
+    </a>
+  )
+
+  if (reduce) return plain
 
   return (
     <motion.a
@@ -44,6 +44,7 @@ export function MagneticLink({
       className={cn("inline-flex", className)}
       style={{ x: springX, y: springY }}
       onPointerMove={(event) => {
+        if (event.pointerType !== "mouse") return
         const rect = event.currentTarget.getBoundingClientRect()
         const dx = event.clientX - (rect.left + rect.width / 2)
         const dy = event.clientY - (rect.top + rect.height / 2)

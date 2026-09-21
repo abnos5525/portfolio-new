@@ -32,7 +32,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <Link
           href="/"
-          className="hover:text-primary font-heading truncate text-sm font-semibold transition-colors sm:text-base"
+          className="font-heading hover:text-primary truncate text-sm font-semibold tracking-tight transition-colors sm:text-base"
         >
           {t(site.name, locale)}
         </Link>

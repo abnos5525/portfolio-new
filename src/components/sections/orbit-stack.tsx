@@ -53,7 +53,7 @@ export function OrbitStack({ className }: Props) {
       aria-hidden
       className={className}
     >
-      <div className="relative mx-auto aspect-square w-[min(100%,26rem)]">
+      <div className="relative mx-auto aspect-square w-full max-w-[18rem] sm:max-w-[22rem] lg:max-w-[26rem]">
         <div className="border-primary/25 absolute inset-[18%] rounded-full border" />
         <div className="border-primary/15 absolute inset-[8%] rounded-[45%] border" />
         <div className="bg-primary/20 absolute top-1/2 start-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full shadow-[0_0_24px_var(--primary)]" />

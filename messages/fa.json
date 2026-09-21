@@ -5,15 +5,34 @@
     "skills": "تخصص‌ها",
     "about": "درباره من",
     "experience": "مسیر حرفه‌ای",
-    "available": "آماده همکاری",
+    "available": "آمادهٔ همکاری",
     "skipToContent": "رفتن به محتوا",
-    "experienceSupport": "هر نقش روی نقش قبلی می‌نشیند؛ اسکرول کن تا مسیر کامل دیده شود.",
-    "skillsSupport": "مهارت‌ها بر اساس جایی که در محصول استفاده می‌شوند گروه‌بندی شده‌اند.",
+    "skillsSupport": "مهارت‌ها بر اساس جایی که در محصول استفاده می‌شوند.",
     "catFrontend": "رابط کاربری",
     "catBackend": "بک‌اند و API",
     "catData": "داده",
     "catDevops": "پلتفرم",
-    "catOther": "سایر"
+    "catOther": "سایر",
+    "current": "فعلی",
+    "education": "تحصیلات",
+    "hireTitle": "آماده همکاری",
+    "hireBody": "برای نقش فول‌استک وب — از React و Next.js تا NestJS و Spring Boot. مسیر محصول را از رابط تا API جلو می‌برم.",
+    "hireLinkedin": "گفتگو در لینکدین",
+    "proofLang": "زبان",
+    "proofLangValue": "فارسی / English",
+    "proofStack": "استک",
+    "proofStackValue": "React · Nest · Spring",
+    "proofEdu": "تحصیل",
+    "proofEduValue": "ارشد نرم‌افزار",
+    "proofWork": "وضعیت",
+    "proofWorkValue": "جویای نقش"
+  },
+  "Dock": {
+    "label": "میانبر",
+    "about": "درباره",
+    "experience": "مسیر",
+    "skills": "مهارت",
+    "resume": "رزومه"
   },
   "Nav": {
     "primary": "منوی اصلی",
@@ -26,7 +45,7 @@
   "Theme": {
     "toggle": "تغییر حالت روشن یا تیره",
     "accent": "رنگ تم",
-    "trust": "آرامش",
+    "trust": "اعتماد",
     "energy": "انرژی",
     "focus": "تمرکز"
   },
