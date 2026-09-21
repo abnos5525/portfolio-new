@@ -1,10 +1,7 @@
 "use client"
 
-import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
-import { useCallback, useId, useState } from "react"
+import { useCallback, useEffect, useId, useRef, useState } from "react"
 
-import { Badge } from "@/components/ui/badge"
-import { buttonVariants } from "@/components/ui/button"
 import type { Experience, Locale } from "@/content"
 import { t } from "@/content"
 import { cn } from "@/lib/utils"
@@ -14,6 +11,13 @@ type Props = {
   title: string
   currentLabel: string
   items: Experience[]
+}
+
+function yearFromStart(start: string, locale: Locale) {
+  if (locale === "fa") {
+    return start.match(/[۰-۹]{4}/)?.[0] ?? start
+  }
+  return start.match(/\d{4}/)?.[0] ?? start
 }
 
 export function ExperienceReel({
@@ -28,6 +32,7 @@ export function ExperienceReel({
     items.findIndex((item) => item.current)
   )
   const [index, setIndex] = useState(startIndex === -1 ? 0 : startIndex)
+  const touchX = useRef<number | null>(null)
   const active = items[index]
   const rtl = locale === "fa"
 
@@ -39,196 +44,177 @@ export function ExperienceReel({
     [items.length]
   )
 
+  useEffect(() => {
+    const onKey = (event: KeyboardEvent) => {
+      const target = event.target
+      if (
+        target instanceof HTMLElement &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.isContentEditable)
+      ) {
+        return
+      }
+
+      if (event.key === "ArrowRight") go(index + (rtl ? 1 : -1))
+      if (event.key === "ArrowLeft") go(index + (rtl ? -1 : 1))
+    }
+
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [go, index, rtl])
+
   if (!active) return null
 
-  const dir = rtl ? 1 : -1
+  const activeYear = yearFromStart(t(active.start, locale), locale)
 
   return (
     <section
       id="experience"
       className="scroll-mt-24 mx-auto mt-16 w-full max-w-6xl px-4 sm:mt-24 sm:px-6 md:scroll-mt-28"
     >
-      <h2
-        id={labelId}
-        className="font-heading text-2xl font-semibold tracking-tight sm:text-5xl"
+      <div className="flex items-end justify-between gap-4">
+        <h2
+          id={labelId}
+          className="font-heading text-2xl font-semibold tracking-tight sm:text-5xl"
+        >
+          {title}
+        </h2>
+        <p className="text-muted-foreground hidden font-mono text-xs tabular-nums sm:block">
+          {String(index + 1).padStart(2, "0")} /{" "}
+          {String(items.length).padStart(2, "0")}
+        </p>
+      </div>
+
+      <div
+        aria-hidden
+        className="bg-primary/25 mt-5 h-px w-full overflow-hidden"
       >
-        {title}
-      </h2>
+        <div
+          className="bg-primary h-px origin-start transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+          style={{ transform: `scaleX(${(index + 1) / items.length})` }}
+        />
+      </div>
 
-      <div className="mt-8 grid gap-6 lg:grid-cols-12 lg:gap-10">
-        <div className="lg:col-span-5">
-          <div className="rounded-3xl border border-primary/20 bg-card/65 p-4 sm:p-5">
-            <ol
-              role="tablist"
-              aria-labelledby={labelId}
-              className="relative space-y-3 before:bg-primary/18 before:absolute before:inset-y-3 before:start-[0.62rem] before:w-px before:content-['']"
-            >
-              {items.map((item, i) => {
-                const selected = i === index
-                const tabId = `experience-tab-${item.id}`
-                const panelId = `experience-panel-${item.id}`
+      <div className="mt-8 grid items-start gap-8 lg:mt-12 lg:grid-cols-12 lg:gap-6">
+        <nav
+          aria-labelledby={labelId}
+          className="-mx-4 lg:col-span-4 lg:mx-0 lg:sticky lg:top-24"
+        >
+          <ol
+            role="tablist"
+            className="flex snap-x snap-mandatory gap-1 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden lg:flex-col lg:items-start lg:gap-1 lg:overflow-visible lg:px-0 lg:pb-0"
+          >
+            {items.map((item, i) => {
+              const selected = i === index
+              const year = yearFromStart(t(item.start, locale), locale)
 
-                return (
-                  <li key={item.id} className="relative ps-7">
+              return (
+                <li key={item.id} className="shrink-0 snap-center lg:w-full">
+                  <button
+                    id={`experience-tab-${item.id}`}
+                    type="button"
+                    role="tab"
+                    aria-selected={selected}
+                    aria-controls={`experience-panel-${item.id}`}
+                    onClick={() => setIndex(i)}
+                    className={cn(
+                      "font-heading block min-h-14 min-w-[7.5rem] rounded-xl px-2 py-1 text-start leading-none transition-[color,transform,opacity] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] lg:min-w-0 lg:px-0",
+                      selected
+                        ? "text-foreground scale-100"
+                        : "text-foreground/22 hover:text-foreground/55"
+                    )}
+                  >
                     <span
-                      aria-hidden
                       className={cn(
-                        "absolute start-0 top-1/2 size-3 -translate-y-1/2 rounded-full border",
+                        "block font-extrabold tabular-nums",
                         selected
-                          ? "border-primary bg-primary shadow-[0_0_0_4px_color-mix(in_oklab,var(--primary)_26%,transparent)]"
-                          : "border-primary/35 bg-background"
-                      )}
-                    />
-                    <button
-                      id={tabId}
-                      type="button"
-                      role="tab"
-                      aria-selected={selected}
-                      aria-controls={panelId}
-                      onClick={() => setIndex(i)}
-                      className={cn(
-                        "w-full rounded-2xl border px-3 py-3 text-start transition-colors",
-                        selected
-                          ? "border-primary/65 bg-primary/10"
-                          : "border-primary/15 hover:border-primary/40"
+                          ? "text-[clamp(3.4rem,16vw,5.5rem)] lg:text-[clamp(4.4rem,7vw,7.5rem)]"
+                          : "text-[clamp(2.1rem,10vw,3.2rem)] lg:text-[2.35rem]"
                       )}
                     >
-                      <div className="flex items-center justify-between gap-2">
-                        <p className="text-muted-foreground font-mono text-[0.66rem] tabular-nums">
-                          {String(i + 1).padStart(2, "0")}
-                        </p>
-                        <p className="text-muted-foreground font-mono text-[0.66rem] tabular-nums">
-                          {t(item.start, locale)}
-                        </p>
-                      </div>
-                      <p className="mt-1.5 text-sm font-semibold">
+                      {year}
+                    </span>
+                    {selected ? (
+                      <span className="text-primary mt-2 block text-sm font-medium">
                         {t(item.company, locale)}
-                      </p>
-                      <p className="text-muted-foreground mt-1 text-xs">
-                        {t(item.role, locale)}
-                      </p>
-                    </button>
-                  </li>
-                )
-              })}
-            </ol>
+                      </span>
+                    ) : null}
+                  </button>
+                </li>
+              )
+            })}
+          </ol>
+        </nav>
 
-            <div className="mt-4 hidden items-center justify-between gap-3 border-t border-primary/15 pt-4 lg:flex">
-              <p className="text-muted-foreground font-mono text-[0.7rem] tabular-nums">
-                {String(index + 1).padStart(2, "0")} /{" "}
-                {String(items.length).padStart(2, "0")}
-              </p>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  aria-label="prev"
-                  onClick={() => go(index - dir)}
-                  className={cn(
-                    buttonVariants({ variant: "outline", size: "icon" }),
-                    "size-10 touch-manipulation"
-                  )}
-                >
-                  <ChevronRightIcon className="size-4 rtl:rotate-180" />
-                </button>
-                <button
-                  type="button"
-                  aria-label="next"
-                  onClick={() => go(index + dir)}
-                  className={cn(
-                    buttonVariants({ variant: "outline", size: "icon" }),
-                    "size-10 touch-manipulation"
-                  )}
-                >
-                  <ChevronLeftIcon className="size-4 rtl:rotate-180" />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="lg:col-span-7">
-          <article
-            id={`experience-panel-${active.id}`}
-            role="tabpanel"
-            aria-labelledby={`experience-tab-${active.id}`}
-            className="relative overflow-hidden rounded-3xl border border-primary/22 bg-card/80 p-5 shadow-[0_22px_90px_-55px_var(--primary)] sm:p-8"
+        <article
+          id={`experience-panel-${active.id}`}
+          role="tabpanel"
+          aria-labelledby={`experience-tab-${active.id}`}
+          onTouchStart={(event) => {
+            touchX.current = event.changedTouches[0]?.clientX ?? null
+          }}
+          onTouchEnd={(event) => {
+            if (touchX.current == null) return
+            const currentX = event.changedTouches[0]?.clientX
+            if (currentX == null) return
+            const delta = currentX - touchX.current
+            touchX.current = null
+            if (Math.abs(delta) < 56) return
+            if (rtl) go(index + (delta > 0 ? 1 : -1))
+            else go(index + (delta < 0 ? 1 : -1))
+          }}
+          className="relative min-h-[22rem] overflow-hidden lg:col-span-8 lg:min-h-[28rem]"
+        >
+          <span
+            aria-hidden
+            className="font-heading text-foreground/6 pointer-events-none absolute -top-6 end-0 select-none text-[clamp(6rem,28vw,14rem)] leading-none font-extrabold tabular-nums"
           >
-            <div
-              aria-hidden
-              className="from-primary/40 absolute inset-x-0 top-0 h-0.5 bg-gradient-to-r via-transparent to-transparent"
-            />
+            {activeYear}
+          </span>
 
-            <div className="flex flex-wrap items-center justify-between gap-2">
-              {active.current ? (
-                <Badge className="px-2.5 py-0 text-[0.65rem]">{currentLabel}</Badge>
-              ) : (
-                <span />
-              )}
-              <p className="text-muted-foreground bg-background/80 rounded-full border px-3 py-1 font-mono text-xs tabular-nums">
+          <div className="relative">
+            <div className="flex flex-wrap items-center gap-3">
+              <p className="text-muted-foreground font-mono text-xs tabular-nums">
                 {t(active.start, locale)}
-                <span className="mx-1.5 opacity-50">—</span>
+                <span className="mx-1.5 opacity-40">—</span>
                 {t(active.end, locale)}
               </p>
+              {active.current ? (
+                <span className="text-primary inline-flex items-center gap-1.5 text-xs font-medium">
+                  <span className="bg-primary size-1.5 rounded-full motion-safe:animate-pulse" />
+                  {currentLabel}
+                </span>
+              ) : null}
             </div>
 
-            <h3 className="font-heading mt-5 text-2xl font-semibold tracking-tight text-balance sm:text-4xl">
+            <h3 className="font-heading mt-5 max-w-xl text-3xl font-semibold tracking-tight text-balance sm:text-5xl">
               {t(active.role, locale)}
             </h3>
-            <p className="text-primary mt-2 text-base font-medium sm:text-xl">
+            <p className="text-primary mt-3 text-lg font-medium sm:text-2xl">
               {t(active.company, locale)}
             </p>
 
-            <ul className="mt-7 space-y-3 sm:mt-8">
+            <ol className="mt-8 divide-y divide-primary/15 border-y border-primary/15">
               {active.projects.map((project, projectIndex) => (
                 <li
                   key={`${active.id}-${project.name.en}`}
-                  className="rounded-2xl border border-primary/15 bg-background/55 p-4"
+                  className="grid grid-cols-[auto_1fr] gap-x-4 gap-y-2 py-4 sm:grid-cols-[3rem_1fr_auto] sm:items-baseline"
                 >
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="text-sm font-semibold sm:text-[0.95rem]">
-                      {t(project.name, locale)}
-                    </p>
-                    <p className="text-muted-foreground font-mono text-[0.66rem] tabular-nums">
-                      {String(projectIndex + 1).padStart(2, "0")}
-                    </p>
-                  </div>
-                  <div className="mt-3 flex flex-wrap gap-1.5">
-                    {project.stack.map((tech) => (
-                      <Badge key={tech} variant="outline" className="text-[0.68rem]">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
+                  <span className="text-muted-foreground font-mono text-xs tabular-nums">
+                    {String(projectIndex + 1).padStart(2, "0")}
+                  </span>
+                  <p className="text-sm font-semibold sm:text-base">
+                    {t(project.name, locale)}
+                  </p>
+                  <p className="text-muted-foreground col-start-2 text-xs leading-6 sm:col-start-3 sm:max-w-xs sm:text-end">
+                    {project.stack.join(" · ")}
+                  </p>
                 </li>
               ))}
-            </ul>
-          </article>
-
-          <div className="mt-4 flex justify-end gap-2 lg:hidden">
-            <button
-              type="button"
-              aria-label="prev"
-              onClick={() => go(index - dir)}
-              className={cn(
-                buttonVariants({ variant: "outline", size: "icon" }),
-                "size-11 touch-manipulation"
-              )}
-            >
-              <ChevronRightIcon className="size-4 rtl:rotate-180" />
-            </button>
-            <button
-              type="button"
-              aria-label="next"
-              onClick={() => go(index + dir)}
-              className={cn(
-                buttonVariants({ variant: "outline", size: "icon" }),
-                "size-11 touch-manipulation"
-              )}
-            >
-              <ChevronLeftIcon className="size-4 rtl:rotate-180" />
-            </button>
+            </ol>
           </div>
-        </div>
+        </article>
       </div>
     </section>
   )
