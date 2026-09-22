@@ -88,6 +88,17 @@ export function PublicWorkSkeleton() {
   )
 }
 
+export function MarketSkeleton() {
+  return (
+    <div className="page-gutter mx-auto mt-16 w-full max-w-6xl sm:mt-24">
+      <Skeleton className="h-3 w-16" />
+      <Skeleton className="mt-3 h-14 w-56 sm:h-16" />
+      <Skeleton className="mt-3 h-4 w-24" />
+      <Skeleton className="mt-6 h-56 w-full sm:h-72" />
+    </div>
+  )
+}
+
 function RosetteSkeleton() {
   return (
     <div className="page-gutter mx-auto mt-16 w-full max-w-6xl sm:mt-24">
@@ -172,6 +183,7 @@ export function PageSkeleton() {
       <PublicWorkSkeleton />
       <SkillsSkeleton />
       <EducationSkeleton />
+      <MarketSkeleton />
       <HireSkeleton />
     </main>
   )

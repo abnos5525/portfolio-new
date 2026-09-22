@@ -6,12 +6,13 @@ import { HafezVerse } from "@/components/sections/hafez-verse"
 import { HeroSection } from "@/components/sections/hero"
 import { IranClock } from "@/components/sections/iran-clock"
 import { Rosette } from "@/components/sections/rosette"
+import { BitcoinChart } from "@/components/sections/bitcoin-chart"
 import {
   EducationSection,
   HireBand,
   ProofStrip,
 } from "@/components/sections/hire-signals"
-import { PublicWorkSkeleton } from "@/components/sections/page-skeleton"
+import { MarketSkeleton, PublicWorkSkeleton } from "@/components/sections/page-skeleton"
 import { PublicWork } from "@/components/sections/public-work"
 import { SkillsConstellation } from "@/components/sections/skills-constellation"
 import { experience, getAllSkills, site, t, type Locale } from "@/content"
@@ -117,6 +118,24 @@ export default async function Home({ params }: Props) {
       />
 
       <EducationSection locale={locale} title={translate("education")} />
+
+      <Suspense fallback={<MarketSkeleton />}>
+        <BitcoinChart
+          locale={locale}
+          title={translate("marketTitle")}
+          unit={translate("marketUnit")}
+          unavailable={translate("marketUnavailable")}
+          lowLabel={translate("marketLow")}
+          highLabel={translate("marketHigh")}
+          rangesLabel={translate("marketRanges")}
+          ranges={{
+            "1h": translate("market1h"),
+            "1d": translate("market1d"),
+            "1w": translate("market1w"),
+            "1m": translate("market1m"),
+          }}
+        />
+      </Suspense>
 
       <HireBand
         title={translate("hireTitle")}

@@ -29,7 +29,17 @@
     "proofEduValue": "M.Sc. Software",
     "proofWork": "Status",
     "proofWorkValue": "Looking for work",
-    "rosette": "Mark"
+    "rosette": "Mark",
+    "marketTitle": "Bitcoin",
+    "marketUnit": "USD",
+    "marketUnavailable": "The price isn't available right now.",
+    "marketLow": "Low",
+    "marketHigh": "High",
+    "marketRanges": "Range",
+    "market1h": "1 hour",
+    "market1d": "1 day",
+    "market1w": "1 week",
+    "market1m": "1 month"
   },
   "Dock": {
     "label": "Shortcuts",

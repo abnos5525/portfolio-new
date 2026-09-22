@@ -29,7 +29,17 @@
     "proofEduValue": "ارشد نرم‌افزار",
     "proofWork": "وضعیت",
     "proofWorkValue": "جویای کار",
-    "rosette": "نقش"
+    "rosette": "نقش",
+    "marketTitle": "بیت‌کوین",
+    "marketUnit": "دلار",
+    "marketUnavailable": "قیمت الان در دسترس نیست.",
+    "marketLow": "کمترین",
+    "marketHigh": "بیشترین",
+    "marketRanges": "بازه",
+    "market1h": "۱ ساعت",
+    "market1d": "۱ روز",
+    "market1w": "۱ هفته",
+    "market1m": "۱ ماه"
   },
   "Dock": {
     "label": "میانبر",
