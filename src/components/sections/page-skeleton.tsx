@@ -71,6 +71,23 @@ function ExperienceSkeleton() {
   )
 }
 
+export function PublicWorkSkeleton() {
+  return (
+    <div className="page-gutter mx-auto mt-16 w-full max-w-6xl sm:mt-24">
+      <Skeleton className="h-9 w-36 sm:h-12" />
+      <Skeleton className="mt-3 h-4 w-full max-w-md" />
+      <div className="border-border mt-8 divide-y border-y">
+        {Array.from({ length: 6 }, (_, index) => (
+          <div key={index} className="flex flex-col gap-2 py-4 sm:py-5">
+            <Skeleton className="h-6 w-48" />
+            <Skeleton className="h-4 w-full max-w-sm" />
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function SkillsSkeleton() {
   return (
     <div className="border-border bg-card/50 mt-20 border-y">
@@ -133,6 +150,7 @@ export function PageSkeleton() {
       </div>
       <ProofSkeleton />
       <ExperienceSkeleton />
+      <PublicWorkSkeleton />
       <SkillsSkeleton />
       <EducationSkeleton />
       <HireSkeleton />

@@ -10,6 +10,7 @@ export { skills, skillLevelLabel, getAllSkills } from "./skills"
 export { experience } from "./experience"
 export { education } from "./education"
 export { socials } from "./socials"
+export { publicWorkSummaries } from "./public-work"
 export { navigation } from "./navigation"
 export type {
   Education,

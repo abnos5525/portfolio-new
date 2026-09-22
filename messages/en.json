@@ -2,6 +2,8 @@
   "Home": {
     "viewExperience": "Work experience",
     "downloadResume": "Download resume",
+    "publicWork": "Public code",
+    "publicWorkSupport": "Public repositories ordered by the latest work on them.",
     "skills": "Skills",
     "about": "About",
     "experience": "Work experience",

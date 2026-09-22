@@ -1,4 +1,5 @@
 import { getTranslations, setRequestLocale } from "next-intl/server"
+import { Suspense } from "react"
 
 import { ExperienceReel } from "@/components/sections/experience-reel"
 import { HeroSection } from "@/components/sections/hero"
@@ -8,6 +9,8 @@ import {
   HireBand,
   ProofStrip,
 } from "@/components/sections/hire-signals"
+import { PublicWorkSkeleton } from "@/components/sections/page-skeleton"
+import { PublicWork } from "@/components/sections/public-work"
 import { SkillsConstellation } from "@/components/sections/skills-constellation"
 import { experience, getAllSkills, site, t, type Locale } from "@/content"
 
@@ -85,6 +88,14 @@ export default async function Home({ params }: Props) {
         currentLabel={translate("current")}
         items={experience}
       />
+
+      <Suspense fallback={<PublicWorkSkeleton />}>
+        <PublicWork
+          locale={locale}
+          title={translate("publicWork")}
+          support={translate("publicWorkSupport")}
+        />
+      </Suspense>
 
       <SkillsConstellation
         title={translate("skills")}
