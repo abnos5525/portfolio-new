@@ -1,4 +1,4 @@
-import { education, site, socials, t, type Locale } from "@/content"
+import { education, site, t, type Locale } from "@/content"
 
 type Proof = {
   label: string
@@ -71,16 +71,12 @@ export function EducationSection({
 export function HireBand({
   title,
   body,
-  linkedinLabel,
   resumeLabel,
 }: {
   title: string
   body: string
-  linkedinLabel: string
   resumeLabel: string
 }) {
-  const linkedin = socials.find((item) => item.id === "linkedin")
-
   return (
     <section id="hire" className="scroll-mt-24 bg-primary text-primary-foreground mt-20 md:scroll-mt-28">
       <div className="page-gutter mx-auto flex w-full max-w-6xl flex-col gap-6 py-14 sm:py-20">
@@ -91,20 +87,10 @@ export function HireBand({
           {body}
         </p>
         <div className="flex flex-col gap-3 sm:flex-row">
-          {linkedin ? (
-            <a
-              href={linkedin.href}
-              target="_blank"
-              rel="noreferrer"
-              className="bg-primary-foreground text-primary focus-visible:ring-primary-foreground inline-flex min-h-12 w-full items-center justify-center rounded-lg px-5 text-sm font-medium focus-visible:ring-2 focus-visible:outline-none sm:w-auto"
-            >
-              {linkedinLabel}
-            </a>
-          ) : null}
           <a
             href={site.resumePath}
             download
-            className="border-primary-foreground/45 focus-visible:ring-primary-foreground inline-flex min-h-12 w-full items-center justify-center rounded-lg border px-5 text-sm font-medium focus-visible:ring-2 focus-visible:outline-none sm:w-auto"
+            className="bg-primary-foreground text-primary focus-visible:ring-primary-foreground inline-flex min-h-12 w-full items-center justify-center rounded-lg px-5 text-sm font-medium focus-visible:ring-2 focus-visible:outline-none sm:w-auto"
           >
             {resumeLabel}
           </a>

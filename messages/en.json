@@ -1,10 +1,10 @@
 {
   "Home": {
-    "viewExperience": "Career path",
+    "viewExperience": "Work experience",
     "downloadResume": "Download resume",
     "skills": "Skills",
     "about": "About",
-    "experience": "Career path",
+    "experience": "Work experience",
     "available": "Open to work",
     "skipToContent": "Skip to content",
     "skillsSupport": "Skills grouped by where they show up in a product.",
@@ -17,7 +17,8 @@
     "education": "Education",
     "hireTitle": "Let’s work together",
     "hireBody": "Open to senior full-stack web roles — React and Next.js on the UI, NestJS and Spring Boot on the API. I own the path from first screen to deploy.",
-    "hireLinkedin": "Talk on LinkedIn",
+    "iranClock": "Iran time",
+    "iranCity": "Tehran",
     "proofLang": "Languages",
     "proofLangValue": "Persian / English",
     "proofStack": "Stack",
@@ -25,12 +26,12 @@
     "proofEdu": "Study",
     "proofEduValue": "M.Sc. Software",
     "proofWork": "Status",
-    "proofWorkValue": "Open to work"
+    "proofWorkValue": "Looking for work"
   },
   "Dock": {
     "label": "Shortcuts",
     "about": "About",
-    "experience": "Path",
+    "experience": "Work",
     "skills": "Skills",
     "resume": "Resume"
   },

@@ -1,10 +1,10 @@
 {
   "Home": {
-    "viewExperience": "مسیر حرفه‌ای",
+    "viewExperience": "تجربه کاری",
     "downloadResume": "دانلود رزومه",
     "skills": "تخصص‌ها",
     "about": "درباره من",
-    "experience": "مسیر حرفه‌ای",
+    "experience": "تجربه کاری",
     "available": "آمادهٔ همکاری",
     "skipToContent": "رفتن به محتوا",
     "skillsSupport": "مهارت‌ها بر اساس جایی که در محصول استفاده می‌شوند.",
@@ -17,7 +17,8 @@
     "education": "تحصیلات",
     "hireTitle": "آماده همکاری",
     "hireBody": "برای نقش فول‌استک وب — از React و Next.js تا NestJS و Spring Boot. مسیر محصول را از رابط تا API جلو می‌برم.",
-    "hireLinkedin": "گفتگو در لینکدین",
+    "iranClock": "ساعت ایران",
+    "iranCity": "تهران",
     "proofLang": "زبان",
     "proofLangValue": "فارسی / English",
     "proofStack": "استک",
@@ -25,12 +26,12 @@
     "proofEdu": "تحصیل",
     "proofEduValue": "ارشد نرم‌افزار",
     "proofWork": "وضعیت",
-    "proofWorkValue": "جویای نقش"
+    "proofWorkValue": "جویای کار"
   },
   "Dock": {
     "label": "میانبر",
     "about": "درباره",
-    "experience": "مسیر",
+    "experience": "تجربه",
     "skills": "مهارت",
     "resume": "رزومه"
   },

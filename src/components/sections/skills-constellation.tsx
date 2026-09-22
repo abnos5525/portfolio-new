@@ -34,31 +34,25 @@ export function SkillsConstellation({
           {support}
         </p>
 
-        <ol className="mt-8 sm:mt-12">
-          {grouped.map((group, index) => (
-            <li
-              key={group.category}
-              className="border-border grid gap-3 border-t py-5 sm:grid-cols-[4.5rem_11rem_1fr] sm:items-start sm:gap-6 sm:py-6"
-            >
-              <span className="font-heading text-foreground/25 text-3xl leading-none font-extrabold tabular-nums sm:text-4xl">
-                {String(index + 1).padStart(2, "0")}
-              </span>
-              <h3 className="text-primary text-sm font-medium sm:pt-1">
+        <div className="mt-8 grid gap-x-8 gap-y-6 sm:mt-10 sm:grid-cols-2">
+          {grouped.map((group) => (
+            <div key={group.category}>
+              <h3 className="text-primary text-sm font-medium">
                 {categoryLabels[group.category]}
               </h3>
-              <ul className="flex flex-col">
+              <ul className="mt-3 flex flex-wrap gap-2">
                 {group.items.map((skill) => (
                   <li
                     key={skill.id}
-                    className="border-border/70 border-b py-2 text-sm last:border-b-0 sm:text-[0.95rem]"
+                    className="border-border bg-background/70 rounded-md border px-2.5 py-1 text-sm"
                   >
                     {skill.name}
                   </li>
                 ))}
               </ul>
-            </li>
+            </div>
           ))}
-        </ol>
+        </div>
       </div>
     </section>
   )

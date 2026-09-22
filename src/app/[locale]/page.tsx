@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 
 import { ExperienceReel } from "@/components/sections/experience-reel"
 import { HeroSection } from "@/components/sections/hero"
+import { IranClock } from "@/components/sections/iran-clock"
 import {
   EducationSection,
   HireBand,
@@ -56,6 +57,11 @@ export default async function Home({ params }: Props) {
       </a>
 
       <div className="page-gutter mx-auto w-full max-w-6xl">
+        <IranClock
+          locale={locale}
+          label={translate("iranClock")}
+          city={translate("iranCity")}
+        />
         <HeroSection locale={locale} />
 
         <AboutLead
@@ -98,7 +104,6 @@ export default async function Home({ params }: Props) {
       <HireBand
         title={translate("hireTitle")}
         body={translate("hireBody")}
-        linkedinLabel={translate("hireLinkedin")}
         resumeLabel={translate("downloadResume")}
       />
     </main>
