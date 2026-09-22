@@ -2,7 +2,7 @@
 
 import { MoonIcon, SunIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
-import { useTheme } from "next-themes"
+import { useTheme } from "@/components/layout/theme-provider"
 import { useEffect, useState } from "react"
 
 import { useAccent, type Accent } from "@/components/layout/use-accent"
@@ -10,9 +10,9 @@ import { buttonVariants } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
 const accentSwatch: Record<Accent, string> = {
-  trust: "bg-[oklch(0.82_0.2_145)]",
-  energy: "bg-[oklch(0.68_0.14_48)]",
-  focus: "bg-[oklch(0.75_0.16_95)]",
+  trust: "bg-[oklch(0.78_0.12_192)]",
+  energy: "bg-[oklch(0.72_0.16_32)]",
+  focus: "bg-[oklch(0.84_0.13_86)]",
 }
 
 export function ThemeControls() {

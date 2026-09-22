@@ -5,6 +5,7 @@ import { notFound } from "next/navigation"
 
 import { SiteShell } from "@/components/layout/site-shell"
 import { ThemeProvider } from "@/components/layout/theme-provider"
+import { ThemeScript } from "@/components/layout/theme-script"
 import { DirectionProvider } from "@/components/ui/direction"
 import { site, t, type Locale } from "@/content"
 import { routing } from "@/i18n/routing"
@@ -55,6 +56,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       suppressHydrationWarning
     >
       <body className="min-h-dvh font-sans antialiased">
+        <ThemeScript />
         <ThemeProvider>
           <NextIntlClientProvider messages={messages}>
             <DirectionProvider direction={direction}>
