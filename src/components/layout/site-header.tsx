@@ -29,7 +29,7 @@ export function SiteHeader() {
       className="border-border/60 bg-background/75 sticky top-0 z-40 border-b backdrop-blur-md"
       suppressHydrationWarning
     >
-      <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+      <div className="page-gutter mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-4">
         <Link
           href="/"
           className="font-heading hover:text-primary truncate text-sm font-semibold tracking-tight transition-colors sm:text-base"

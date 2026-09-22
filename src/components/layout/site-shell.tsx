@@ -10,7 +10,7 @@ type Props = {
 
 export function SiteShell({ children }: Props) {
   return (
-    <div className="relative flex min-h-dvh flex-col pb-24 md:pb-0">
+    <div className="relative flex min-h-dvh flex-col pb-[calc(7rem+env(safe-area-inset-bottom))] md:pb-0">
       <SmoothScroll />
       <PointerField />
 

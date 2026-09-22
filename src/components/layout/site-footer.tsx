@@ -9,7 +9,7 @@ export async function SiteFooter() {
 
   return (
     <footer className="border-border/60 mt-auto border-t">
-      <div className="mx-auto flex w-full max-w-6xl flex-col gap-6 px-4 py-10 sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <div className="page-gutter mx-auto flex w-full max-w-6xl flex-col gap-6 py-10 sm:flex-row sm:items-center sm:justify-between">
         <div className="space-y-1">
           <p className="text-sm font-medium">{t(site.name, locale)}</p>
           <p className="text-muted-foreground text-sm">{t(site.role, locale)}</p>

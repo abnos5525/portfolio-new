@@ -133,6 +133,7 @@
   html {
     @apply font-sans;
     color-scheme: light dark;
+    --page-gutter: max(1.5rem, env(safe-area-inset-left), env(safe-area-inset-right));
     --pointer-x: 50%;
     --pointer-y: 30%;
     --pointer-nx: 0;
@@ -180,5 +181,21 @@
       linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
     background-size: 64px 64px;
     mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black, transparent 75%);
+  }
+
+  .page-gutter {
+    padding-inline: var(--page-gutter);
+  }
+}
+
+@media (min-width: 40rem) {
+  html {
+    --page-gutter: max(2rem, env(safe-area-inset-left), env(safe-area-inset-right));
+  }
+}
+
+@media (min-width: 64rem) {
+  html {
+    --page-gutter: max(2.5rem, env(safe-area-inset-left), env(safe-area-inset-right));
   }
 }

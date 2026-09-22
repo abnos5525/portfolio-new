@@ -18,7 +18,7 @@ export function MobileDock() {
   return (
     <nav
       aria-label={translate("label")}
-      className="border-border/60 bg-background/85 pb-[max(0.5rem,env(safe-area-inset-bottom))] fixed inset-x-3 bottom-3 z-50 rounded-2xl border px-2 pt-2 backdrop-blur-md md:hidden"
+      className="border-border/60 bg-background/85 pb-[max(0.5rem,env(safe-area-inset-bottom))] fixed inset-x-0 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 mx-[var(--page-gutter)] rounded-2xl border px-2 pt-2 backdrop-blur-md md:hidden"
     >
       <ul className="grid grid-cols-4 gap-1">
         {items.map((item) => (

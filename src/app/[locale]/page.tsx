@@ -14,6 +14,30 @@ type Props = {
   params: Promise<{ locale: string }>
 }
 
+function splitLead(copy: string) {
+  const match = copy.match(/^(.+?)[.;؛]\s+([\s\S]+)$/)
+  if (!match?.[1] || !match[2]) return { lead: copy, rest: "" }
+  return { lead: match[1], rest: match[2] }
+}
+
+function AboutLead({ kicker, copy }: { kicker: string; copy: string }) {
+  const { lead, rest } = splitLead(copy)
+
+  return (
+    <section id="about" className="scroll-mt-24 mt-10 max-w-3xl md:scroll-mt-28">
+      <p className="text-primary text-xs font-medium">{kicker}</p>
+      <h2 className="font-heading mt-3 text-[clamp(1.7rem,6.4vw,3.15rem)] leading-[1.28] font-semibold text-balance">
+        {lead}
+      </h2>
+      {rest ? (
+        <p className="text-foreground/85 mt-5 max-w-xl text-base leading-8 text-pretty sm:text-lg sm:leading-9">
+          {rest}
+        </p>
+      ) : null}
+    </section>
+  )
+}
+
 export default async function Home({ params }: Props) {
   const { locale: raw } = await params
   const locale = raw as Locale
@@ -31,17 +55,13 @@ export default async function Home({ params }: Props) {
         {translate("skipToContent")}
       </a>
 
-      <div className="mx-auto w-full max-w-6xl px-4 sm:px-6">
+      <div className="page-gutter mx-auto w-full max-w-6xl">
         <HeroSection locale={locale} />
 
-        <section id="about" className="scroll-mt-24 mt-4 max-w-3xl sm:mt-10 md:scroll-mt-28">
-          <h2 className="font-heading text-2xl font-semibold tracking-tight sm:text-5xl">
-            {translate("about")}
-          </h2>
-          <p className="text-foreground/90 mt-4 text-base leading-7 text-pretty sm:mt-6 sm:text-lg sm:leading-9">
-            {t(site.about, locale)}
-          </p>
-        </section>
+        <AboutLead
+          kicker={translate("about")}
+          copy={t(site.about, locale)}
+        />
       </div>
 
       <ProofStrip
