@@ -28,7 +28,8 @@
     "proofEdu": "تحصیل",
     "proofEduValue": "ارشد نرم‌افزار",
     "proofWork": "وضعیت",
-    "proofWorkValue": "جویای کار"
+    "proofWorkValue": "جویای کار",
+    "rosette": "نقش"
   },
   "Dock": {
     "label": "میانبر",

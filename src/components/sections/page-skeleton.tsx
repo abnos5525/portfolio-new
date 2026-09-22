@@ -88,6 +88,14 @@ export function PublicWorkSkeleton() {
   )
 }
 
+function RosetteSkeleton() {
+  return (
+    <div className="page-gutter mx-auto mt-16 w-full max-w-6xl sm:mt-24">
+      <Skeleton className="h-64 w-full sm:h-80 lg:h-96" />
+    </div>
+  )
+}
+
 function SkillsSkeleton() {
   return (
     <div className="border-border bg-card/50 mt-20 border-y">
@@ -159,6 +167,7 @@ export function PageSkeleton() {
         <AboutSkeleton />
       </div>
       <ProofSkeleton />
+      <RosetteSkeleton />
       <ExperienceSkeleton />
       <PublicWorkSkeleton />
       <SkillsSkeleton />

@@ -5,6 +5,7 @@ import { ExperienceReel } from "@/components/sections/experience-reel"
 import { HafezVerse } from "@/components/sections/hafez-verse"
 import { HeroSection } from "@/components/sections/hero"
 import { IranClock } from "@/components/sections/iran-clock"
+import { Rosette } from "@/components/sections/rosette"
 import {
   EducationSection,
   HireBand,
@@ -84,6 +85,8 @@ export default async function Home({ params }: Props) {
           { label: translate("proofWork"), value: translate("proofWorkValue") },
         ]}
       />
+
+      <Rosette label={translate("rosette")} />
 
       <ExperienceReel
         locale={locale}

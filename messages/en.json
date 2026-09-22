@@ -28,7 +28,8 @@
     "proofEdu": "Study",
     "proofEduValue": "M.Sc. Software",
     "proofWork": "Status",
-    "proofWorkValue": "Looking for work"
+    "proofWorkValue": "Looking for work",
+    "rosette": "Mark"
   },
   "Dock": {
     "label": "Shortcuts",
