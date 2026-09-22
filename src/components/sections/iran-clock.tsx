@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react"
 
+import { ClockSkeleton } from "@/components/sections/page-skeleton"
 import type { Locale } from "@/content"
 
 type Props = {
@@ -58,6 +59,14 @@ export function IranClock({ locale, label, city }: Props) {
     return () => window.clearInterval(id)
   }, [locale])
 
+  if (!parts) {
+    return (
+      <section aria-label={label} aria-busy="true">
+        <ClockSkeleton />
+      </section>
+    )
+  }
+
   return (
     <section
       aria-label={label}
@@ -65,17 +74,17 @@ export function IranClock({ locale, label, city }: Props) {
     >
       <div className="min-w-0">
         <p className="text-sm font-medium">{city}</p>
-        <p className="text-muted-foreground mt-1 min-h-5 text-xs">{parts?.date ?? ""}</p>
+        <p className="text-muted-foreground mt-1 min-h-5 text-xs">{parts.date}</p>
       </div>
       <p
         className="font-heading text-[clamp(2rem,8vw,3.25rem)] leading-none font-semibold tabular-nums"
         suppressHydrationWarning
       >
-        <span>{parts?.hour ?? "––"}</span>
+        <span>{parts.hour}</span>
         <span className="text-primary">:</span>
-        <span>{parts?.minute ?? "––"}</span>
+        <span>{parts.minute}</span>
         <span className="text-muted-foreground ms-1.5 align-baseline text-[0.42em] font-medium">
-          {parts?.second ?? "––"}
+          {parts.second}
         </span>
       </p>
     </section>
