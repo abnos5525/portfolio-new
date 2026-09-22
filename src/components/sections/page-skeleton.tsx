@@ -128,6 +128,15 @@ function EducationSkeleton() {
   )
 }
 
+export function VerseSkeleton() {
+  return (
+    <div className="page-gutter mx-auto w-full max-w-6xl pt-6 sm:pt-8">
+      <Skeleton className="h-6 w-full max-w-3xl" />
+      <Skeleton className="mt-2 h-3 w-24" />
+    </div>
+  )
+}
+
 function HireSkeleton() {
   return (
     <div className="bg-muted mt-20">
@@ -143,6 +152,7 @@ function HireSkeleton() {
 export function PageSkeleton() {
   return (
     <main aria-busy="true" className="w-full flex-1">
+      <VerseSkeleton />
       <div className="page-gutter mx-auto w-full max-w-6xl">
         <ClockSkeleton />
         <HeroSkeleton />

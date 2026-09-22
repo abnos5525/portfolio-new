@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server"
 import { Suspense } from "react"
 
 import { ExperienceReel } from "@/components/sections/experience-reel"
+import { HafezVerse } from "@/components/sections/hafez-verse"
 import { HeroSection } from "@/components/sections/hero"
 import { IranClock } from "@/components/sections/iran-clock"
 import {
@@ -58,6 +59,8 @@ export default async function Home({ params }: Props) {
       >
         {translate("skipToContent")}
       </a>
+
+      <HafezVerse />
 
       <div className="page-gutter mx-auto w-full max-w-6xl">
         <IranClock
