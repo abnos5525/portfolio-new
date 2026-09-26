@@ -39,6 +39,8 @@ bun.lockb
 
 # vercel
 .vercel
+out
+.pages-hold
 
 # typescript
 *.tsbuildinfo

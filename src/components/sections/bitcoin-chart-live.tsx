@@ -3,7 +3,8 @@
 import { useEffect, useMemo, useRef, useState, type PointerEvent } from "react"
 
 import type { Locale } from "@/content"
-import { asBtcSeries, btcRanges, stampBtcPrice, type BtcRange, type BtcSeries } from "@/lib/btc"
+import { btcRanges, stampBtcPrice, type BtcRange, type BtcSeries } from "@/lib/btc"
+import { getBtcSeries } from "@/lib/btc-feed"
 import { cn } from "@/lib/utils"
 
 type Props = {
@@ -12,7 +13,6 @@ type Props = {
   title: string
   unit: string
   unavailable: string
-  source: string
   lowLabel: string
   highLabel: string
   rangesLabel: string
@@ -139,9 +139,7 @@ export function BitcoinChartLive({
     setRatio(null)
     void (async () => {
       try {
-        const response = await fetch(`/api/btc?range=${next}`, { cache: "no-store" })
-        if (!response.ok) throw new Error(`Bitcoin history returned ${response.status}`)
-        const loaded = asBtcSeries(await response.json())
+        const loaded = await getBtcSeries(next)
         if (requestId !== rangeRequest.current) return
         if (!loaded) throw new Error("Bitcoin history was empty")
         const live = liveRef.current

@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 
 import { VerseSkeleton } from "@/components/sections/page-skeleton"
-import { hafezFallback, type HafezCouplet } from "@/lib/ganjoor"
+import { getHafezCouplet, hafezFallback, type HafezCouplet } from "@/lib/ganjoor"
 
 function isCouplet(value: unknown): value is HafezCouplet {
   if (!value || typeof value !== "object") return false
@@ -31,14 +31,10 @@ export function HafezVerse() {
     const controller = new AbortController()
     let active = true
 
-    fetch("/api/hafez", { cache: "no-store", signal: controller.signal })
-      .then(async (response) => {
-        if (!response.ok) {
-          throw new Error(`Hafez route returned ${response.status}`)
-        }
-        const payload: unknown = await response.json()
+    getHafezCouplet(controller.signal)
+      .then((payload) => {
         if (!isCouplet(payload)) {
-          throw new Error("Hafez route returned an unexpected shape")
+          throw new Error("Hafez verse had an unexpected shape")
         }
         if (active) setVerse(payload)
       })

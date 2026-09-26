@@ -40,7 +40,9 @@ export async function getRecentPublicRepos(limit = 6): Promise<GithubRepoLive[]>
         Accept: "application/vnd.github+json",
         "User-Agent": "portfolio-new",
       },
-      next: { revalidate: 3600 },
+      ...(process.env.GITHUB_PAGES === "true"
+        ? { cache: "force-cache" as const }
+        : { next: { revalidate: 3600 } }),
     }
   )
 

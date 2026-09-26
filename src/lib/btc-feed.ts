@@ -34,8 +34,7 @@ async function loadCandles(range: BtcRange): Promise<BtcPoint[] | null> {
   const response = await fetch(
     `https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=${spec.bucket}&start=${start}&end=${end}`,
     {
-      headers: { "User-Agent": "portfolio-new" },
-      cache: "no-store",
+      cache: typeof window === "undefined" ? "force-cache" : "no-store",
       signal: AbortSignal.timeout(8000),
     },
   )

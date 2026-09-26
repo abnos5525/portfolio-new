@@ -40,12 +40,13 @@ function asCouplet(value: unknown): HafezCouplet | null {
   }
 }
 
-export async function getHafezCouplet(): Promise<HafezCouplet> {
+export async function getHafezCouplet(signal?: AbortSignal): Promise<HafezCouplet> {
   try {
     const response = await fetch("https://api.ganjoor.net/api/ganjoor/hafez/faal", {
-      headers: { "User-Agent": "portfolio-new" },
       cache: "no-store",
-      signal: AbortSignal.timeout(8000),
+      signal: signal
+        ? AbortSignal.any([signal, AbortSignal.timeout(8000)])
+        : AbortSignal.timeout(8000),
     })
 
     if (!response.ok) {

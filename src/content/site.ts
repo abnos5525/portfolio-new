@@ -21,7 +21,7 @@ export const site: SiteContent = {
     fa: "تهران، ایران",
     en: "Tehran, Iran",
   },
-  resumePath: "/file/resume.pdf",
+  resumePath: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/file/resume.pdf`,
   availability: "open",
   nowLearning: ["Next.js App Router", "Motion", "System design"],
 }
