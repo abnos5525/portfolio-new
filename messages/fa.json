@@ -48,6 +48,16 @@
     "skills": "مهارت",
     "resume": "رزومه"
   },
+  "Resume": {
+    "metaTitle": "رزومه",
+    "dossier": "پروندهٔ کاری",
+    "downloadPdf": "دانلود PDF",
+    "scrollCareer": "مسیر شغلی",
+    "career": "مسیر شغلی",
+    "printHint": "فصل‌های کار به‌ترتیب زمان — اسکن سریع برای استخدام.",
+    "skipToCareer": "رفتن به مسیر شغلی",
+    "contact": "راه‌های ارتباط"
+  },
   "Nav": {
     "primary": "منوی اصلی",
     "menu": "باز کردن منو",

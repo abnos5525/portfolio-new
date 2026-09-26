@@ -48,6 +48,16 @@
     "skills": "Skills",
     "resume": "Resume"
   },
+  "Resume": {
+    "metaTitle": "Resume",
+    "dossier": "Work dossier",
+    "downloadPdf": "Download PDF",
+    "scrollCareer": "Career path",
+    "career": "Career path",
+    "printHint": "Work chapters in time order — built for a fast hiring scan.",
+    "skipToCareer": "Skip to career",
+    "contact": "Contact"
+  },
   "Nav": {
     "primary": "Primary",
     "menu": "Open menu",

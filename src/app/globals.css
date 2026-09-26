@@ -201,3 +201,51 @@
     --page-gutter: max(2.5rem, env(safe-area-inset-left), env(safe-area-inset-right));
   }
 }
+
+@media print {
+  header.sticky,
+  footer,
+  .fixed,
+  nav[aria-label]:not(.resume-contact-nav) {
+    display: none !important;
+  }
+
+  .resume-dossier {
+    --foreground: #111;
+    --muted-foreground: #555;
+    --primary: #0b5f73;
+    --border: #d4d4d4;
+    color: #111 !important;
+    background: #fff !important;
+  }
+
+  .resume-dossier * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .resume-dossier > header {
+    padding-block: 0 2rem !important;
+  }
+
+  .resume-dossier li {
+    break-inside: avoid;
+  }
+
+  .resume-contact a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-size: 0.75em;
+  }
+
+  .resume-dossier a {
+    color: inherit !important;
+    text-decoration: none !important;
+  }
+
+  .engineering-grid,
+  .grain-overlay {
+    display: none !important;
+  }
+}

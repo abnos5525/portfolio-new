@@ -1,15 +1,15 @@
 "use client"
 
-import { BriefcaseIcon, FileDownIcon, LayersIcon, UserIcon } from "lucide-react"
+import { BriefcaseIcon, FileTextIcon, LayersIcon, UserIcon } from "lucide-react"
 import { useTranslations } from "next-intl"
 
-import { site } from "@/content"
+import { Link } from "@/i18n/navigation"
 import { cn } from "@/lib/utils"
 
 const items = [
-  { href: "#about", icon: UserIcon, key: "about" as const },
-  { href: "#experience", icon: BriefcaseIcon, key: "experience" as const },
-  { href: "#skills", icon: LayersIcon, key: "skills" as const },
+  { href: "/#about", icon: UserIcon, key: "about" as const },
+  { href: "/#experience", icon: BriefcaseIcon, key: "experience" as const },
+  { href: "/#skills", icon: LayersIcon, key: "skills" as const },
 ] as const
 
 export function MobileDock() {
@@ -23,7 +23,7 @@ export function MobileDock() {
       <ul className="grid grid-cols-4 gap-1">
         {items.map((item) => (
           <li key={item.key}>
-            <a
+            <Link
               href={item.href}
               className={cn(
                 "text-muted-foreground hover:text-primary flex min-h-12 touch-manipulation flex-col items-center justify-center gap-1 rounded-xl text-[0.65rem] font-medium"
@@ -31,18 +31,17 @@ export function MobileDock() {
             >
               <item.icon className="size-4" aria-hidden />
               {translate(item.key)}
-            </a>
+            </Link>
           </li>
         ))}
         <li>
-          <a
-            href={site.resumePath}
-            download
+          <Link
+            href="/resume"
             className="text-muted-foreground hover:text-primary flex min-h-12 touch-manipulation flex-col items-center justify-center gap-1 rounded-xl text-[0.65rem] font-medium"
           >
-            <FileDownIcon className="size-4" aria-hidden />
+            <FileTextIcon className="size-4" aria-hidden />
             {translate("resume")}
-          </a>
+          </Link>
         </li>
       </ul>
     </nav>

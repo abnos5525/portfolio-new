@@ -56,16 +56,15 @@ export function SiteHeader() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <a
-            href={site.resumePath}
-            download
+          <Link
+            href="/resume"
             className={cn(
               buttonVariants({ size: "sm", variant: "outline" }),
               "hidden sm:inline-flex"
             )}
           >
             {translate("resume")}
-          </a>
+          </Link>
 
           <div className="hidden items-center gap-2 sm:flex">
             <ThemeControls />
@@ -100,17 +99,16 @@ export function SiteHeader() {
                     {t(item.label, locale)}
                   </Link>
                 ))}
-                <a
-                  href={site.resumePath}
-                  download
+                <Link
+                  href="/resume"
+                  onClick={() => setOpen(false)}
                   className={cn(
                     buttonVariants({ variant: "outline" }),
                     "mt-2 justify-start"
                   )}
-                  onClick={() => setOpen(false)}
                 >
                   {translate("resume")}
-                </a>
+                </Link>
                 <div className="mt-4 space-y-3">
                   <ThemeControls />
                   <LocaleSwitcher />
