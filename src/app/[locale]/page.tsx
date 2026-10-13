@@ -14,6 +14,7 @@ import {
 } from "@/components/sections/hire-signals"
 import { MarketSkeleton, PublicWorkSkeleton } from "@/components/sections/page-skeleton"
 import { PublicWork } from "@/components/sections/public-work"
+import { GithubPulse } from "@/components/sections/github-pulse"
 import { SkillsConstellation } from "@/components/sections/skills-constellation"
 import { experience, getAllSkills, site, t, type Locale } from "@/content"
 
@@ -134,6 +135,21 @@ export default async function Home({ params }: Props) {
             "1w": translate("market1w"),
             "1m": translate("market1m"),
           }}
+        />
+      </Suspense>
+
+      <Suspense fallback={<MarketSkeleton />}>
+        <GithubPulse
+          locale={locale}
+          title={translate("pulseTitle")}
+          support={translate("pulseSupport")}
+          weekLabel={translate("pulseWeek")}
+          lastLabel={translate("pulseLast")}
+          unavailable={translate("pulseUnavailable")}
+          liveLabel={translate("pulseLive")}
+          activityLabel={translate("pulseActivity")}
+          languagesLabel={translate("pulseLanguages")}
+          latestLabel={translate("pulseLatest")}
         />
       </Suspense>
 

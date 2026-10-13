@@ -39,7 +39,16 @@
     "market1h": "۱ ساعت",
     "market1d": "۱ روز",
     "market1w": "۱ هفته",
-    "market1m": "۱ ماه"
+    "market1m": "۱ ماه",
+    "pulseTitle": "نبض انتشار",
+    "pulseSupport": "سیگنال زندهٔ گیت‌هاب عمومی — این جریان کد واقعاً چقدر حرکت می‌کند.",
+    "pulseWeek": "رویداد عمومی · ۷ روز",
+    "pulseLast": "آخرین انتشار عمومی",
+    "pulseUnavailable": "نبض گیت‌هاب الان در دسترس نیست.",
+    "pulseLive": "زنده",
+    "pulseActivity": "فعالیت · ۱۴ روز",
+    "pulseLanguages": "زبان‌ها در مخزن‌های عمومی",
+    "pulseLatest": "آخرین"
   },
   "Dock": {
     "label": "میانبر",

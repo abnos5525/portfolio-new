@@ -56,6 +56,7 @@ export async function getHafezCouplet(signal?: AbortSignal): Promise<HafezCouple
 
     return asCouplet(await response.json()) ?? hafezFallback
   } catch (error) {
+    if (error instanceof Error && error.name === "AbortError") return hafezFallback
     console.error("Ganjoor request failed", error)
     return hafezFallback
   }

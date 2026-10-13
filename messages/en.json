@@ -39,7 +39,16 @@
     "market1h": "1 hour",
     "market1d": "1 day",
     "market1w": "1 week",
-    "market1m": "1 month"
+    "market1m": "1 month",
+    "pulseTitle": "Ship pulse",
+    "pulseSupport": "Live public GitHub signal — how often this codebase stream actually moves.",
+    "pulseWeek": "Public events · 7 days",
+    "pulseLast": "Last public ship",
+    "pulseUnavailable": "GitHub pulse isn’t available right now.",
+    "pulseLive": "Live",
+    "pulseActivity": "Activity · 14 days",
+    "pulseLanguages": "Languages in public repos",
+    "pulseLatest": "Latest"
   },
   "Dock": {
     "label": "Shortcuts",
