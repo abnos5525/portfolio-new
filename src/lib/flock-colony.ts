@@ -1,57 +1,44 @@
-/** Colony work layer — roles, nest, food motes, stigmergy helpers. */
+/** Ocean helpers — schooling fish, sharks, plankton food, reef landmark. */
 
-export type ColonyRole = "scout" | "forager" | "guard"
-export type WorkPhase = "flock" | "seek" | "carry" | "guard"
+export type Species = "fish" | "shark"
 
-export type Nest = { x: number; y: number; r: number }
+export type Reef = { x: number; y: number; r: number }
 
 export type FoodMote = {
   x: number
   y: number
   stock: number
   pulse: number
-  claims: number
 }
 
-export const MAX_SEEKERS = 24
-export const MAX_CLAIMS_PER_FOOD = 2
+export const FISH_COUNT = 86
+export const SHARK_COUNT = 5
+export const MAX_FOOD = 20
 
-export function assignRole(curiosity: number, grit: number): ColonyRole {
-  if (curiosity > 0.78) return "scout"
-  if (grit > 0.7) return "guard"
-  return "forager"
-}
-
-export function roleBias(role: ColonyRole): number {
-  if (role === "scout") return 0.85
-  if (role === "guard") return 0.25
-  return 0.5
-}
-
-export function createNest(width: number, height: number): Nest {
+export function createReef(width: number, height: number): Reef {
   return {
     x: width * 0.5,
-    y: height * 0.82,
-    r: Math.max(24, Math.min(36, width * 0.045)),
+    y: height * 0.78,
+    r: Math.max(26, Math.min(40, width * 0.048)),
   }
 }
 
 export function seedFood(
   width: number,
   height: number,
-  nest: Nest,
+  reef: Reef,
   count = 16
 ): FoodMote[] {
   const food: FoodMote[] = []
   let guard = 0
-  while (food.length < count && guard < count * 30) {
+  while (food.length < count && guard < count * 28) {
     guard += 1
     const x = width * (0.08 + Math.random() * 0.84)
-    const y = height * (0.06 + Math.random() * 0.58)
-    if (Math.hypot(x - nest.x, y - nest.y) < nest.r + 90) continue
+    const y = height * (0.07 + Math.random() * 0.62)
+    if (Math.hypot(x - reef.x, y - reef.y) < reef.r + 50) continue
     let ok = true
     for (const existing of food) {
-      if (Math.hypot(existing.x - x, existing.y - y) < 36) {
+      if (Math.hypot(existing.x - x, existing.y - y) < 32) {
         ok = false
         break
       }
@@ -62,13 +49,11 @@ export function seedFood(
       y,
       stock: 2 + Math.floor(Math.random() * 3),
       pulse: Math.random() * Math.PI * 2,
-      claims: 0,
     })
   }
   return food
 }
 
-/** Prefer different motes per agent so the whole flock does not pile on one spot. */
 export function preferredFood(
   agentId: number,
   x: number,
@@ -76,20 +61,17 @@ export function preferredFood(
   food: FoodMote[],
   maxDist: number
 ): FoodMote | null {
-  const candidates: { mote: FoodMote; dist: number; index: number }[] = []
-  for (let i = 0; i < food.length; i++) {
-    const mote = food[i]!
+  const candidates: { mote: FoodMote; dist: number }[] = []
+  for (const mote of food) {
     if (mote.stock <= 0) continue
-    if (mote.claims >= MAX_CLAIMS_PER_FOOD) continue
     const dist = Math.hypot(mote.x - x, mote.y - y)
     if (dist > maxDist) continue
-    candidates.push({ mote, dist, index: i })
+    candidates.push({ mote, dist })
   }
   if (candidates.length === 0) return null
   candidates.sort((a, b) => a.dist - b.dist)
   const top = candidates.slice(0, Math.min(5, candidates.length))
-  const pick = top[agentId % top.length]!
-  return pick.mote
+  return top[agentId % top.length]!.mote
 }
 
 export function steerToward(
@@ -105,11 +87,31 @@ export function steerToward(
   return { x: (dx / mag) * strength, y: (dy / mag) * strength }
 }
 
-export function nestRepulsion(x: number, y: number, nest: Nest, strength: number) {
-  const dx = x - nest.x
-  const dy = y - nest.y
+/** Lead the prey — simple pursuit prediction. */
+export function steerIntercept(
+  fromX: number,
+  fromY: number,
+  preyX: number,
+  preyY: number,
+  preyVx: number,
+  preyVy: number,
+  strength: number,
+  lead = 11
+) {
+  return steerToward(
+    fromX,
+    fromY,
+    preyX + preyVx * lead,
+    preyY + preyVy * lead,
+    strength
+  )
+}
+
+export function reefRepulsion(x: number, y: number, reef: Reef, strength: number) {
+  const dx = x - reef.x
+  const dy = y - reef.y
   const dist = Math.hypot(dx, dy) || 0.0001
-  const zone = nest.r * 3.2
+  const zone = reef.r * 2.4
   if (dist > zone) return { x: 0, y: 0 }
   const falloff = 1 - dist / zone
   return {
@@ -118,21 +120,20 @@ export function nestRepulsion(x: number, y: number, nest: Nest, strength: number
   }
 }
 
-export function inNest(x: number, y: number, nest: Nest) {
-  return Math.hypot(x - nest.x, y - nest.y) <= nest.r + 6
+export function inReef(x: number, y: number, reef: Reef) {
+  return Math.hypot(x - reef.x, y - reef.y) <= reef.r + 4
 }
 
 export function respawnMote(
   mote: FoodMote,
   width: number,
   height: number,
-  nest: Nest
+  reef: Reef
 ) {
-  mote.claims = 0
   for (let i = 0; i < 16; i++) {
     const x = width * (0.08 + Math.random() * 0.84)
-    const y = height * (0.06 + Math.random() * 0.58)
-    if (Math.hypot(x - nest.x, y - nest.y) < nest.r + 90) continue
+    const y = height * (0.07 + Math.random() * 0.62)
+    if (Math.hypot(x - reef.x, y - reef.y) < reef.r + 55) continue
     mote.x = x
     mote.y = y
     mote.stock = 2 + Math.floor(Math.random() * 3)
@@ -141,21 +142,42 @@ export function respawnMote(
   mote.stock = 3
 }
 
+export function edgeSpawn(width: number, height: number, preferFar = false) {
+  const side = Math.floor(Math.random() * 4)
+  const pad = 24
+  if (side === 0) return { x: pad + Math.random() * (width - pad * 2), y: pad }
+  if (side === 1)
+    return { x: pad + Math.random() * (width - pad * 2), y: height - pad }
+  if (side === 2) return { x: pad, y: pad + Math.random() * (height - pad * 2) }
+  return {
+    x: width - pad,
+    y: preferFar
+      ? pad + Math.random() * (height * 0.45)
+      : pad + Math.random() * (height - pad * 2),
+  }
+}
+
 export function scatterSpawn(
   width: number,
   height: number,
-  nest: Nest,
+  reef: Reef,
   index: number,
-  total: number
+  total: number,
+  species: Species
 ) {
-  const ring = 0.18 + (index % 5) * 0.12
-  const angle = (index / total) * Math.PI * 2 + (index % 3) * 0.4
-  let x = width * 0.5 + Math.cos(angle) * width * ring
-  let y = height * 0.38 + Math.sin(angle) * height * ring * 0.85
-  x = Math.min(width * 0.92, Math.max(width * 0.08, x))
-  y = Math.min(height * 0.72, Math.max(height * 0.08, y))
-  if (Math.hypot(x - nest.x, y - nest.y) < nest.r + 50) {
-    y = height * 0.25
+  if (species === "shark") {
+    const angle = (index / Math.max(1, SHARK_COUNT)) * Math.PI * 2
+    return {
+      x: width * 0.5 + Math.cos(angle) * width * 0.32,
+      y: height * 0.28 + Math.sin(angle) * height * 0.18,
+    }
   }
+  const ring = 0.16 + (index % 6) * 0.1
+  const angle = (index / total) * Math.PI * 2 + (index % 3) * 0.35
+  let x = width * 0.5 + Math.cos(angle) * width * ring
+  let y = height * 0.36 + Math.sin(angle) * height * ring * 0.8
+  x = Math.min(width * 0.92, Math.max(width * 0.08, x))
+  y = Math.min(height * 0.68, Math.max(height * 0.08, y))
+  if (Math.hypot(x - reef.x, y - reef.y) < reef.r + 40) y = height * 0.22
   return { x, y }
 }

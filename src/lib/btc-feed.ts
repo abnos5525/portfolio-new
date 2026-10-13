@@ -61,6 +61,10 @@ export async function getBtcSeries(range: BtcRange = "1d"): Promise<BtcSeries | 
       points,
     }
   } catch (error) {
+    if (error instanceof Error && error.name === "TimeoutError") {
+      console.warn("Coinbase request timed out")
+      return null
+    }
     console.error("Coinbase request failed", error)
     return null
   }
