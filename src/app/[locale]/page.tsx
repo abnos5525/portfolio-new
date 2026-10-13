@@ -16,6 +16,7 @@ import { MarketSkeleton, PublicWorkSkeleton } from "@/components/sections/page-s
 import { PublicWork } from "@/components/sections/public-work"
 import { CareerGraph } from "@/components/sections/career-graph"
 import { SkillsConstellation } from "@/components/sections/skills-constellation"
+import { FlockField } from "@/components/sections/flock-field"
 import { TehranWeather } from "@/components/sections/tehran-weather"
 import { experience, getAllSkills, site, t, type Locale } from "@/content"
 
@@ -162,6 +163,39 @@ export default async function Home({ params }: Props) {
           highLabel={translate("marketHigh")}
         />
       </Suspense>
+
+      <FlockField
+        eyebrow={translate("flockEyebrow")}
+        title={translate("flockTitle")}
+        support={translate("flockSupport")}
+        hint={translate("flockHint")}
+        whyLabel={translate("flockWhy")}
+        whyBody={translate("flockWhyBody")}
+        modeLabel={translate("flockMode")}
+        presetLabel={translate("flockPreset")}
+        attract={translate("flockAttract")}
+        scare={translate("flockScare")}
+        wall={translate("flockWall")}
+        murmur={translate("flockMurmur")}
+        school={translate("flockSchool")}
+        scatter={translate("flockScatter")}
+        trails={translate("flockTrails")}
+        sense={translate("flockSense")}
+        mind={translate("flockMind")}
+        clearWalls={translate("flockClearWalls")}
+        agentsLabel={translate("flockAgents")}
+        orderLabel={translate("flockOrder")}
+        alertLabel={translate("flockAlert")}
+        seeingLabel={translate("flockSeeing")}
+        wallsLabel={translate("flockWalls")}
+        sepTitle={translate("flockSepTitle")}
+        sepBody={translate("flockSepBody")}
+        aliTitle={translate("flockAliTitle")}
+        aliBody={translate("flockAliBody")}
+        cohTitle={translate("flockCohTitle")}
+        cohBody={translate("flockCohBody")}
+        rulesHint={translate("flockRulesHint")}
+      />
 
       <HireBand
         title={translate("hireTitle")}
