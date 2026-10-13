@@ -40,11 +40,18 @@
     "market1d": "۱ روز",
     "market1w": "۱ هفته",
     "market1m": "۱ ماه",
-    "graphTitle": "نقشهٔ زندهٔ مسیر",
-    "graphSupport": "شبیه‌سازی نیرو که خودم نوشتم — شرکت‌ها و مهارت‌های اثبات‌شده روی همان فصل‌ها، در لحظه آرام می‌گیرند.",
+    "graphTitle": "گراف مسیر شغلی",
+    "graphSupport": "شرکت‌ها و مهارت‌های اثبات‌شده روی همان فصل‌ها",
     "graphCompany": "شرکت",
     "graphSkill": "مهارت اثبات‌شده",
-    "graphHint": "گره را بکش. برای دیدن پیوند، نگه دار."
+    "weatherTitle": "آسمان تهران",
+    "weatherLive": "زنده",
+    "weatherTempUnit": "°C",
+    "weatherHumidity": "رطوبت",
+    "weatherWind": "باد",
+    "weatherWindUnit": "کیلومتر بر ساعت",
+    "weatherDay": "امروز",
+    "weatherUnavailable": "آب‌وهوا الان در دسترس نیست."
   },
   "Dock": {
     "label": "میانبر",

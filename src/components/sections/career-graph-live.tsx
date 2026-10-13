@@ -11,7 +11,6 @@ type Props = {
   support: string
   companyLegend: string
   skillLegend: string
-  hint: string
 }
 
 type SimNode = GraphNode & {
@@ -43,7 +42,6 @@ export function CareerGraphLive({
   support,
   companyLegend,
   skillLegend,
-  hint,
 }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const wrapRef = useRef<HTMLDivElement>(null)
@@ -346,7 +344,6 @@ export function CareerGraphLive({
           <span className="border-primary size-2.5 rounded-full border" aria-hidden />
           {skillLegend}
         </span>
-        <span className="text-muted-foreground">{hint}</span>
       </div>
 
       <div

@@ -16,6 +16,7 @@ import { MarketSkeleton, PublicWorkSkeleton } from "@/components/sections/page-s
 import { PublicWork } from "@/components/sections/public-work"
 import { CareerGraph } from "@/components/sections/career-graph"
 import { SkillsConstellation } from "@/components/sections/skills-constellation"
+import { TehranWeather } from "@/components/sections/tehran-weather"
 import { experience, getAllSkills, site, t, type Locale } from "@/content"
 
 type Props = {
@@ -144,8 +145,23 @@ export default async function Home({ params }: Props) {
         support={translate("graphSupport")}
         companyLegend={translate("graphCompany")}
         skillLegend={translate("graphSkill")}
-        hint={translate("graphHint")}
       />
+
+      <Suspense fallback={<MarketSkeleton />}>
+        <TehranWeather
+          locale={locale}
+          title={translate("weatherTitle")}
+          liveLabel={translate("weatherLive")}
+          tempUnit={translate("weatherTempUnit")}
+          humidityLabel={translate("weatherHumidity")}
+          windLabel={translate("weatherWind")}
+          windUnit={translate("weatherWindUnit")}
+          dayLabel={translate("weatherDay")}
+          unavailable={translate("weatherUnavailable")}
+          lowLabel={translate("marketLow")}
+          highLabel={translate("marketHigh")}
+        />
+      </Suspense>
 
       <HireBand
         title={translate("hireTitle")}

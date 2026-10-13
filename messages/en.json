@@ -40,11 +40,18 @@
     "market1d": "1 day",
     "market1w": "1 week",
     "market1m": "1 month",
-    "graphTitle": "Living career map",
-    "graphSupport": "A force simulation I wrote by hand — companies and the skills proven on those chapters, settling in real time.",
+    "graphTitle": "Career graph",
+    "graphSupport": "Companies and the skills proven on those chapters",
     "graphCompany": "Company",
     "graphSkill": "Proven skill",
-    "graphHint": "Drag a node. Hover to see the bond."
+    "weatherTitle": "Tehran sky",
+    "weatherLive": "Live",
+    "weatherTempUnit": "°C",
+    "weatherHumidity": "Humidity",
+    "weatherWind": "Wind",
+    "weatherWindUnit": "km/h",
+    "weatherDay": "Today",
+    "weatherUnavailable": "Weather isn’t available right now."
   },
   "Dock": {
     "label": "Shortcuts",

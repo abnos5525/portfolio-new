@@ -8,7 +8,6 @@ type Props = {
   support: string
   companyLegend: string
   skillLegend: string
-  hint: string
 }
 
 export function CareerGraph({
@@ -17,7 +16,6 @@ export function CareerGraph({
   support,
   companyLegend,
   skillLegend,
-  hint,
 }: Props) {
   const data = buildCareerGraph(locale)
   return (
@@ -27,7 +25,6 @@ export function CareerGraph({
       support={support}
       companyLegend={companyLegend}
       skillLegend={skillLegend}
-      hint={hint}
     />
   )
 }
