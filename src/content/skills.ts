@@ -156,7 +156,7 @@ export const skills: Skill[] = [
     name: "Docker",
     category: "devops",
     level: "core",
-    projectIds: ["iziran"],
+    projectIds: ["iziran", "ariko", "arnitex"],
   },
   {
     id: "kafka",
@@ -177,7 +177,7 @@ export const skills: Skill[] = [
     name: "Spring Boot",
     category: "backend",
     level: "core",
-    projectIds: ["iziran", "ariko"],
+    projectIds: ["iziran", "ariko", "arnitex"],
   },
   {
     id: "jpa",
@@ -227,7 +227,7 @@ export const skills: Skill[] = [
     icon: "/images/icons/git.png",
     category: "other",
     level: "core",
-    projectIds: ["iziran", "ariko", "segal"],
+    projectIds: ["iziran", "ariko", "arnitex"],
   },
   {
     id: "linux",
