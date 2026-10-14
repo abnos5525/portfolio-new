@@ -34,7 +34,7 @@ export function buildCareerGraph(locale: Locale): CareerGraphData {
   const skills = getAllSkills()
     .filter(
       (skill) =>
-        skill.level !== "familiar" &&
+        skill.level !== "beginner" &&
         skill.projectIds.some((id) => companyIds.has(id))
     )
     .map((skill) => ({

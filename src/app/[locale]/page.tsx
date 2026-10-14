@@ -108,6 +108,7 @@ export default async function Home({ params }: Props) {
       </Suspense>
 
       <SkillsConstellation
+        locale={locale}
         title={translate("skills")}
         support={translate("skillsSupport")}
         skills={allSkills}

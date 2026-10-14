@@ -14,7 +14,7 @@ export type NavItem = {
   label: LocalizedString
 }
 
-export type SkillLevel = "core" | "proficient" | "familiar"
+export type SkillLevel = "advanced" | "intermediate" | "beginner"
 
 export type SkillCategory =
   | "frontend"
