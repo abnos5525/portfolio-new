@@ -19,9 +19,26 @@ type SimNode = GraphNode & {
   vx: number
   vy: number
   r: number
+  lines: string[]
 }
 
 type SimEdge = { source: number; target: number }
+
+const COMPANY_FONT = "600 12px var(--font-sans), system-ui, sans-serif"
+const COMPANY_LINE = 13
+
+function fitCompanyLabel(ctx: CanvasRenderingContext2D, label: string) {
+  ctx.font = COMPANY_FONT
+  const words = label.split(" ")
+  const half = Math.ceil(words.length / 2)
+  const lines =
+    words.length > 1 && ctx.measureText(label).width > 36
+      ? [words.slice(0, half).join(" "), words.slice(half).join(" ")]
+      : [label]
+  const halfWidth = Math.max(...lines.map((line) => ctx.measureText(line).width)) / 2
+  const halfHeight = (lines.length * COMPANY_LINE) / 2
+  return { lines, r: Math.max(22, Math.ceil(Math.hypot(halfWidth, halfHeight)) + 4) }
+}
 
 function preferReducedMotion() {
   if (typeof window === "undefined") return false
@@ -66,13 +83,19 @@ export function CareerGraphLive({
     const nodes: SimNode[] = data.nodes.map((node, index) => {
       const angle = (index / data.nodes.length) * Math.PI * 2
       const isCompany = node.kind === "company"
+      const fit = isCompany
+        ? fitCompanyLabel(ctx, node.label)
+        : {
+            lines: [node.label.length > 14 ? `${node.label.slice(0, 13)}…` : node.label],
+            r: 14,
+          }
       return {
         ...node,
         x: Math.cos(angle) * (isCompany ? 90 : 160),
         y: Math.sin(angle) * (isCompany ? 90 : 160),
         vx: 0,
         vy: 0,
-        r: isCompany ? 22 : 14,
+        ...fit,
       }
     })
 
@@ -215,22 +238,21 @@ export function CareerGraphLive({
         }
         ctx.globalAlpha = 1
 
-        ctx.font = company
-          ? "600 12px var(--font-sans), system-ui, sans-serif"
-          : "500 11px var(--font-sans), system-ui, sans-serif"
+        ctx.font = company ? COMPANY_FONT : "500 11px var(--font-sans), system-ui, sans-serif"
         ctx.textAlign = "center"
         ctx.textBaseline = "middle"
         ctx.fillStyle = company ? fg : active ? fg : muted
         if (company) {
           ctx.fillStyle = styles.getPropertyValue("--primary-foreground").trim() || "#0c0a09"
         }
-        const label =
-          node.label.length > 14 ? `${node.label.slice(0, 13)}…` : node.label
         if (company) {
-          ctx.fillText(label, node.x, node.y)
+          node.lines.forEach((line, k) => {
+            const offset = (k - (node.lines.length - 1) / 2) * COMPANY_LINE
+            ctx.fillText(line, node.x, node.y + offset)
+          })
         } else {
           ctx.fillStyle = active ? fg : muted
-          ctx.fillText(label, node.x, node.y + node.r + 12)
+          ctx.fillText(node.lines[0]!, node.x, node.y + node.r + 12)
         }
       }
     }

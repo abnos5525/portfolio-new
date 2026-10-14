@@ -6,7 +6,7 @@ export const site: SiteContent = {
     en: "Hossein Heidary",
   },
   role: {
-    fa: "مهندس فول‌استک ارشد وب",
+    fa: "مهندس فول‌استک وب",
     en: "Senior Full-Stack Web Engineer",
   },
   headline: {
