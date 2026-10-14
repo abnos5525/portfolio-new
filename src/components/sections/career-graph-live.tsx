@@ -260,7 +260,16 @@ export function CareerGraphLive({
     const hitTest = (x: number, y: number) => {
       for (let i = nodes.length - 1; i >= 0; i--) {
         const node = nodes[i]!
-        if (Math.hypot(node.x - x, node.y - y) <= node.r + 6) return i
+        const pad = node.kind === "company" ? 12 : 16
+        if (Math.hypot(node.x - x, node.y - y) <= node.r + pad) return i
+        if (
+          node.kind !== "company" &&
+          Math.abs(x - node.x) <= 44 &&
+          y >= node.y &&
+          y <= node.y + node.r + 24
+        ) {
+          return i
+        }
       }
       return null
     }
@@ -270,8 +279,13 @@ export function CareerGraphLive({
       const x = event.clientX - rect.left
       const y = event.clientY - rect.top
       const index = hitTest(x, y)
-      if (index == null) return
+      if (index == null) {
+        hoverRef.current = null
+        return
+      }
+      event.preventDefault()
       const node = nodes[index]!
+      hoverRef.current = index
       dragRef.current = { index, dx: node.x - x, dy: node.y - y }
       canvas.setPointerCapture(event.pointerId)
     }
@@ -282,11 +296,13 @@ export function CareerGraphLive({
       const y = event.clientY - rect.top
       const drag = dragRef.current
       if (drag) {
+        event.preventDefault()
         const node = nodes[drag.index]!
         node.x = x + drag.dx
         node.y = y + drag.dy
         node.vx = 0
         node.vy = 0
+        hoverRef.current = drag.index
       } else {
         hoverRef.current = hitTest(x, y)
       }
@@ -301,8 +317,9 @@ export function CareerGraphLive({
       }
     }
 
+    const finePointer = window.matchMedia("(hover: hover) and (pointer: fine)")
     const onPointerLeave = () => {
-      if (!dragRef.current) hoverRef.current = null
+      if (!dragRef.current && finePointer.matches) hoverRef.current = null
     }
 
     resize()
@@ -327,8 +344,9 @@ export function CareerGraphLive({
     })
     observer.observe(wrap)
 
-    canvas.addEventListener("pointerdown", onPointerDown)
-    canvas.addEventListener("pointermove", onPointerMove)
+    const pointerOpts: AddEventListenerOptions = { passive: false }
+    canvas.addEventListener("pointerdown", onPointerDown, pointerOpts)
+    canvas.addEventListener("pointermove", onPointerMove, pointerOpts)
     canvas.addEventListener("pointerup", onPointerUp)
     canvas.addEventListener("pointercancel", onPointerUp)
     canvas.addEventListener("pointerleave", onPointerLeave)
@@ -337,8 +355,8 @@ export function CareerGraphLive({
       alive = false
       window.cancelAnimationFrame(raf)
       observer.disconnect()
-      canvas.removeEventListener("pointerdown", onPointerDown)
-      canvas.removeEventListener("pointermove", onPointerMove)
+      canvas.removeEventListener("pointerdown", onPointerDown, pointerOpts)
+      canvas.removeEventListener("pointermove", onPointerMove, pointerOpts)
       canvas.removeEventListener("pointerup", onPointerUp)
       canvas.removeEventListener("pointercancel", onPointerUp)
       canvas.removeEventListener("pointerleave", onPointerLeave)
