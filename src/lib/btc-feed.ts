@@ -1,51 +1,71 @@
 import { type BtcPoint, type BtcRange, type BtcSeries } from "@/lib/btc"
 
 const CANDLE_TTL_MS = 60_000
+const API = "https://api.coingecko.com/api/v3"
 
-const specs: Record<BtcRange, { span: number; bucket: number }> = {
-  "1h": { span: 60 * 60, bucket: 60 },
-  "1d": { span: 24 * 60 * 60, bucket: 300 },
-  "1w": { span: 7 * 24 * 60 * 60, bucket: 3600 },
-  "1m": { span: 30 * 24 * 60 * 60, bucket: 21600 },
+const specs: Record<BtcRange, { days: number; span: number; bucket: number }> = {
+  "1h": { days: 1, span: 60 * 60, bucket: 300 },
+  "1d": { days: 1, span: 24 * 60 * 60, bucket: 300 },
+  "1w": { days: 7, span: 7 * 24 * 60 * 60, bucket: 3600 },
+  "1m": { days: 30, span: 30 * 24 * 60 * 60, bucket: 21600 },
 }
 
-const candleCache = new Map<BtcRange, { at: number; points: BtcPoint[] }>()
+const chartCache = new Map<number, { at: number; points: BtcPoint[] }>()
 
-function asCandles(value: unknown): BtcPoint[] | null {
-  if (!Array.isArray(value) || value.length < 2) return null
+function asPrices(value: unknown): BtcPoint[] | null {
+  if (!value || typeof value !== "object") return null
+  const rows = (value as Record<string, unknown>).prices
+  if (!Array.isArray(rows) || rows.length < 2) return null
   const points: BtcPoint[] = []
-  for (const row of value) {
-    if (!Array.isArray(row) || row.length < 5) return null
-    const t = Number(row[0])
-    const close = Number(row[4])
-    if (!Number.isFinite(t) || !Number.isFinite(close) || close <= 0) return null
-    points.push({ t, p: close })
+  for (const row of rows) {
+    if (!Array.isArray(row) || row.length < 2) return null
+    const t = Math.floor(Number(row[0]) / 1000)
+    const p = Number(row[1])
+    if (!Number.isFinite(t) || !Number.isFinite(p) || p <= 0) return null
+    points.push({ t, p })
   }
   points.sort((a, b) => a.t - b.t)
   return points
 }
 
-async function loadCandles(range: BtcRange): Promise<BtcPoint[] | null> {
-  const cached = candleCache.get(range)
+/** Keep the last sample of each bucket so every range has an even cadence. */
+function toBuckets(points: BtcPoint[], bucket: number, since: number): BtcPoint[] {
+  const byBucket = new Map<number, BtcPoint>()
+  for (const point of points) {
+    if (point.t < since) continue
+    byBucket.set(Math.floor(point.t / bucket), point)
+  }
+  return [...byBucket.values()]
+}
+
+/** CoinGecko's free tier is tightly rate limited; ranges sharing `days` share one request. */
+async function loadChart(days: number): Promise<BtcPoint[] | null> {
+  const cached = chartCache.get(days)
   if (cached && Date.now() - cached.at < CANDLE_TTL_MS) return cached.points
-  const spec = specs[range]
-  const end = Math.floor(Date.now() / 1000)
-  const start = end - spec.span
   const response = await fetch(
-    `https://api.exchange.coinbase.com/products/BTC-USD/candles?granularity=${spec.bucket}&start=${start}&end=${end}`,
+    `${API}/coins/bitcoin/market_chart?vs_currency=usd&days=${days}`,
     {
       cache: typeof window === "undefined" ? "force-cache" : "no-store",
       signal: AbortSignal.timeout(8000),
     },
   )
   if (!response.ok) {
-    console.error(`Coinbase candles returned ${response.status}`)
+    console.error(`CoinGecko market chart returned ${response.status}`)
     return null
   }
-  const points = asCandles(await response.json())
+  const points = asPrices(await response.json())
   if (!points) return null
-  candleCache.set(range, { at: Date.now(), points })
+  chartCache.set(days, { at: Date.now(), points })
   return points
+}
+
+async function loadCandles(range: BtcRange): Promise<BtcPoint[] | null> {
+  const spec = specs[range]
+  const raw = await loadChart(spec.days)
+  const last = raw?.[raw.length - 1]
+  if (!raw || !last) return null
+  const points = toBuckets(raw, spec.bucket, last.t - spec.span)
+  return points.length < 2 ? null : points
 }
 
 export async function getBtcSeries(range: BtcRange = "1d"): Promise<BtcSeries | null> {
@@ -62,10 +82,32 @@ export async function getBtcSeries(range: BtcRange = "1d"): Promise<BtcSeries | 
     }
   } catch (error) {
     if (error instanceof Error && error.name === "TimeoutError") {
-      console.warn("Coinbase request timed out")
+      console.warn("CoinGecko request timed out")
       return null
     }
-    console.error("Coinbase request failed", error)
+    console.error("CoinGecko request failed", error)
+    return null
+  }
+}
+
+export async function getBtcSpot(): Promise<number | null> {
+  try {
+    const response = await fetch(`${API}/simple/price?ids=bitcoin&vs_currencies=usd`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(8000),
+    })
+    if (!response.ok) {
+      console.error(`CoinGecko price returned ${response.status}`)
+      return null
+    }
+    const data: unknown = await response.json()
+    const usd = Number(
+      (data as { bitcoin?: { usd?: unknown } } | null)?.bitcoin?.usd,
+    )
+    return Number.isFinite(usd) && usd > 0 ? usd : null
+  } catch (error) {
+    if (error instanceof Error && error.name === "TimeoutError") return null
+    console.error("CoinGecko price failed", error)
     return null
   }
 }

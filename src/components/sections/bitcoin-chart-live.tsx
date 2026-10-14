@@ -4,7 +4,7 @@ import { useEffect, useMemo, useRef, useState, type PointerEvent } from "react"
 
 import type { Locale } from "@/content"
 import { btcRanges, stampBtcPrice, type BtcRange, type BtcSeries } from "@/lib/btc"
-import { getBtcSeries } from "@/lib/btc-feed"
+import { getBtcSeries, getBtcSpot } from "@/lib/btc-feed"
 import { cn } from "@/lib/utils"
 
 type Props = {
@@ -71,63 +71,22 @@ export function BitcoinChartLive({
 
   useEffect(() => {
     let alive = true
-    let socket: WebSocket | null = null
-    let reconnectTimer = 0
-    let flushTimer = 0
-    let pendingPrice = 0
-    let pendingAt = 0
+    // Static hosting serves a build-time snapshot; refresh history in the browser.
+    void getBtcSeries("1d").then((loaded) => {
+      if (alive && loaded && rangeRequest.current === 0) setSeries(loaded)
+    })
 
-    const connect = () => {
-      socket = new WebSocket("wss://ws-feed.exchange.coinbase.com")
-      socket.onopen = () => {
-        socket?.send(
-          JSON.stringify({
-            type: "subscribe",
-            product_ids: ["BTC-USD"],
-            channels: ["ticker"],
-          }),
-        )
-      }
-      socket.onmessage = (event) => {
-        if (!alive || typeof event.data !== "string") return
-        let data: unknown
-        try {
-          data = JSON.parse(event.data)
-        } catch (error) {
-          console.error("Bitcoin ticker parse failed", error)
-          return
-        }
-        if (!data || typeof data !== "object") return
-        const row = data as Record<string, unknown>
-        if (row.type !== "ticker") return
-        const price = Number(row.price)
-        if (!Number.isFinite(price) || price <= 0) return
-        const parsed = typeof row.time === "string" ? Math.floor(Date.parse(row.time) / 1000) : Number.NaN
-        pendingPrice = price
-        pendingAt = Number.isFinite(parsed) ? parsed : Math.floor(Date.now() / 1000)
-        liveRef.current = { price: pendingPrice, at: pendingAt }
-        if (flushTimer) return
-        flushTimer = window.setTimeout(() => {
-          flushTimer = 0
-          if (!alive || pendingPrice <= 0) return
-          setSeries((current) => (current ? stampBtcPrice(current, pendingPrice, pendingAt) : current))
-        }, 400)
-      }
-      socket.onclose = () => {
-        if (!alive || reconnectTimer) return
-        reconnectTimer = window.setTimeout(() => {
-          reconnectTimer = 0
-          connect()
-        }, 2000)
-      }
+    const poll = async () => {
+      const price = await getBtcSpot()
+      if (!alive || price == null) return
+      const at = Math.floor(Date.now() / 1000)
+      liveRef.current = { price, at }
+      setSeries((current) => (current ? stampBtcPrice(current, price, at) : current))
     }
-
-    connect()
+    const id = window.setInterval(() => void poll(), 60_000)
     return () => {
       alive = false
-      window.clearTimeout(reconnectTimer)
-      window.clearTimeout(flushTimer)
-      socket?.close()
+      window.clearInterval(id)
     }
   }, [])
 
