@@ -5,7 +5,6 @@ export type GithubRepoLive = {
   language: string | null
   pushedAt: string | null
   url: string
-  description: string | null
 }
 
 function githubUser() {
@@ -25,7 +24,6 @@ function asRepo(value: unknown): GithubRepoLive | null {
     language: typeof row.language === "string" ? row.language : null,
     pushedAt: typeof row.pushed_at === "string" ? row.pushed_at : null,
     url: row.html_url,
-    description: typeof row.description === "string" ? row.description : null,
   }
 }
 
@@ -33,16 +31,19 @@ export async function getRecentPublicRepos(limit = 6): Promise<GithubRepoLive[]>
   const user = githubUser()
   if (!user) return []
 
+  const onServer = typeof window === "undefined"
   const response = await fetch(
     `https://api.github.com/users/${user}/repos?sort=pushed&per_page=20&type=owner`,
     {
       headers: {
         Accept: "application/vnd.github+json",
-        "User-Agent": "portfolio-new",
+        ...(onServer ? { "User-Agent": "portfolio-new" } : {}),
       },
-      ...(process.env.GITHUB_PAGES === "true"
-        ? { cache: "force-cache" as const }
-        : { next: { revalidate: 3600 } }),
+      ...(onServer
+        ? process.env.GITHUB_PAGES === "true"
+          ? { cache: "force-cache" as const }
+          : { next: { revalidate: 3600 } }
+        : { cache: "no-store" as const }),
     }
   )
 

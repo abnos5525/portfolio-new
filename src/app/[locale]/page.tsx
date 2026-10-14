@@ -12,7 +12,7 @@ import {
   HireBand,
   ProofStrip,
 } from "@/components/sections/hire-signals"
-import { MarketSkeleton, PublicWorkSkeleton } from "@/components/sections/page-skeleton"
+import { MarketSkeleton } from "@/components/sections/page-skeleton"
 import { PublicWork } from "@/components/sections/public-work"
 import { CareerGraph } from "@/components/sections/career-graph"
 import { SkillsConstellation } from "@/components/sections/skills-constellation"
@@ -99,13 +99,11 @@ export default async function Home({ params }: Props) {
         items={experience}
       />
 
-      <Suspense fallback={<PublicWorkSkeleton />}>
-        <PublicWork
-          locale={locale}
-          title={translate("publicWork")}
-          support={translate("publicWorkSupport")}
-        />
-      </Suspense>
+      <PublicWork
+        locale={locale}
+        title={translate("publicWork")}
+        support={translate("publicWorkSupport")}
+      />
 
       <SkillsConstellation
         locale={locale}
