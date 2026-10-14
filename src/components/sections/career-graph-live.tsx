@@ -345,7 +345,7 @@ export function CareerGraphLive({
     observer.observe(wrap)
 
     const pointerOpts: AddEventListenerOptions = { passive: false }
-    canvas.addEventListener("pointerdown", onPointerDown, pointerOpts)
+    canvas.addEventListener("pointerdown" , onPointerDown, pointerOpts)
     canvas.addEventListener("pointermove", onPointerMove, pointerOpts)
     canvas.addEventListener("pointerup", onPointerUp)
     canvas.addEventListener("pointercancel", onPointerUp)
